@@ -1,0 +1,808 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!-- 
+This file describes the possible actions, their corresponding MIDI-message as well as default key-combination
+
+keyCodes on a german keyboard layout are:
+			 CTRL					| SHIFT				| ALT
+	a:  0 => arm track				| multi-arm			| encoder 1 down
+	b: 11
+	c:  8 => pan right				| more precise
+	d:  2 => (de)activate track		| exclusive mute	| encoder 3 down
+	e: 14 =>						|					| encoder 3 up
+	f:  3 => volume up				| more precise		| encoder 4 down
+	g:  5 =>						|					| encoder 5 down
+	h:  4 =>						|					| encoder 6 down
+	i: 34 => next input 			| next input device	| encoder 8 up
+	j: 38 =>						|					| encoder 7 down
+	k: 40 =>						|					| encoder 8 down
+	l: 37
+	m: 46 => monitoring next		| monitoring prev	
+	n: 45
+	o: 31 => next output			| next output device
+	p: 35 => output to phones,cue
+	q: 12 => 						|					| encoder 1 up
+	r: 15 => volume "reset"			| send 4 up			| encoder 4 up
+	s:  1 => solo track				| multi-solo		| encoder 2 down
+	t: 17 =>  						|					| encoder 5 up
+	u: 32 =>  						|					| encoder 7 up
+	v:  9 => volume down			| more precise
+	w: 13 =>  						|					| encoder 2 up
+	x:  7 => pan center				| more precise
+	y:  6 => pan left				| more precise
+	z:  16 =>  						|					| encoder 6 up
+	
+	1: 18 => select track 1			| deactivate send 1	| button 1
+	2: 19 => select track 2			| deactivate send 2	| button 2
+	3: 20 => select track 3			| deactivate send 3	| button 3
+	4: 21 => .	
+	5: 23 => .	
+	6: 22 => .	
+	7: 26 => .	
+	8: 28 => .
+	9: 25 => 
+	0: 29 => select master 
+	
+	up:    126 => previous scene	| first scene		| BANK UP			| first BANK?
+	down:  125 => next scene		| last scene		| BANK DOWN			| last BANK?
+	left:  123 => previous track	| previous track	| previous device	| first device
+	right: 124 => next track		| next track		| next device		| last device
+	
+	pg-up: 116 => volume up
+	pg-dn: 121 => volume down
+	home:  115 => pan left
+	end:   119 => pan right
+	
+	
+	enter:  36 => play/pause selected clip
+	return: 52 => fire selected scene + and select next
+	
+	-: 44
+	+: 30
+	,: 43
+	.: 47
+	<: 50
+	backspace: 51
+	delete: 117
+ -->
+<plist version="1.0">
+<dict>
+	<key>fire_scene</key>
+	<dict>
+		<!-- F#0 -->
+		<key>note</key>
+		<integer>10</integer>
+		<key>value</key>
+		<integer>127</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>52</integer>
+			<key>controlKey</key>
+			<true/>
+		</dict>
+	</dict>
+	<key>fire_scene_enter</key>
+	<dict>
+		<!-- F#0 -->
+		<key>note</key>
+		<integer>10</integer>
+		<key>value</key>
+		<integer>127</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>36</integer>
+			<key>controlKey</key>
+			<true/>
+		</dict>
+	</dict>
+	<key>fire_clip</key>
+	<dict>
+		<!-- F#0 -->
+		<key>note</key>
+		<integer>10</integer>
+		<key>value</key>
+		<integer>100</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>52</integer>
+			<key>controlKey</key>
+			<true/>
+			<key>shiftKey</key>
+			<true/>
+		</dict>
+	</dict>
+	<key>fire_clip_enter</key>
+	<dict>
+		<!-- F#0 -->
+		<key>note</key>
+		<integer>10</integer>
+		<key>value</key>
+		<integer>100</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>36</integer>
+			<key>controlKey</key>
+			<true/>
+			<key>shiftKey</key>
+			<true/>
+		</dict>
+	</dict>
+	
+	
+	
+	
+	
+	
+	
+	
+	<key>prev_scene</key>
+	<dict>
+		<key>cc</key>
+		<integer>84</integer>
+		<key>value</key>
+		<integer>127</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>126</integer>
+			<key>controlKey</key>
+			<true/>
+		</dict>
+	</dict>
+	<key>first_scene</key>
+	<dict>
+		<key>cc</key>
+		<integer>84</integer>
+		<key>value</key>
+		<integer>123</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>126</integer>
+			<key>controlKey</key>
+			<true/>
+			<key>shiftKey</key>
+			<true/>
+		</dict>
+	</dict>
+	<key>next_scene</key>
+	<dict>
+		<key>cc</key>
+		<integer>84</integer>
+		<key>value</key>
+		<integer>1</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>125</integer>
+			<key>controlKey</key>
+			<true/>
+		</dict>
+	</dict>
+	<key>last_scene</key>
+	<dict>
+		<key>cc</key>
+		<integer>84</integer>
+		<key>value</key>
+		<integer>5</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>125</integer>
+			<key>controlKey</key>
+			<true/>
+			<key>shiftKey</key>
+			<true/>
+		</dict>
+	</dict>
+	
+	
+	<key>prev_track</key>
+	<dict>
+		<key>cc</key>
+		<integer>85</integer>
+		<key>value</key>
+		<integer>127</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>123</integer>
+			<key>controlKey</key>
+			<true/>
+		</dict>
+	</dict>
+	<key>prev_track_shift</key>
+	<dict>
+		<key>cc</key>
+		<integer>85</integer>
+		<key>value</key>
+		<integer>127</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>123</integer>
+			<key>controlKey</key>
+			<true/>
+			<key>shiftKey</key>
+			<true/>
+		</dict>
+	</dict>
+	<key>next_track</key>
+	<dict>
+		<key>cc</key>
+		<integer>85</integer>
+		<key>value</key>
+		<integer>127</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>124</integer>
+			<key>controlKey</key>
+			<true/>
+		</dict>
+	</dict>
+	<key>next_track_shift</key>
+	<dict>
+		<key>cc</key>
+		<integer>85</integer>
+		<key>value</key>
+		<integer>127</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>124</integer>
+			<key>controlKey</key>
+			<true/>
+			<key>shiftKey</key>
+			<true/>
+		</dict>
+	</dict>
+	
+	
+	
+	
+	<key>track_1</key>
+	<dict>
+		<!-- C1 -->
+		<key>note</key>
+		<integer>12</integer>
+		<key>value</key>
+		<integer>127</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>18</integer>
+			<key>controlKey</key>
+			<true/>
+		</dict>
+	</dict>
+	<key>track_2</key>
+	<dict>
+		<!-- D1 -->
+		<key>note</key>
+		<integer>14</integer>
+		<key>value</key>
+		<integer>127</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>19</integer>
+			<key>controlKey</key>
+			<true/>
+		</dict>
+	</dict>
+	<key>track_3</key>
+	<dict>
+		<!-- E1 -->
+		<key>note</key>
+		<integer>16</integer>
+		<key>value</key>
+		<integer>127</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>20</integer>
+			<key>controlKey</key>
+			<true/>
+		</dict>
+	</dict>
+	<key>track_4</key>
+	<dict>
+		<!-- F1 -->
+		<key>note</key>
+		<integer>17</integer>
+		<key>value</key>
+		<integer>127</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>21</integer>
+			<key>controlKey</key>
+			<true/>
+		</dict>
+	</dict>
+	<key>track_5</key>
+	<dict>
+		<!-- G1 -->
+		<key>note</key>
+		<integer>19</integer>
+		<key>value</key>
+		<integer>127</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>23</integer>
+			<key>controlKey</key>
+			<true/>
+		</dict>
+	</dict>
+	<key>track_6</key>
+	<dict>
+		<!-- A1 -->
+		<key>note</key>
+		<integer>21</integer>
+		<key>value</key>
+		<integer>127</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>22</integer>
+			<key>controlKey</key>
+			<true/>
+		</dict>
+	</dict>
+	<key>track_7</key>
+	<dict>
+		<!-- B1 -->
+		<key>note</key>
+		<integer>23</integer>
+		<key>value</key>
+		<integer>127</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>26</integer>
+			<key>controlKey</key>
+			<true/>
+		</dict>
+	</dict>
+	<key>track_8</key>
+	<dict>
+		<!-- C0 -->
+		<key>note</key>
+		<integer>24</integer>
+		<key>value</key>
+		<integer>127</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>28</integer>
+			<key>controlKey</key>
+			<true/>
+		</dict>
+	</dict>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<key>arm</key>
+	<dict>
+		<!-- C0 -->
+		<key>note</key>
+		<integer>0</integer>
+		<key>value</key>
+		<integer>0</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>0</integer>
+			<key>controlKey</key>
+			<true/>
+		</dict>
+	</dict>
+	<key>arm-multi</key>
+	<dict>
+		<!-- C0 -->
+		<key>note</key>
+		<integer>0</integer>
+		<key>value</key>
+		<integer>127</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>0</integer>
+			<key>shiftKey</key>
+			<true/>
+			<key>controlKey</key>
+			<true/>
+		</dict>
+	</dict>
+	
+	<key>solo</key>
+	<dict>
+		<!-- C#0 -->
+		<key>note</key>
+		<integer>1</integer>
+		<key>value</key>
+		<integer>0</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>1</integer>
+			<key>controlKey</key>
+			<true/>
+		</dict>
+	</dict>
+	<key>solo-multi</key>
+	<dict>
+		<!-- C#0 -->
+		<key>note</key>
+		<integer>1</integer>
+		<key>value</key>
+		<integer>127</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>1</integer>
+			<key>shiftKey</key>
+			<true/>
+			<key>controlKey</key>
+			<true/>
+		</dict>
+	</dict>
+	
+	<key>mute</key>
+	<dict>
+		<!-- D0 -->
+		<key>note</key>
+		<integer>2</integer>
+		<key>value</key>
+		<integer>0</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>2</integer>
+			<key>controlKey</key>
+			<true/>
+		</dict>
+	</dict>
+	<key>mute-exclusive</key>
+	<dict>
+		<!-- D0 -->
+		<key>note</key>
+		<integer>2</integer>
+		<key>value</key>
+		<integer>127</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>2</integer>
+			<key>shiftKey</key>
+			<true/>
+			<key>controlKey</key>
+			<true/>
+		</dict>
+	</dict>
+	
+	
+	
+	
+	
+	
+	
+
+	<key>volume_reset</key>
+	<dict>
+		<key>cc</key>
+		<integer>7</integer>
+		<key>value</key>
+		<integer>100</integer>
+		
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>15</integer>
+			<key>controlKey</key>
+			<true/>
+		</dict>
+	</dict>	
+	<key>volume_up</key>
+	<dict>
+		<key>cc</key>
+		<integer>7</integer>
+		<key>value</key>
+		<integer>5</integer>
+		
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>3</integer>
+			<key>controlKey</key>
+			<true/>
+		</dict>
+	</dict>
+	<key>volume_up_precise</key>
+	<dict>
+		<key>cc</key>
+		<integer>7</integer>
+		<key>value</key>
+		<integer>1</integer>
+		
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>3</integer>
+			<key>controlKey</key>
+			<true/>
+			<key>shiftKey</key>
+			<true/>
+		</dict>
+	</dict>
+	
+	<key>volume_down</key>
+	<dict>
+		<key>cc</key>
+		<integer>7</integer>
+		<key>value</key>
+		<integer>123</integer>
+		
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>9</integer>
+			<key>controlKey</key>
+			<true/>
+		</dict>
+	</dict>
+	<key>volume_down_precise</key>
+	<dict>
+		<key>cc</key>
+		<integer>7</integer>
+		<key>value</key>
+		<integer>127</integer>
+		
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>9</integer>
+			<key>controlKey</key>
+			<true/>
+			<key>shiftKey</key>
+			<true/>
+		</dict>
+	</dict>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		
+	<key>pan_left</key>
+	<dict>
+		<key>cc</key>
+		<integer>10</integer>
+		<key>value</key>
+		<integer>123</integer>
+		
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>6</integer>
+			<key>controlKey</key>
+			<true/>
+		</dict>
+	</dict>
+	<key>pan_left_precise</key>
+	<dict>
+		<key>cc</key>
+		<integer>10</integer>
+		<key>value</key>
+		<integer>127</integer>
+		
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>6</integer>
+			<key>controlKey</key>
+			<true/>
+			<key>shiftKey</key>
+			<true/>
+		</dict>
+	</dict>
+	
+	<key>pan_right</key>
+	<dict>
+		<key>cc</key>
+		<integer>10</integer>
+		<key>value</key>
+		<integer>5</integer>
+		
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>8</integer>
+			<key>controlKey</key>
+			<true/>
+		</dict>
+	</dict>
+	<key>pan_right_precise</key>
+	<dict>
+		<key>cc</key>
+		<integer>10</integer>
+		<key>value</key>
+		<integer>1</integer>
+		
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>8</integer>
+			<key>controlKey</key>
+			<true/>
+			<key>shiftKey</key>
+			<true/>
+		</dict>
+	</dict>
+	
+	<key>pan_center</key>
+	<dict>
+		<key>cc</key>
+		<integer>10</integer>
+		<key>value</key>
+		<integer>64</integer>
+		
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>7</integer>
+			<key>controlKey</key>
+			<true/>
+		</dict>
+	</dict>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<key>button_1</key>
+	<dict>
+		<!-- c1 -->
+		<key>note</key>
+		<integer>36</integer>
+		<key>value</key>
+		<integer>127</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>18</integer>
+			<key>controlKey</key>
+			<true/>
+			<key>optionKey</key>
+			<true/>
+		</dict>
+	</dict>
+	<key>button_2</key>
+	<dict>
+		<!-- d1 -->
+		<key>note</key>
+		<integer>38</integer>
+		<key>value</key>
+		<integer>127</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>19</integer>
+			<key>controlKey</key>
+			<true/>
+			<key>optionKey</key>
+			<true/>
+		</dict>
+	</dict>
+
+
+	<key>encoder1up</key>
+	<dict>
+		<key>cc</key>
+		<integer>22</integer>
+		<key>value</key>
+		<integer>5</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>12</integer>
+			<key>optionKey</key>
+			<true/>
+			<key>controlKey</key>
+			<true/>
+		</dict>
+	</dict>
+	<key>encoder1down</key>
+	<dict>
+		<key>cc</key>
+		<integer>22</integer>
+		<key>value</key>
+		<integer>123</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>0</integer>
+			<key>optionKey</key>
+			<true/>
+			<key>controlKey</key>
+			<true/>
+		</dict>
+	</dict>
+	
+	<!--
+	<key>mute</key>
+	<dict>
+		<key>number</key>
+		<integer>2</integer>
+		<key>value</key>
+		<integer>127</integer>
+		
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>2</integer>
+			<key>optionKey</key>
+			<false/>
+			<key>cmdKey</key>
+			<false/>
+			<key>controlKey</key>
+			<true/>
+		</dict>
+	</dict>
+	<key>solo</key>
+	<dict>
+		<key>number</key>
+		<integer>1</integer>
+		<key>value</key>
+		<integer>127</integer>
+		
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>1</integer>
+			<key>optionKey</key>
+			<false/>
+			<key>cmdKey</key>
+			<false/>
+			<key>controlKey</key>
+			<true/>
+		</dict>
+	</dict>
+	-->
+
+</dict>
+</plist>

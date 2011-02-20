@@ -1,0 +1,91 @@
+//
+//  TrayMenu.m
+//  Kimidi
+//
+//  Created by Richard Schreiber on 28.07.09.
+//  Copyright 2009 __MyCompanyName__. All rights reserved.
+//
+
+#import "TrayMenu.h"
+#import "AppController.h"
+
+
+@implementation TrayMenu
+/* not possible with a Menubar item only
+- (void) init
+{
+	NSLog(@"init");
+}
+*/
+
+- (void) openWebsite:(id)sender {
+  NSURL *url = [NSURL URLWithString:@"http://stc.wiffbi.com/"];
+  [[NSWorkspace sharedWorkspace] openURL:url];
+  //[url release];
+}
+/*
+- (void) openFinder:(id)sender {
+  [[NSWorkspace sharedWorkspace] launchApplication:@"Finder"];
+}
+*/
+
+- (void) actionQuit:(id)sender {
+  [NSApp terminate:sender];
+}
+
+- (NSMenu *) createMenu {
+
+  NSZone *menuZone = [NSMenu menuZone];
+  NSMenu *menu = [[NSMenu allocWithZone:menuZone] init];
+  NSMenuItem *menuItem;
+
+/*
+  // Add To Items
+  menuItem = [[NSMenuItem alloc] initWithTitle:@"transforms global hotkeys to MIDI \nmessages for Ableton Live track control"
+                      action:NULL
+                      keyEquivalent:@""];
+  [menuItem setEnabled:false];
+  [menu addItem:menuItem];
+*/  
+  // Add To Items
+  menuItem = [menu addItemWithTitle:@"Visit Website"
+                      action:@selector(openWebsite:)
+                      keyEquivalent:@""];
+  [menuItem setTarget:self];
+  /*
+  menuItem = [menu addItemWithTitle:@"Open Finder"
+                      action:@selector(openFinder:)
+                      keyEquivalent:@""];
+  [menuItem setTarget:self];
+  */
+  // Add Separator
+  [menu addItem:[NSMenuItem separatorItem]];
+  
+  // Add Quit Action
+  menuItem = [menu addItemWithTitle:@"Quit Selected Track Control"
+                      action:@selector(actionQuit:)
+                      keyEquivalent:@""];
+  //[menuItem setToolTip:@"Quit"];
+  [menuItem setTarget:self];
+
+  return menu;
+}
+
+- (void) applicationDidFinishLaunching:(NSNotification *)notification {
+  NSMenu *menu = [self createMenu];
+
+  _statusItem = [[[NSStatusBar systemStatusBar]
+                  statusItemWithLength:NSSquareStatusItemLength] retain];
+  [_statusItem setMenu:menu];
+  [_statusItem setHighlightMode:YES];
+  [_statusItem setToolTip:@"Kimidi"];
+  [_statusItem setImage:[NSImage imageNamed:@"menubar.png"]];
+  [_statusItem setAlternateImage:[NSImage imageNamed:@"menubar-hover.png"]];
+
+  [menu release];
+  
+  [[[AppController alloc] init] awakeFromNib];
+}
+
+
+@end
