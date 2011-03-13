@@ -11,7 +11,10 @@
 
 
 @interface HotKeyMomentary : HotKey {
+	NSTimer* timer;
+	bool isHold;
 }
 
+- (void) setIsHold;
 
 @end
