@@ -15,100 +15,33 @@
 
 //#import "HotKey.h"
 //#import "HotKeyMomentary.h"
+//#import "HotKeyRepeat.h"
 
 OSStatus myHotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent, void *userData)
 {
-	//NSLog(@"YEAY WE DID A GLOBAL HOTKEY");
-	//return noErr;
-	/*
-	NSDictionary *activeApp = [[NSWorkspace sharedWorkspace] activeApplication];
-	NSString *activeAppName = (NSString *)[activeApp objectForKey:@"NSApplicationName"];
+	NSLog(@"modifier flags: 0x%x", [[NSApp currentEvent] modifierFlags]);
 	
-	if ([activeAppName isEqualToString: @"Live"]) {
-		NSLog(@"intercept hotkey");
-	*/	
-		OSStatus theError;
-		EventHotKeyID hkCom;
-		
-		theError = GetEventParameter(theEvent,kEventParamDirectObject,typeEventHotKeyID,NULL,sizeof(hkCom),NULL,&hkCom);
-		
-		if( theError == noErr && GetEventClass(theEvent) == kEventClassKeyboard)
-		{
-			[(id)userData hotKeyPressed:hkCom.id];
-		}
-	/*
-	 }
-	 */
+	OSStatus theError;
+	EventHotKeyID hkCom;
+	
+	//UInt32 modifierFlags = GetCurrentKeyModifiers();
+	//NSUInteger modifierFlags = [theEvent modifierFlags];
+	//NSLog(@"%d", modifierFlags);
+	NSLog(@"%d", [[NSApp currentEvent] modifierFlags]);
+	
+	if (NSAlphaShiftKeyMask & [[NSApp currentEvent] modifierFlags]) {
+		NSLog(@"CAPS LOCK");
+	}
+	
+	
+	theError = GetEventParameter(theEvent,kEventParamDirectObject,typeEventHotKeyID,NULL,sizeof(hkCom),NULL,&hkCom);
+	
+	if( theError == noErr && GetEventClass(theEvent) == kEventClassKeyboard)
+	{
+		[(id)userData hotKeyPressed:hkCom.id];
+	}
 	
 	return theError;
-
-	NSLog(@"do not intercept hotkey");
-
-
-	/*
-	UInt8	macCharCode = 0;
-	OSStatus result = GetEventParameter (theEvent, kEventParamKeyMacCharCodes, typeChar, NULL, sizeof (UInt8), NULL, &macCharCode);
-	NSLog(@"The result %@", result);
-	//theError = GetEventParameter(theEvent,kEventParamDirectObject,typeEventHotKeyID,NULL,sizeof(hkCom),NULL,&hkCom);
-	*/
-	
-	//return (CallNextEventHandler(nextHandler, theEvent));
-	return eventNotHandledErr;
-	
-	//return theError;
-	//[self sendMIDI];
-	//[(id)userData logHotKey];
-	/*
-	switch (l) {
-		case STC_HOTKEY_ARM: // arm safe track
-			[(id)userData sendMIDINote:0:127];
-			break;
-		case STC_HOTKEY_ARM_SHIFT: // arm track
-			[(id)userData sendMIDINote:0:0];
-			break;
-
-		case STC_HOTKEY_SOLO: // solo safe track
-			[(id)userData sendMIDINote:1:127];
-			break;
-		case STC_HOTKEY_SOLO_SHIFT: // solo track
-			[(id)userData sendMIDINote:1:0];
-			break;
-
-		case STC_HOTKEY_MUTE: // mute track
-			[(id)userData sendMIDINote:2:127];
-			break;
-		
-		
-		case STC_HOTKEY_PANLEFT: // pan left
-			[(id)userData sendMIDICC:10:123];
-			break;
-		case STC_HOTKEY_PANLEFT_SHIFT: // pan left more precise
-			[(id)userData sendMIDICC:10:127];
-			break;
-		case STC_HOTKEY_PANRIGHT: // pan right
-			[(id)userData sendMIDICC:10:5];
-			break;
-		case STC_HOTKEY_PANRIGHT_SHIFT: // pan right more precise
-			[(id)userData sendMIDICC:10:1];
-			break;
-		
-		
-		case STC_HOTKEY_VOLUMEUP:
-			[(id)userData sendMIDICC:7:5];
-			break;
-		case STC_HOTKEY_VOLUMEUP_SHIFT:
-			[(id)userData sendMIDICC:7:1];
-			break;
-		case STC_HOTKEY_VOLUMEDOWN:
-			[(id)userData sendMIDICC:7:123];
-			break;
-		case STC_HOTKEY_VOLUMEDOWN_SHIFT:
-			[(id)userData sendMIDICC:7:127];
-			break;
-	}
-	//NSLog([virtualInput displayName]);
-	return noErr;
-	*/
 }
 
 OSStatus myHotKeyReleasedHandler(EventHandlerCallRef nextHandler, EventRef theEvent, void *userData)
@@ -128,7 +61,7 @@ static OSStatus AppFrontSwitchedHandler(EventHandlerCallRef inHandlerCallRef, Ev
 @implementation AppController
 - (void) logHotKey
 {
-	NSLog(@"logHotKey");
+	//NSLog(@"logHotKey");
 }
 - (id) init
 {
@@ -136,24 +69,6 @@ static OSStatus AppFrontSwitchedHandler(EventHandlerCallRef inHandlerCallRef, Ev
 	
 	// create hotkeys-array to hold all the hotkeys
 	hotkeys = [[NSMutableArray alloc] init];
-	
-	/*
-	hotkey = [[HotKey alloc] init];
-	[hotkey setController:self];
-	*/
-	/*
-	// customizable hotkeys
-	NSMutableDictionary *userDefaultsValuesDict = [NSMutableDictionary dictionary];
-	[userDefaultsValuesDict setObject:[NSNumber numberWithInt:0] forKey:@"hotkeyCodeArm"];
-	[userDefaultsValuesDict setObject:[NSNumber numberWithInt:controlKey] forKey:@"hotkeyModifiersArm"];
-	
-	[userDefaultsValuesDict setObject:[NSNumber numberWithInt:1] forKey:@"hotkeyCodeSolo"];
-	[userDefaultsValuesDict setObject:[NSNumber numberWithInt:controlKey] forKey:@"hotkeyModifiersSolo"];
-
-	[[NSUserDefaults standardUserDefaults] registerDefaults:userDefaultsValuesDict];      //Register the defaults
-	[[NSUserDefaults standardUserDefaults] synchronize];  //And sync them
-	*/
-	
 
 	//PYMIDIVirtualSource* 
 	virtualInput = [[PYMIDIVirtualSource alloc] initWithName:@"STC Virtual IN"];
@@ -162,16 +77,16 @@ static OSStatus AppFrontSwitchedHandler(EventHandlerCallRef inHandlerCallRef, Ev
 	
 	//virtualOutput = [[PYMIDIVirtualDestination alloc] initWithName:@"STC Virtual OUT"];
 	//[virtualOutput addReceiver:self];
-
 	
     return self;
 }
 
 - (void) hotKeyPressed:(int) hotKeyId
 {
-	NSLog(@"Hotkey pressed: %d", hotKeyId);
-	//NSLog(@"The active app is %@", activeAppName);
-	
+	if (NSAlphaShiftKeyMask & [[NSApp currentEvent] modifierFlags]) {
+		NSLog(@"CAPS LOCK");
+	}
+	//NSLog(@"Hotkey pressed: %d", hotKeyId);
 	HotKey *hotkey = (HotKey *)[hotkeys objectAtIndex:hotKeyId];
 	//NSLog(@"Hotkey: %@", hotkey);
 	[hotkey pressed];
@@ -200,19 +115,6 @@ static OSStatus AppFrontSwitchedHandler(EventHandlerCallRef inHandlerCallRef, Ev
 	[virtualInput processMIDIPacketList:&packetList sender:self];
 
 }
-/*
-- (void) sendMIDICC: (int) cc: (int) value
-{
-	int channel = 0xB0 | 0; // channel 1 for CC
-	[self sendMIDIMessage:channel:cc:value];
-}
-- (void) sendMIDINote: (int) note: (int) velocity
-{
-	int channel = 0x90 | 0; // channel 1 for Notes
-	[self sendMIDIMessage:channel:note:velocity];
-}
-*/
-
 
 - (void) bindHotkeys {
 	NSLog(@"bind hotkeys");
@@ -233,24 +135,23 @@ static OSStatus AppFrontSwitchedHandler(EventHandlerCallRef inHandlerCallRef, Ev
 	NSDictionary *activeApp = [[NSWorkspace sharedWorkspace] activeApplication];
 	//NSString *
 	activeAppName = (NSString *)[activeApp objectForKey:@"NSApplicationName"];
-    NSLog(@"The active app is %@", activeAppName);
-	/*
+	NSLog(@"The active app is %@", activeAppName);
+	
 	if ([activeAppName isEqualToString: @"Live"] && !hotkeysBound) {
 		[self bindHotkeys];
 	}
 	else if (hotkeysBound) {
 		[self unbindHotkeys];
 	}
-	
-	
-	interceptHotkey = [activeAppName isEqualToString: @"Live"];
-	*/
 }
+
 - (void) awakeFromNib
 {
+	// appFrontSwitched
 	EventTypeSpec spec = { kEventClassApplication,  kEventAppFrontSwitched };
     InstallApplicationEventHandler(NewEventHandlerUPP(AppFrontSwitchedHandler), 1, &spec, (void*)self, NULL);
-
+	
+	
 	// read default Key-Commands and Actions from MIDIActions.plist
 	NSString *errorDesc = nil;
 	NSPropertyListFormat format;
@@ -268,10 +169,9 @@ static OSStatus AppFrontSwitchedHandler(EventHandlerCallRef inHandlerCallRef, Ev
 	}
 	
 	// check which app is in front and if needed, bind hotkeys
-	//[self appFrontSwitched];
+	[self appFrontSwitched];
 	
 	
-
 	//[hotKeyActions release]
 
 	/*
@@ -292,11 +192,6 @@ static OSStatus AppFrontSwitchedHandler(EventHandlerCallRef inHandlerCallRef, Ev
 	//InstallApplicationEventHandler(NewEventHandlerUPP(&myHotKeyRawHandler),1,&eventType,(void *)self,NULL);
 	
 	
-	/*
-	 TODO: myHotKeyRef in ein Array umwandeln, so dass man die hotkeys per UnregisterEventHotKey löschen kann, wenn "Live" nicht 
-	 die aktive Anwendung ist.
-	 Alternativ die Keyboard-Shortcuts durchleiten.
-	*/
 	// setup hotkeyref
 	EventHotKeyRef myHotKeyRef;
 	EventHotKeyID myHotKeyID;
@@ -314,19 +209,37 @@ static OSStatus AppFrontSwitchedHandler(EventHandlerCallRef inHandlerCallRef, Ev
 		NSDictionary *actionSettings = [hotKeyActions objectForKey:key];
 		NSDictionary *hotkeySettings = [actionSettings objectForKey:@"hotkey"];
 		
+		int keyCode = [[hotkeySettings valueForKey:@"keyCode"] intValue];
+		//NSLog(@"++ Register key-combo for: %d", keyCode);
 		int keyCombo = 0;
 		if ([[hotkeySettings valueForKey:@"cmdKey"] boolValue]) {
 			keyCombo+= cmdKey;
+			//NSLog(@"cmdKey");
 		}
 		if ([[hotkeySettings valueForKey:@"controlKey"] boolValue]) {
 			keyCombo+= controlKey;
+			//NSLog(@"controlKey");
 		}
 		if ([[hotkeySettings valueForKey:@"optionKey"] boolValue]) {
 			keyCombo+= optionKey;
+			//NSLog(@"optionKey");
 		}
 		if ([[hotkeySettings valueForKey:@"shiftKey"] boolValue]) {
 			keyCombo+= shiftKey;
+			//NSLog(@"shiftKey");
 		}
+		/*
+		if ([[hotkeySettings valueForKey:@"alphaLock"] boolValue]) {
+			keyCombo+= alphaLock;
+			//NSLog(@"alphaLock");
+		}
+		*/
+		/*
+		if (keyCombo == 0) {
+			NSLog(@"key: %@, value: %@", key, [hotKeyActions objectForKey:key]);
+		}
+		*/
+		//NSLog(@"-- key-combo registered");
 		
 		/*
 		unsigned char midiData[3];
@@ -336,93 +249,32 @@ static OSStatus AppFrontSwitchedHandler(EventHandlerCallRef inHandlerCallRef, Ev
 		*/
 		
 		// setup all the Hotkeys based on those actions
-		HotKey *hotkey = [[HotKeyMomentary alloc] init];
-		[hotkey setController:self];
+		//HotKey *hotkey = [[HotKeyRepeat alloc] init];
+		HotKey *hotkey = nil;
 		if ([[actionSettings valueForKey:@"cc"] boolValue]) {
+			hotkey = [[HotKeyRepeat alloc] init];
+			
 			[hotkey setChannel:0xB0 | 0];
 			[hotkey setKey:[[actionSettings valueForKey:@"cc"] intValue]];
+			
+			[hotkey setValue:[[actionSettings valueForKey:@"value"] intValue]];
 		}
 		else {
+			hotkey = [[HotKeyMomentary alloc] init];
+			
 			[hotkey setChannel:0x90 | 0];
 			[hotkey setKey:[[actionSettings valueForKey:@"note"] intValue]];
+			[hotkey setValue:127];
 		}
 		
-		[hotkey setValue:[[actionSettings valueForKey:@"value"] intValue]];
+		[hotkey setController:self];
+		
+		//[hotkey setValue:[[actionSettings valueForKey:@"value"] intValue]];
 		[hotkeys addObject:hotkey];
 		
-		RegisterEventHotKey([[hotkeySettings valueForKey:@"keyCode"] intValue], keyCombo, myHotKeyID, GetApplicationEventTarget(), 0, &myHotKeyRef);
+		RegisterEventHotKey(keyCode, keyCombo, myHotKeyID, GetApplicationEventTarget(), 0, &myHotKeyRef);
 		myHotKeyID.id+=1;
 	}
-	
-	//NSLog([[actions objectForKey:@"arm"] objectForKey:@"key"]);
-	//for (id key in actionKeys) {
-	//	NSLog(@"key: %@, value: %@", key, [actions objectForKey:key]);
-	//}
-	
-	//RegisterEventHotKey(1024, 0, myHotKeyID, GetApplicationEventTarget(), 0, &myHotKeyRef);
-	//myHotKeyID.id+=1;
-	/*
-	myHotKeyID.id=0;
-	RegisterEventHotKey(0, controlKey, myHotKeyID, GetApplicationEventTarget(), 0, &myHotKeyRef);
-	
-	
-	
-	myHotKeyID.id=STC_HOTKEY_ARM;
-	RegisterEventHotKey(STC_HOTKEY_ARM, controlKey, myHotKeyID, GetApplicationEventTarget(), 0, &myHotKeyRef);
-
-	myHotKeyID.id=STC_HOTKEY_ARM_SHIFT;
-	RegisterEventHotKey(STC_HOTKEY_ARM, controlKey+shiftKey, myHotKeyID, GetApplicationEventTarget(), 0, &myHotKeyRef);
-	
-	myHotKeyID.id=STC_HOTKEY_SOLO;
-	RegisterEventHotKey(STC_HOTKEY_SOLO, controlKey, myHotKeyID, GetApplicationEventTarget(), 0, &myHotKeyRef);
-	myHotKeyID.id=STC_HOTKEY_SOLO_SHIFT;
-	RegisterEventHotKey(STC_HOTKEY_SOLO, controlKey+shiftKey, myHotKeyID, GetApplicationEventTarget(), 0, &myHotKeyRef);
-	
-	myHotKeyID.id=STC_HOTKEY_MUTE;
-	RegisterEventHotKey(STC_HOTKEY_MUTE, controlKey, myHotKeyID, GetApplicationEventTarget(), 0, &myHotKeyRef);
-
-
-	myHotKeyID.id=STC_HOTKEY_PANLEFT;
-	RegisterEventHotKey(STC_HOTKEY_PANLEFT, controlKey, myHotKeyID, GetApplicationEventTarget(), 0, &myHotKeyRef);
-	myHotKeyID.id=STC_HOTKEY_PANLEFT_SHIFT;
-	RegisterEventHotKey(STC_HOTKEY_PANLEFT, controlKey+shiftKey, myHotKeyID, GetApplicationEventTarget(), 0, &myHotKeyRef);
-
-	myHotKeyID.id=STC_HOTKEY_PANRIGHT;
-	RegisterEventHotKey(STC_HOTKEY_PANRIGHT, controlKey, myHotKeyID, GetApplicationEventTarget(), 0, &myHotKeyRef);
-	myHotKeyID.id=STC_HOTKEY_PANRIGHT_SHIFT;
-	RegisterEventHotKey(STC_HOTKEY_PANRIGHT, controlKey+shiftKey, myHotKeyID, GetApplicationEventTarget(), 0, &myHotKeyRef);
-	
-	
-	
-	myHotKeyID.id=STC_HOTKEY_VOLUMEUP;
-	RegisterEventHotKey(STC_HOTKEY_VOLUMEUP, controlKey, myHotKeyID, GetApplicationEventTarget(), 0, &myHotKeyRef);
-	myHotKeyID.id=STC_HOTKEY_VOLUMEUP_SHIFT;
-	RegisterEventHotKey(STC_HOTKEY_VOLUMEUP, controlKey+shiftKey, myHotKeyID, GetApplicationEventTarget(), 0, &myHotKeyRef);
-	
-	myHotKeyID.id=STC_HOTKEY_VOLUMEDOWN;
-	RegisterEventHotKey(STC_HOTKEY_VOLUMEDOWN, controlKey, myHotKeyID, GetApplicationEventTarget(), 0, &myHotKeyRef);
-	myHotKeyID.id=STC_HOTKEY_VOLUMEDOWN_SHIFT;
-	RegisterEventHotKey(STC_HOTKEY_VOLUMEDOWN, controlKey+shiftKey, myHotKeyID, GetApplicationEventTarget(), 0, &myHotKeyRef);	
-	*/
-	//NSArray
-	//NSDictionary
-	//NSArray *objects = [NSArray arrayWithObjects:@"String1", @"String2", @"String3", nil];
-	/*
-	if([[NSUserDefaults standardUserDefaults] integerForKey:@"hotkeyCodeArm"]!=-999) {
-		myHotKeyID.id=STC_HOTKEY_ARM;
-		
-		RegisterEventHotKey([[NSUserDefaults standardUserDefaults] integerForKey:@"hotkeyCodeArm"], [[NSUserDefaults standardUserDefaults] integerForKey:
-@"hotkeyModifiersArm"], myHotKeyID, GetApplicationEventTarget(), 0, &myHotKeyRef);
-	}
-
-	if([[NSUserDefaults standardUserDefaults] integerForKey:@"hotkeyCodeSolo"]!=-999) {
-		myHotKeyID.id=STC_HOTKEY_SOLO;
-		
-		RegisterEventHotKey([[NSUserDefaults standardUserDefaults] integerForKey:@"hotkeyCodeSolo"], [[NSUserDefaults standardUserDefaults] integerForKey:
-@"hotkeyModifiersSolo"], myHotKeyID, GetApplicationEventTarget(), 0, &myHotKeyRef);
-	}
-	*/
-
 }
 
 

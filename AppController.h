@@ -11,8 +11,10 @@
 #import <PYMIDI/PYMIDI.h>
 #import "HotKey.h"
 #import "HotKeyMomentary.h"
+#import "HotKeyRepeat.h"
 
 OSStatus myHotKeyHandler(EventHandlerCallRef nextHandler, EventRef anEvent, void *userData);
+OSStatus myHotKeyReleasedHandler(EventHandlerCallRef nextHandler, EventRef anEvent, void *userData);
 
 @interface AppController : NSObject {
 	PYMIDIVirtualSource* virtualInput;
@@ -23,7 +25,6 @@ OSStatus myHotKeyHandler(EventHandlerCallRef nextHandler, EventRef anEvent, void
 	NSString *activeAppName;
 	
 	BOOL hotkeysBound;
-	BOOL interceptHotkey;
 }
 - (void) sendMIDIMessage: (int) channel: (int) key: (int) value;//(unsigned char*) message;
 
