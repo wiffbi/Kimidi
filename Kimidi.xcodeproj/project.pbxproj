@@ -52,6 +52,7 @@
 		7939A476101FA0CF00FEB7DA /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7939A475101FA0CF00FEB7DA /* AppController.m */; };
 		794F69E7104956130000CCA9 /* HotKeyMomentary.m in Sources */ = {isa = PBXBuildFile; fileRef = 794F69E6104956130000CCA9 /* HotKeyMomentary.m */; };
 		794F69E8104956130000CCA9 /* HotKeyMomentary.m in Sources */ = {isa = PBXBuildFile; fileRef = 794F69E6104956130000CCA9 /* HotKeyMomentary.m */; };
+		795E91F01311425C00C13113 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 795E91EF1311425C00C13113 /* Carbon.framework */; };
 		79694EE8102029A500EF3D24 /* menubar.png in Resources */ = {isa = PBXBuildFile; fileRef = 79694EE7102029A500EF3D24 /* menubar.png */; };
 		79694F2310202DB100EF3D24 /* menubar-hover.png in Resources */ = {isa = PBXBuildFile; fileRef = 79694F2210202DB100EF3D24 /* menubar-hover.png */; };
 		79BD94DE101F107F0057A858 /* TrayMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BD94DD101F107F0057A858 /* TrayMenu.m */; };
@@ -103,12 +104,13 @@
 		7939A475101FA0CF00FEB7DA /* AppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppController.m; sourceTree = "<group>"; };
 		794F69E5104956130000CCA9 /* HotKeyMomentary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotKeyMomentary.h; sourceTree = "<group>"; };
 		794F69E6104956130000CCA9 /* HotKeyMomentary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotKeyMomentary.m; sourceTree = "<group>"; };
+		795E91C91311400D00C13113 /* Kimidi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kimidi.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		795E91EF1311425C00C13113 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		79694EE7102029A500EF3D24 /* menubar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menubar.png; sourceTree = "<group>"; };
 		79694F2210202DB100EF3D24 /* menubar-hover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menubar-hover.png"; sourceTree = "<group>"; };
 		79BD94DC101F107F0057A858 /* TrayMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrayMenu.h; sourceTree = "<group>"; };
 		79BD94DD101F107F0057A858 /* TrayMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrayMenu.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		8D1107320486CEB800E47090 /* Kimidi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = Kimidi.app; path = /Users/richard/Projekte/SelectedTrackControl/Kimidi/build/Debug/Kimidi.app; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 				790415991021918500F9761A /* Cocoa.framework in Frameworks */,
 				7904159A1021918500F9761A /* CoreAudio.framework in Frameworks */,
 				7904159B1021918500F9761A /* CoreMIDI.framework in Frameworks */,
+				795E91F01311425C00C13113 /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,6 +159,7 @@
 				7939A444101FA02D00FEB7DA /* Cocoa.framework */,
 				7939A445101FA02D00FEB7DA /* CoreAudio.framework */,
 				7939A446101FA02D00FEB7DA /* CoreMIDI.framework */,
+				795E91EF1311425C00C13113 /* Carbon.framework */,
 			);
 			name = "Linked Frameworks";
 			sourceTree = "<group>";
@@ -174,6 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				790414981021906D00F9761A /* Selected Track Control.app */,
+				795E91C91311400D00C13113 /* Kimidi.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -289,7 +294,7 @@
 			name = Kimidi;
 			productInstallPath = "$(HOME)/Applications";
 			productName = Kimidi;
-			productReference = 8D1107320486CEB800E47090 /* Kimidi.app */;
+			productReference = 795E91C91311400D00C13113 /* Kimidi.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -524,6 +529,7 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_VERSION = 4.0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;

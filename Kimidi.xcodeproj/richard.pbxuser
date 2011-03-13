@@ -19,8 +19,8 @@
 		);
 		codeSenseManager = 79BD94D8101F103A0057A858 /* Code sense */;
 		executables = (
-			79BD94C0101F10240057A858 /* Kimidi */,
 			790414991021906D00F9761A /* Selected Track Control */,
+			795E91CA1311400D00C13113 /* Kimidi */,
 		);
 		perUserDictionary = {
 			"PBXConfiguration.PBXBreakpointsDataSource.v1:1CA1AED706398EBD00589147" = {
@@ -50,7 +50,7 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					450,
+					862,
 					20,
 					48,
 					43,
@@ -72,7 +72,7 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					410,
+					569,
 					60,
 					20,
 					48,
@@ -89,8 +89,16 @@
 					PBXFileDataSource_Warnings_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 319383112;
-			PBXWorkspaceStateSaveDate = 319383112;
+			PBXPerProjectTemplateStateSaveDate = 321728056;
+			PBXWorkspaceStateSaveDate = 321728056;
+		};
+		perUserProjectItems = {
+			795E9209131142FB00C13113 = 795E9209131142FB00C13113 /* PBXTextBookmark */;
+			795E922113114CF900C13113 = 795E922113114CF900C13113 /* PBXTextBookmark */;
+			795E922213114CF900C13113 = 795E922213114CF900C13113 /* PBXTextBookmark */;
+			795E922313114CF900C13113 = 795E922313114CF900C13113 /* PBXTextBookmark */;
+			795E922413114CF900C13113 = 795E922413114CF900C13113 /* PBXTextBookmark */;
+			795E925613114FB200C13113 = 795E925613114FB200C13113 /* PBXTextBookmark */;
 		};
 		sourceControlManager = 79BD94D7101F103A0057A858 /* Source Control */;
 		userBuildSettings = {
@@ -98,8 +106,9 @@
 	};
 	29B97316FDCFA39411CA2CEA /* main.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {946, 402}}";
-			sepNavSelRange = "{181, 0}";
+			sepNavIntBoundsRect = "{{0, 0}, {787, 461}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 563}";
 			sepNavVisRect = "{{0, 0}, {946, 402}}";
 		};
 	};
@@ -112,15 +121,17 @@
 	};
 	7903131A1025F466001B1AEC /* HotKey.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1006, 518}}";
-			sepNavSelRange = "{166, 0}";
+			sepNavIntBoundsRect = "{{0, 0}, {1040, 604}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 563}";
 			sepNavVisRect = "{{0, 44}, {1006, 451}}";
 		};
 	};
 	7903131B1025F466001B1AEC /* HotKey.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1006, 1344}}";
-			sepNavSelRange = "{1362, 0}";
+			sepNavIntBoundsRect = "{{0, 0}, {1040, 1157}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{16, 800}";
 			sepNavVisRect = "{{0, 238}, {1006, 451}}";
 		};
 	};
@@ -213,15 +224,17 @@
 	};
 	7939A474101FA0CF00FEB7DA /* AppController.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1006, 504}}";
-			sepNavSelRange = "{255, 0}";
+			sepNavIntBoundsRect = "{{0, 0}, {1040, 604}}";
+			sepNavSelRange = "{537, 13}";
+			sepNavVisRange = "{0, 902}";
 			sepNavVisRect = "{{0, 14}, {1006, 451}}";
 		};
 	};
 	7939A475101FA0CF00FEB7DA /* AppController.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1006, 5194}}";
-			sepNavSelRange = "{7832, 0}";
+			sepNavIntBoundsRect = "{{0, 0}, {1048, 4992}}";
+			sepNavSelRange = "{4341, 0}";
+			sepNavVisRange = "{6826, 1368}";
 			sepNavVisRect = "{{0, 3680}, {1006, 451}}";
 		};
 	};
@@ -240,7 +253,7 @@
 			sepNavVisRect = "{{0, 0}, {1006, 451}}";
 		};
 	};
-	79BD94C0101F10240057A858 /* Kimidi */ = {
+	795E91CA1311400D00C13113 /* Kimidi */ = {
 		isa = PBXExecutable;
 		activeArgIndices = (
 		);
@@ -256,7 +269,6 @@
 		dataTipSortType = 0;
 		debuggerPlugin = GDBDebugging;
 		disassemblyDisplayState = 0;
-		dylibVariantSuffix = "";
 		enableDebugStr = 1;
 		environmentEntries = (
 		);
@@ -264,11 +276,69 @@
 		executableUserSymbolLevel = 0;
 		libgmallocEnabled = 0;
 		name = Kimidi;
-		savedGlobals = {
-		};
 		showTypeColumn = 0;
 		sourceDirectories = (
 		);
+	};
+	795E9209131142FB00C13113 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 29B97316FDCFA39411CA2CEA /* main.m */;
+		name = "main.m: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 563;
+		vrLoc = 0;
+	};
+	795E922113114CF900C13113 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 7903131B1025F466001B1AEC /* HotKey.m */;
+		name = "HotKey.m: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 800;
+		vrLoc = 16;
+	};
+	795E922213114CF900C13113 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 7903131A1025F466001B1AEC /* HotKey.h */;
+		name = "HotKey.h: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 563;
+		vrLoc = 0;
+	};
+	795E922313114CF900C13113 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 7939A474101FA0CF00FEB7DA /* AppController.h */;
+		name = "AppController.h: 23";
+		rLen = 13;
+		rLoc = 537;
+		rType = 0;
+		vrLen = 902;
+		vrLoc = 0;
+	};
+	795E922413114CF900C13113 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 7939A475101FA0CF00FEB7DA /* AppController.m */;
+		name = "AppController.m: 294";
+		rLen = 19;
+		rLoc = 8707;
+		rType = 0;
+		vrLen = 1248;
+		vrLoc = 1647;
+	};
+	795E925613114FB200C13113 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 7939A475101FA0CF00FEB7DA /* AppController.m */;
+		name = "AppController.m: 156";
+		rLen = 0;
+		rLoc = 4341;
+		rType = 0;
+		vrLen = 1368;
+		vrLoc = 6826;
 	};
 	79BD94D7101F103A0057A858 /* Source Control */ = {
 		isa = PBXSourceControlManager;
@@ -302,7 +372,7 @@
 	8D1107260486CEB800E47090 /* Kimidi */ = {
 		activeExec = 0;
 		executables = (
-			79BD94C0101F10240057A858 /* Kimidi */,
+			795E91CA1311400D00C13113 /* Kimidi */,
 		);
 	};
 	8D1107310486CEB800E47090 /* Info.plist */ = {
