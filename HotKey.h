@@ -18,9 +18,6 @@
 	int channel;
 	int key;
 	int value;
-
-	NSTimer* timer;
-	bool isHold;
 }
 
 - (void) setController: (id) ac;
@@ -31,6 +28,4 @@
 - (void) pressed;
 - (void) released;
 - (void) execute;
-
-- (void) setIsHold;
 @end
