@@ -20,16 +20,30 @@ OSStatus myHotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent, voi
 {
 	//NSLog(@"YEAY WE DID A GLOBAL HOTKEY");
 	//return noErr;
+	/*
+	NSDictionary *activeApp = [[NSWorkspace sharedWorkspace] activeApplication];
+	NSString *activeAppName = (NSString *)[activeApp objectForKey:@"NSApplicationName"];
 	
-	OSStatus theError;
-	EventHotKeyID hkCom;
+	if ([activeAppName isEqualToString: @"Live"]) {
+		NSLog(@"intercept hotkey");
+	*/	
+		OSStatus theError;
+		EventHotKeyID hkCom;
+		
+		theError = GetEventParameter(theEvent,kEventParamDirectObject,typeEventHotKeyID,NULL,sizeof(hkCom),NULL,&hkCom);
+		
+		if( theError == noErr && GetEventClass(theEvent) == kEventClassKeyboard)
+		{
+			[(id)userData hotKeyPressed:hkCom.id];
+		}
+	/*
+	 }
+	 */
 	
-	theError = GetEventParameter(theEvent,kEventParamDirectObject,typeEventHotKeyID,NULL,sizeof(hkCom),NULL,&hkCom);
-	
-	if( theError == noErr && GetEventClass(theEvent) == kEventClassKeyboard)
-	{
-		[(id)userData hotKeyPressed:hkCom.id];
-	}
+	return theError;
+
+	NSLog(@"do not intercept hotkey");
+
 
 	/*
 	UInt8	macCharCode = 0;
@@ -37,7 +51,11 @@ OSStatus myHotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent, voi
 	NSLog(@"The result %@", result);
 	//theError = GetEventParameter(theEvent,kEventParamDirectObject,typeEventHotKeyID,NULL,sizeof(hkCom),NULL,&hkCom);
 	*/
-	return theError;
+	
+	//return (CallNextEventHandler(nextHandler, theEvent));
+	return eventNotHandledErr;
+	
+	//return theError;
 	//[self sendMIDI];
 	//[(id)userData logHotKey];
 	/*
@@ -114,6 +132,8 @@ static OSStatus AppFrontSwitchedHandler(EventHandlerCallRef inHandlerCallRef, Ev
 }
 - (id) init
 {
+	hotkeysBound = NO;
+	
 	// create hotkeys-array to hold all the hotkeys
 	hotkeys = [[NSMutableArray alloc] init];
 	
@@ -136,11 +156,12 @@ static OSStatus AppFrontSwitchedHandler(EventHandlerCallRef inHandlerCallRef, Ev
 	
 
 	//PYMIDIVirtualSource* 
-	virtualInput = [[PYMIDIVirtualSource alloc] initWithName:@"STC Virtual IN"];//[PYMIDIVirtualSource initWithName:@"My virtual input"];
-	//[virtualInput setName:@"Kimidi IN"];
-	
+	virtualInput = [[PYMIDIVirtualSource alloc] initWithName:@"STC Virtual IN"];
 	[virtualInput addSender:self];
 	//NSLog([virtualInput displayName]);
+	
+	//virtualOutput = [[PYMIDIVirtualDestination alloc] initWithName:@"STC Virtual OUT"];
+	//[virtualOutput addReceiver:self];
 
 	
     return self;
@@ -148,7 +169,9 @@ static OSStatus AppFrontSwitchedHandler(EventHandlerCallRef inHandlerCallRef, Ev
 
 - (void) hotKeyPressed:(int) hotKeyId
 {
-	//NSLog(@"Hotkey pressed: %d", hotKeyId);
+	NSLog(@"Hotkey pressed: %d", hotKeyId);
+	//NSLog(@"The active app is %@", activeAppName);
+	
 	HotKey *hotkey = (HotKey *)[hotkeys objectAtIndex:hotKeyId];
 	//NSLog(@"Hotkey: %@", hotkey);
 	[hotkey pressed];
@@ -191,10 +214,39 @@ static OSStatus AppFrontSwitchedHandler(EventHandlerCallRef inHandlerCallRef, Ev
 */
 
 
-- (void) appFrontSwitched {
-    NSLog(@"%@", [[NSWorkspace sharedWorkspace] activeApplication]);
+- (void) bindHotkeys {
+	NSLog(@"bind hotkeys");
+	
+	hotkeysBound = YES;
 }
--(void)awakeFromNib
+- (void) unbindHotkeys {
+	NSLog(@"unbind hotkeys");
+	
+	
+	hotkeysBound = NO;
+}
+
+
+
+
+- (void) appFrontSwitched {
+	NSDictionary *activeApp = [[NSWorkspace sharedWorkspace] activeApplication];
+	//NSString *
+	activeAppName = (NSString *)[activeApp objectForKey:@"NSApplicationName"];
+    NSLog(@"The active app is %@", activeAppName);
+	/*
+	if ([activeAppName isEqualToString: @"Live"] && !hotkeysBound) {
+		[self bindHotkeys];
+	}
+	else if (hotkeysBound) {
+		[self unbindHotkeys];
+	}
+	
+	
+	interceptHotkey = [activeAppName isEqualToString: @"Live"];
+	*/
+}
+- (void) awakeFromNib
 {
 	EventTypeSpec spec = { kEventClassApplication,  kEventAppFrontSwitched };
     InstallApplicationEventHandler(NewEventHandlerUPP(AppFrontSwitchedHandler), 1, &spec, (void*)self, NULL);
@@ -214,6 +266,10 @@ static OSStatus AppFrontSwitchedHandler(EventHandlerCallRef inHandlerCallRef, Ev
 		NSLog(errorDesc);
 		[errorDesc release];
 	}
+	
+	// check which app is in front and if needed, bind hotkeys
+	//[self appFrontSwitched];
+	
 	
 
 	//[hotKeyActions release]
@@ -236,6 +292,11 @@ static OSStatus AppFrontSwitchedHandler(EventHandlerCallRef inHandlerCallRef, Ev
 	//InstallApplicationEventHandler(NewEventHandlerUPP(&myHotKeyRawHandler),1,&eventType,(void *)self,NULL);
 	
 	
+	/*
+	 TODO: myHotKeyRef in ein Array umwandeln, so dass man die hotkeys per UnregisterEventHotKey löschen kann, wenn "Live" nicht 
+	 die aktive Anwendung ist.
+	 Alternativ die Keyboard-Shortcuts durchleiten.
+	*/
 	// setup hotkeyref
 	EventHotKeyRef myHotKeyRef;
 	EventHotKeyID myHotKeyID;

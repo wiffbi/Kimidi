@@ -20,6 +20,10 @@ OSStatus myHotKeyHandler(EventHandlerCallRef nextHandler, EventRef anEvent, void
 	NSMutableArray *hotkeys;
 	
 	//id hotkey;
+	NSString *activeAppName;
+	
+	BOOL hotkeysBound;
+	BOOL interceptHotkey;
 }
 - (void) sendMIDIMessage: (int) channel: (int) key: (int) value;//(unsigned char*) message;
 
