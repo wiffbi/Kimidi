@@ -111,7 +111,7 @@
 	};
 	29B97316FDCFA39411CA2CEA /* main.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1016, 436}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1016, 474}}";
 			sepNavSelRange = "{0, 0}";
 			sepNavVisRange = "{0, 563}";
 			sepNavVisRect = "{{0, 0}, {946, 402}}";
@@ -119,8 +119,9 @@
 	};
 	32CA4F630368D1EE00C91783 /* Kimidi_Prefix.pch */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {891, 567}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1016, 474}}";
 			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 143}";
 			sepNavVisRect = "{{0, 0}, {891, 567}}";
 		};
 	};
@@ -229,17 +230,17 @@
 	};
 	7939A474101FA0CF00FEB7DA /* AppController.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1016, 520}}";
-			sepNavSelRange = "{595, 0}";
-			sepNavVisRange = "{23, 919}";
+			sepNavIntBoundsRect = "{{0, 0}, {1016, 533}}";
+			sepNavSelRange = "{819, 0}";
+			sepNavVisRange = "{51, 999}";
 			sepNavVisRect = "{{0, 14}, {1006, 451}}";
 		};
 	};
 	7939A475101FA0CF00FEB7DA /* AppController.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1016, 5785}}";
-			sepNavSelRange = "{1075, 0}";
-			sepNavVisRange = "{0, 934}";
+			sepNavIntBoundsRect = "{{0, 0}, {1016, 3159}}";
+			sepNavSelRange = "{6965, 0}";
+			sepNavVisRange = "{4123, 1298}";
 			sepNavVisRect = "{{0, 3680}, {1006, 451}}";
 		};
 	};
@@ -254,7 +255,7 @@
 	};
 	794F69E6104956130000CCA9 /* HotKeyMomentary.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1016, 459}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1016, 474}}";
 			sepNavSelRange = "{0, 0}";
 			sepNavVisRange = "{0, 478}";
 			sepNavVisRect = "{{0, 0}, {1006, 451}}";
