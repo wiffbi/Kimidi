@@ -44,6 +44,11 @@
 {
 	keyCombo = combo;
 }
+- (void) setEventHotKeyID: (int) i
+{
+	hotKeyID.id = i;
+}
+
 
 - (void) activate
 {
@@ -54,29 +59,6 @@
 	UnregisterEventHotKey(hotKeyRef);
 }
 
-
-- (int) getKeyCode
-{
-	return keyCode;
-}
-- (int) getKeyCombo
-{
-	return keyCombo;
-}
-
-
-- (EventHotKeyRef) getEventHotKeyRef
-{
-	return hotKeyRef;
-}
-- (EventHotKeyID) getEventHotKeyID
-{
-	return hotKeyID;
-}
-- (void) setEventHotKeyID: (int) i
-{
-	hotKeyID.id = i;
-}
 
 
 

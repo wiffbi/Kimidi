@@ -35,18 +35,11 @@
 
 - (void) setKeyCode: (int) code;
 - (void) setKeyCombo: (int) combo;
-
-- (int) getKeyCode;
-- (int) getKeyCombo;
-
+- (void) setEventHotKeyID: (int) i;
 
 - (void) activate;
 - (void) deactivate;
 
-
-- (EventHotKeyRef) getEventHotKeyRef;
-- (EventHotKeyID) getEventHotKeyID;
-- (void) setEventHotKeyID: (int) i;
 
 - (void) pressed;
 - (void) released;
