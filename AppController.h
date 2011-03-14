@@ -22,7 +22,7 @@ OSStatus myHotKeyReleasedHandler(EventHandlerCallRef nextHandler, EventRef anEve
 	NSMutableArray *hotkeys;
 	
 	//id hotkey;
-	NSString *activeAppName;
+	//NSString *activeAppName;
 	
 	BOOL hotkeysBound;
 }

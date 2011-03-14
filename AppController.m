@@ -19,7 +19,9 @@
 
 OSStatus myHotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent, void *userData)
 {
+	/*
 	NSLog(@"modifier flags: 0x%x", [[NSApp currentEvent] modifierFlags]);
+	*/
 	
 	OSStatus theError;
 	EventHotKeyID hkCom;
@@ -27,12 +29,13 @@ OSStatus myHotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent, voi
 	//UInt32 modifierFlags = GetCurrentKeyModifiers();
 	//NSUInteger modifierFlags = [theEvent modifierFlags];
 	//NSLog(@"%d", modifierFlags);
+	/*
 	NSLog(@"%d", [[NSApp currentEvent] modifierFlags]);
 	
 	if (NSAlphaShiftKeyMask & [[NSApp currentEvent] modifierFlags]) {
 		NSLog(@"CAPS LOCK");
 	}
-	
+	*/
 	
 	theError = GetEventParameter(theEvent,kEventParamDirectObject,typeEventHotKeyID,NULL,sizeof(hkCom),NULL,&hkCom);
 	
@@ -83,9 +86,11 @@ static OSStatus AppFrontSwitchedHandler(EventHandlerCallRef inHandlerCallRef, Ev
 
 - (void) hotKeyPressed:(int) hotKeyId
 {
+	/*
 	if (NSAlphaShiftKeyMask & [[NSApp currentEvent] modifierFlags]) {
 		NSLog(@"CAPS LOCK");
 	}
+	*/
 	//NSLog(@"Hotkey pressed: %d", hotKeyId);
 	HotKey *hotkey = (HotKey *)[hotkeys objectAtIndex:hotKeyId];
 	//NSLog(@"Hotkey: %@", hotkey);
@@ -117,7 +122,7 @@ static OSStatus AppFrontSwitchedHandler(EventHandlerCallRef inHandlerCallRef, Ev
 }
 
 - (void) bindHotkeys {
-	NSLog(@"bind hotkeys");
+	//NSLog(@"bind hotkeys");
 	
 	int i = [hotkeys count];
 	while ( i-- ) {
@@ -127,7 +132,7 @@ static OSStatus AppFrontSwitchedHandler(EventHandlerCallRef inHandlerCallRef, Ev
 	hotkeysBound = YES;
 }
 - (void) unbindHotkeys {
-	NSLog(@"unbind hotkeys");
+	//NSLog(@"unbind hotkeys");
 	
 	int i = [hotkeys count];
 	while ( i-- ) {
@@ -141,9 +146,8 @@ static OSStatus AppFrontSwitchedHandler(EventHandlerCallRef inHandlerCallRef, Ev
 - (BOOL) shouldHaveHotkeys {
 	
 	NSDictionary *activeApp = [[NSWorkspace sharedWorkspace] activeApplication];
-	//NSString *
-	activeAppName = (NSString *)[activeApp objectForKey:@"NSApplicationName"];
-	NSLog(@"The active app is %@", activeAppName);
+	NSString *activeAppName = (NSString *)[activeApp objectForKey:@"NSApplicationName"];
+	//NSLog(@"The active app is %@", activeAppName);
 	
 	// TODO: optional add NSArray for multiple apps other than Live to have hotkeys enabled
 	return [activeAppName isEqualToString: @"Live"];
@@ -161,14 +165,12 @@ static OSStatus AppFrontSwitchedHandler(EventHandlerCallRef inHandlerCallRef, Ev
 
 - (void) awakeFromNib
 {
-	// appFrontSwitched
+	// event-handler for front app switched
 	EventTypeSpec spec = { kEventClassApplication,  kEventAppFrontSwitched };
     InstallApplicationEventHandler(NewEventHandlerUPP(AppFrontSwitchedHandler), 1, &spec, (void*)self, NULL);
 	
-	/*
-	 Install event-handlers for KeyPressed and KeyReleased
-	 */
 	
+	// event-handlers for KeyPressed and KeyReleased
 	EventTypeSpec eventType;
 	eventType.eventClass=kEventClassKeyboard;
 	
@@ -204,13 +206,7 @@ static OSStatus AppFrontSwitchedHandler(EventHandlerCallRef inHandlerCallRef, Ev
 	}
 	
 	
-	
-	// setup hotkeyref
-	//EventHotKeyRef myHotKeyRef;
-	EventHotKeyID myHotKeyID;
-	myHotKeyID.id=0;
-	
-	// iterate all 
+	int hotKeyID = 0;
 	
 	//NSArray *actionKeys = [actions allKeys];
 	NSEnumerator* actionsIterator = [[hotKeyActions allKeys] objectEnumerator];
@@ -281,7 +277,7 @@ static OSStatus AppFrontSwitchedHandler(EventHandlerCallRef inHandlerCallRef, Ev
 		[hotkey setKeyCode:keyCode];
 		[hotkey setKeyCombo:keyCombo];
 		
-		[hotkey setEventHotKeyID:myHotKeyID.id];
+		[hotkey setEventHotKeyID:hotKeyID];
 		
 		[hotkey setController:self];
 		
@@ -290,7 +286,7 @@ static OSStatus AppFrontSwitchedHandler(EventHandlerCallRef inHandlerCallRef, Ev
 		
 		// do not register hotkey yet
 		//RegisterEventHotKey(keyCode, keyCombo, myHotKeyID, GetApplicationEventTarget(), 0, &myHotKeyRef);
-		myHotKeyID.id+=1;
+		hotKeyID += 1;
 	}
 	
 	
