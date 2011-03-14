@@ -122,11 +122,6 @@ static OSStatus AppFrontSwitchedHandler(EventHandlerCallRef inHandlerCallRef, Ev
 	int i = [hotkeys count];
 	while ( i-- ) {
 		[[hotkeys objectAtIndex:i] activate];
-		/*
-		HotKey *hotkey = (HotKey *)[hotkeys objectAtIndex:i];
-		EventHotKeyRef myHotKeyRef = [hotkey getEventHotKeyRef];
-		RegisterEventHotKey([hotkey getKeyCode], [hotkey getKeyCombo], [hotkey getEventHotKeyID], GetApplicationEventTarget(), 0, &myHotKeyRef);
-		*/
 	}
 	
 	hotkeysBound = YES;
@@ -137,11 +132,6 @@ static OSStatus AppFrontSwitchedHandler(EventHandlerCallRef inHandlerCallRef, Ev
 	int i = [hotkeys count];
 	while ( i-- ) {
 		[[hotkeys objectAtIndex:i] deactivate];
-		/*
-		HotKey *hotkey = (HotKey *)[hotkeys objectAtIndex:i];
-		EventHotKeyRef myHotKeyRef = [hotkey getEventHotKeyRef];
-		UnregisterEventHotKey(myHotKeyRef);
-		*/
 	}
 	
 	hotkeysBound = NO;
