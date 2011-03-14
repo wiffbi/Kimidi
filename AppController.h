@@ -35,6 +35,6 @@ OSStatus myHotKeyReleasedHandler(EventHandlerCallRef nextHandler, EventRef anEve
 - (void) hotKeyReleased:(int) hotKeyId;
 
 - (void) logHotKey;
-- (void) appFrontSwitched;
+- (void) checkFrontAppForHotkeys;
 - (void) awakeFromNib;
 @end

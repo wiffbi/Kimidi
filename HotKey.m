@@ -8,8 +8,10 @@
 
 #import "HotKey.h"
 #import "AppController.h"
+#import <Carbon/Carbon.h>
 
 @implementation HotKey
+
 - (void) setController: (id) c
 {
 	controller = c;
@@ -32,6 +34,50 @@
 {
 	value = v;
 }
+
+
+- (void) setKeyCode: (int) code
+{
+	keyCode = code;
+}
+- (void) setKeyCombo: (int) combo
+{
+	keyCombo = combo;
+}
+
+- (void) activate
+{
+	RegisterEventHotKey(keyCode, keyCombo, hotKeyID, GetApplicationEventTarget(), 0, &hotKeyRef);
+}
+- (void) deactivate
+{
+	UnregisterEventHotKey(hotKeyRef);
+}
+
+
+- (int) getKeyCode
+{
+	return keyCode;
+}
+- (int) getKeyCombo
+{
+	return keyCombo;
+}
+
+
+- (EventHotKeyRef) getEventHotKeyRef
+{
+	return hotKeyRef;
+}
+- (EventHotKeyID) getEventHotKeyID
+{
+	return hotKeyID;
+}
+- (void) setEventHotKeyID: (int) i
+{
+	hotKeyID.id = i;
+}
+
 
 
 - (void) pressed

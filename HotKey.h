@@ -8,6 +8,7 @@
 
 
 #import <Cocoa/Cocoa.h>
+#import <Carbon/Carbon.h>
 //
 
 
@@ -18,6 +19,12 @@
 	int channel;
 	int key;
 	int value;
+	
+	int keyCode;
+	int keyCombo;
+	
+	EventHotKeyRef hotKeyRef;
+	EventHotKeyID hotKeyID;
 }
 
 - (void) setController: (id) ac;
@@ -25,7 +32,24 @@
 - (void) setChannel: (int) c;
 - (void) setKey: (int) k;
 - (void) setValue: (int) v;
+
+- (void) setKeyCode: (int) code;
+- (void) setKeyCombo: (int) combo;
+
+- (int) getKeyCode;
+- (int) getKeyCombo;
+
+
+- (void) activate;
+- (void) deactivate;
+
+
+- (EventHotKeyRef) getEventHotKeyRef;
+- (EventHotKeyID) getEventHotKeyID;
+- (void) setEventHotKeyID: (int) i;
+
 - (void) pressed;
 - (void) released;
 - (void) execute;
+
 @end
