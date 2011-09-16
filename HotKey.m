@@ -8,7 +8,7 @@
 
 #import "HotKey.h"
 #import "AppController.h"
-#import <Carbon/Carbon.h>
+//#import <Carbon/Carbon.h>
 
 @implementation HotKey
 
