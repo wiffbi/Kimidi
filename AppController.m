@@ -2,26 +2,20 @@
 //  AppController.m
 //  SelectedTrackControl
 //
-//  Created by Richard Schreiber on 22.07.09.
-//  Copyright 2009 __MyCompanyName__. All rights reserved.
-//
 
 #import "AppController.h"
-#import <Carbon/Carbon.h>
-#import <CoreServices/CoreServices.h>
+//#import <Carbon/Carbon.h>
+//#import <CoreServices/CoreServices.h>
 
-#import <CoreAudio/HostTime.h>
-#import <PYMIDI/PYMIDI.h>
+//#import <CoreAudio/HostTime.h>
+//#import <PYMIDI/PYMIDI.h>
 
-//#import "HotKey.h"
-//#import "HotKeyMomentary.h"
-//#import "HotKeyRepeat.h"
 
 OSStatus myHotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent, void *userData)
 {
-	/*
-	NSLog(@"modifier flags: 0x%x", [[NSApp currentEvent] modifierFlags]);
-	*/
+	
+	//NSLog(@"modifier flags: 0x%x", [[NSApp currentEvent] modifierFlags]);
+	
 	
 	OSStatus theError;
 	EventHotKeyID hkCom;
@@ -29,13 +23,14 @@ OSStatus myHotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent, voi
 	//UInt32 modifierFlags = GetCurrentKeyModifiers();
 	//NSUInteger modifierFlags = [theEvent modifierFlags];
 	//NSLog(@"%d", modifierFlags);
-	/*
-	NSLog(@"%d", [[NSApp currentEvent] modifierFlags]);
 	
+	//NSLog(@"%d", [[NSApp currentEvent] modifierFlags]);
+	/*
 	if (NSAlphaShiftKeyMask & [[NSApp currentEvent] modifierFlags]) {
 		NSLog(@"CAPS LOCK");
 	}
 	*/
+	
 	
 	theError = GetEventParameter(theEvent,kEventParamDirectObject,typeEventHotKeyID,NULL,sizeof(hkCom),NULL,&hkCom);
 	
@@ -62,35 +57,36 @@ static OSStatus AppFrontSwitchedHandler(EventHandlerCallRef inHandlerCallRef, Ev
 }
 
 @implementation AppController
-- (void) logHotKey
-{
-	//NSLog(@"logHotKey");
-}
 - (id) init
 {
 	hotkeysBound = NO;
 	
 	// create hotkeys-array to hold all the hotkeys
 	hotkeys = [[NSMutableArray alloc] init];
+	
+	// create array for MIDIPacketTimed to check for feedback loop
+	midiMessages = [[NSMutableArray alloc] init];
 
+	
 	//PYMIDIVirtualSource* 
 	virtualInput = [[PYMIDIVirtualSource alloc] initWithName:@"STC Virtual IN"];
 	[virtualInput addSender:self];
 	//NSLog([virtualInput displayName]);
 	
-	//virtualOutput = [[PYMIDIVirtualDestination alloc] initWithName:@"STC Virtual OUT"];
-	//[virtualOutput addReceiver:self];
+	virtualOutput = [[PYMIDIVirtualDestination alloc] initWithName:@"STC Virtual OUT"];
+	[virtualOutput addReceiver:self];
 	
     return self;
 }
 
 - (void) hotKeyPressed:(int) hotKeyId
 {
-	/*
+	
 	if (NSAlphaShiftKeyMask & [[NSApp currentEvent] modifierFlags]) {
+		// Hotkeys aus den hotkeysCapsLock auslesen
 		NSLog(@"CAPS LOCK");
 	}
-	*/
+	
 	//NSLog(@"Hotkey pressed: %d", hotKeyId);
 	HotKey *hotkey = (HotKey *)[hotkeys objectAtIndex:hotKeyId];
 	//NSLog(@"Hotkey: %@", hotkey);
@@ -114,11 +110,120 @@ static OSStatus AppFrontSwitchedHandler(EventHandlerCallRef inHandlerCallRef, Ev
 	midiData[0] = channel;
 	midiData[1] = key;
 	midiData[2] = value;
+	UInt64 timestamp = AudioGetCurrentHostTime();
 	
-	packetPtr = MIDIPacketListAdd(&packetList, sizeof packetList, packetPtr, AudioGetCurrentHostTime(), 3, (const Byte *)&midiData);
-
+	packetPtr = MIDIPacketListAdd(&packetList, sizeof packetList, packetPtr, timestamp, 3, (const Byte *)&midiData);
+	
+	
+	
+	//NSLog(@"%llX", timestamp);
+	// suppress MIDI feedback-loop
+	/*
+	 add midiData to list with AudioGetCurrentHostTime()
+	 if midiData is received, ignore it, if it is the same
+	 the same is:
+	 channel the same
+	 key the same
+	 value the same of if channel == 144: both values > 0 or both values == 0
+	 during lookup, remove messages that are to old (usually older than 250ms)
+	 */
+	//NSArray *timedMIDIPacket;
+	//timedMIDIPacket = [NSArray arrayWithObjects: midiData, nil];
+	MIDIPacketTimed *mpt = [[MIDIPacketTimed alloc] init];
+	[mpt setChannel:channel];
+	[mpt setKey:key];
+	[mpt setValue:value];
+	[mpt setTimestamp:timestamp];
+	
+	
+	NSMutableArray *itemsToKeep = [NSMutableArray arrayWithCapacity:[midiMessages count]];
+	unsigned count = [midiMessages count];
+	while (count--) {
+	//for (MIDIPacketTimed *m in midiMessages) {
+		MIDIPacketTimed *m = [midiMessages objectAtIndex:count];
+		if (![m olderThan : timestamp]) {
+			[itemsToKeep addObject:m];
+		}
+		else {
+			[m autorelease];
+		}
+	}
+	[midiMessages setArray:itemsToKeep];
+	/*
+	unsigned count = [midiMessages count];
+	NSLog(@"send-count: %d", count);
+	while (count--) {
+		MIDIPacketTimed *m = [midiMessages objectAtIndex:count];
+		if ([m olderThan : timestamp]) {
+			[midiMessages removeObjectAtIndex:count];
+			[m release];
+			return;
+		}
+	}
+	*/
+	[midiMessages addObject:mpt];
+	
+	NSLog(@"send: %d, %d, %d", channel, key, value);
 	[virtualInput processMIDIPacketList:&packetList sender:self];
 
+}
+
+- (void)processMIDIPacketList:(MIDIPacketList*)packetList sender:(id)sender
+{
+    // route MIDI in back to out - feedback loop, as Live always sends MIDI in to MIDI out for controllers
+	//NSLog(@"receiveMIDI via ");
+	//NSLog([virtualOutput displayName]);
+	MIDIPacket *packet = &packetList->packet[0];
+	//NSLog(@"packet: %d", packet->data[0]);
+	int channel, key, value;
+	channel = packet->data[0];
+	key = packet->data[1];
+	value = packet->data[2];
+	if (channel == 144 && value > 0)
+	{
+		// values over 0 fix at 127
+		value = 127;
+	}
+	NSLog(@"received: %d, %d, %d", channel, key, value);
+	
+	MIDIPacketTimed *mpt = [[MIDIPacketTimed alloc] init];
+	[mpt setChannel:channel];
+	[mpt setKey:key];
+	[mpt setValue:value];
+	[mpt setTimestamp:AudioGetCurrentHostTime()];
+	
+	bool forwardMIDI = TRUE;
+	NSMutableArray *itemsToKeep = [NSMutableArray arrayWithCapacity:[midiMessages count]];
+	unsigned count = [midiMessages count];
+	while (count--) {
+		//for (MIDIPacketTimed *m in midiMessages) {
+		MIDIPacketTimed *m = [midiMessages objectAtIndex:count];
+		if (![mpt equals: m]) {
+			[itemsToKeep addObject:m];
+		}
+		else {
+			[m autorelease];
+			forwardMIDI = FALSE;
+		}
+	}
+	[midiMessages setArray:itemsToKeep];
+	/*
+	unsigned count = [midiMessages count];
+	NSLog(@"count: %d", count);
+	while (count--) {
+		MIDIPacketTimed *m = [midiMessages objectAtIndex:count];
+		if ([mpt equals:m]) {
+			NSLog(@"break feedback loop");
+			[midiMessages removeObjectAtIndex:count];
+			[m autorelease];
+			return;
+		}
+	}
+	*/
+	if (forwardMIDI) {
+		NSLog(@"forward MIDI");
+		[self sendMIDIMessage: channel : key : value];
+	}
 }
 
 - (void) bindHotkeys {
@@ -150,7 +255,7 @@ static OSStatus AppFrontSwitchedHandler(EventHandlerCallRef inHandlerCallRef, Ev
 	//NSLog(@"The active app is %@", activeAppName);
 	
 	// TODO: optional add NSArray for multiple apps other than Live to have hotkeys enabled
-	return [activeAppName isEqualToString: @"Live"];
+	return true;//[activeAppName isEqualToString: @"Live"];
 }
 
 
