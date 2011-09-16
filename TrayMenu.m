@@ -19,7 +19,7 @@
 */
 
 - (void) openWebsite:(id)sender {
-  NSURL *url = [NSURL URLWithString:@"http://stc.wiffbi.com/"];
+  NSURL *url = [NSURL URLWithString:@"http://kimidi.wiffbi.com/"];
   [[NSWorkspace sharedWorkspace] openURL:url];
   //[url release];
 }
@@ -62,7 +62,7 @@
   [menu addItem:[NSMenuItem separatorItem]];
   
   // Add Quit Action
-  menuItem = [menu addItemWithTitle:@"Quit Selected Track Control"
+  menuItem = [menu addItemWithTitle:@"Quit Kimidi"
                       action:@selector(actionQuit:)
                       keyEquivalent:@""];
   //[menuItem setToolTip:@"Quit"];

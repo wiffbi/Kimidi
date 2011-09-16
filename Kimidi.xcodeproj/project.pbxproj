@@ -34,6 +34,8 @@
 		790416BA10219AC500F9761A /* Credits.html in Resources */ = {isa = PBXBuildFile; fileRef = 790416B810219AC500F9761A /* Credits.html */; };
 		791C2C56102ADD69009F650C /* MIDIActions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 791C2C55102ADD69009F650C /* MIDIActions.plist */; };
 		791C2C57102ADD69009F650C /* MIDIActions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 791C2C55102ADD69009F650C /* MIDIActions.plist */; };
+		792470E513A246D300A3F1CF /* MIDIPacketTimed.m in Sources */ = {isa = PBXBuildFile; fileRef = 792470E413A246D300A3F1CF /* MIDIPacketTimed.m */; };
+		792470E613A246D300A3F1CF /* MIDIPacketTimed.m in Sources */ = {isa = PBXBuildFile; fileRef = 792470E413A246D300A3F1CF /* MIDIPacketTimed.m */; };
 		7939A40C101F9F4400FEB7DA /* appicon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 7939A40B101F9F4400FEB7DA /* appicon.icns */; };
 		7939A447101FA02D00FEB7DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7939A444101FA02D00FEB7DA /* Cocoa.framework */; };
 		7939A448101FA02D00FEB7DA /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7939A445101FA02D00FEB7DA /* CoreAudio.framework */; };
@@ -58,6 +60,7 @@
 		7996F44B132D7F960066FDBC /* HotKeyRepeat.m in Sources */ = {isa = PBXBuildFile; fileRef = 7996F44A132D7F960066FDBC /* HotKeyRepeat.m */; };
 		7996F44C132D7F960066FDBC /* HotKeyRepeat.m in Sources */ = {isa = PBXBuildFile; fileRef = 7996F44A132D7F960066FDBC /* HotKeyRepeat.m */; };
 		79BD94DE101F107F0057A858 /* TrayMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BD94DD101F107F0057A858 /* TrayMenu.m */; };
+		79C6D9D71423F8CC0096A5FA /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 795E91EF1311425C00C13113 /* Carbon.framework */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 /* End PBXBuildFile section */
@@ -75,6 +78,8 @@
 		7904149A1021906D00F9761A /* SelectedTrackControl-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SelectedTrackControl-Info.plist"; sourceTree = "<group>"; };
 		790416B810219AC500F9761A /* Credits.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Credits.html; sourceTree = "<group>"; };
 		791C2C55102ADD69009F650C /* MIDIActions.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.xml; path = MIDIActions.plist; sourceTree = "<group>"; };
+		792470E313A246D300A3F1CF /* MIDIPacketTimed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIDIPacketTimed.h; sourceTree = "<group>"; };
+		792470E413A246D300A3F1CF /* MIDIPacketTimed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIDIPacketTimed.m; sourceTree = "<group>"; };
 		7939A40B101F9F4400FEB7DA /* appicon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = appicon.icns; sourceTree = "<group>"; };
 		7939A444101FA02D00FEB7DA /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = SDKs/MacOSX10.4u.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = SYSTEM_DEVELOPER_DIR; };
 		7939A445101FA02D00FEB7DA /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = SDKs/MacOSX10.4u.sdk/System/Library/Frameworks/CoreAudio.framework; sourceTree = SYSTEM_DEVELOPER_DIR; };
@@ -133,6 +138,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79C6D9D71423F8CC0096A5FA /* Carbon.framework in Frameworks */,
 				7939A447101FA02D00FEB7DA /* Cocoa.framework in Frameworks */,
 				7939A448101FA02D00FEB7DA /* CoreAudio.framework in Frameworks */,
 				7939A449101FA02D00FEB7DA /* CoreMIDI.framework in Frameworks */,
@@ -149,12 +155,14 @@
 				7996F44A132D7F960066FDBC /* HotKeyRepeat.m */,
 				7939A474101FA0CF00FEB7DA /* AppController.h */,
 				7939A475101FA0CF00FEB7DA /* AppController.m */,
-				79BD94DC101F107F0057A858 /* TrayMenu.h */,
-				79BD94DD101F107F0057A858 /* TrayMenu.m */,
+				792470E313A246D300A3F1CF /* MIDIPacketTimed.h */,
+				792470E413A246D300A3F1CF /* MIDIPacketTimed.m */,
 				7903131A1025F466001B1AEC /* HotKey.h */,
 				7903131B1025F466001B1AEC /* HotKey.m */,
 				794F69E5104956130000CCA9 /* HotKeyMomentary.h */,
 				794F69E6104956130000CCA9 /* HotKeyMomentary.m */,
+				79BD94DC101F107F0057A858 /* TrayMenu.h */,
+				79BD94DD101F107F0057A858 /* TrayMenu.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -379,6 +387,7 @@
 				7903131C1025F466001B1AEC /* HotKey.m in Sources */,
 				794F69E8104956130000CCA9 /* HotKeyMomentary.m in Sources */,
 				7996F44C132D7F960066FDBC /* HotKeyRepeat.m in Sources */,
+				792470E513A246D300A3F1CF /* MIDIPacketTimed.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -403,6 +412,7 @@
 				7903131D1025F466001B1AEC /* HotKey.m in Sources */,
 				794F69E7104956130000CCA9 /* HotKeyMomentary.m in Sources */,
 				7996F44B132D7F960066FDBC /* HotKeyRepeat.m in Sources */,
+				792470E613A246D300A3F1CF /* MIDIPacketTimed.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -458,10 +468,8 @@
 		7904149D1021906E00F9761A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1 = "ppc i386";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -530,6 +538,7 @@
 				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(DEVELOPER_DIR)/SDKs/MacOSX10.4u.sdk/System/Library/Frameworks\"";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = G5;
+				GCC_VERSION = 4.0;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				PRODUCT_NAME = Kimidi;
