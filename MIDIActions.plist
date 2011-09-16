@@ -55,7 +55,7 @@
 		<key>hotkey</key>
 		<dict>
 			<key>keyCode</key>
-			<integer>52</integer>
+			<integer>36</integer>
 			<key>optionKey</key>
 			<true/>
 		</dict>
@@ -73,6 +73,34 @@
 		</dict>
 		<key>note</key>
 		<integer>43</integer>
+	</dict>
+	<key>clips_select_playing</key>
+	<dict>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>36</integer>
+			<key>optionKey</key>
+			<true/>
+			<key>shiftKey</key>
+			<true/>
+		</dict>
+		<key>note</key>
+		<integer>50</integer>
+	</dict>
+	<key>clips_toggle_auto_select_playing</key>
+	<dict>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>76</integer>
+			<key>optionKey</key>
+			<true/>
+			<key>shiftKey</key>
+			<true/>
+		</dict>
+		<key>note</key>
+		<integer>51</integer>
 	</dict>
 	<!--
 	<key>clips_toggle_mute</key>
@@ -368,7 +396,34 @@
 		<key>value</key>
 		<integer>1</integer>
 	</dict>
-	
+	<key>global_scrub_by_ff</key>
+	<dict>
+		<key>cc</key>
+		<integer>90</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>controlKey</key>
+			<true/>
+			<key>keyCode</key>
+			<integer>47</integer>
+		</dict>
+		<key>value</key>
+		<integer>4</integer>
+	</dict>
+	<key>global_scrub_by_rw</key>
+	<dict>
+		<key>cc</key>
+		<integer>90</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>controlKey</key>
+			<true/>
+			<key>keyCode</key>
+			<integer>43</integer>
+		</dict>
+		<key>value</key>
+		<integer>124</integer>
+	</dict>
 	
 	<key>scenes_fire_next</key>
 	<dict>
