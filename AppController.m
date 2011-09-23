@@ -11,6 +11,24 @@
 //#import <PYMIDI/PYMIDI.h>
 
 
+// How to monitor modifier key-state globally
+// http://stackoverflow.com/questions/1603030/how-to-monitor-global-modifier-key-state-in-any-application
+CGEventRef keyUpCallback (CGEventTapProxy proxy, CGEventType type, CGEventRef event, void* refcon)
+{
+	AppController *app = (AppController *)refcon;
+	if (type == kCGEventFlagsChanged)
+	{
+		CGEventFlags newFlags = CGEventGetFlags(event);
+		//NSLog(@"%d", newFlags);
+		//NSLog(@"flags: 0x%llX",newFlags & kCGEventFlagMaskAlphaShift);
+		// setAlphLock on app
+		[app setAlphaLock: ((newFlags & kCGEventFlagMaskAlphaShift) == kCGEventFlagMaskAlphaShift)];
+	}
+	// just monitor the keystroke, always return the event
+    return event;
+}
+
+
 OSStatus myHotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent, void *userData)
 {
 	
@@ -56,194 +74,79 @@ static OSStatus AppFrontSwitchedHandler(EventHandlerCallRef inHandlerCallRef, Ev
     return 0;
 }
 
+
 @implementation AppController
 - (id) init
 {
 	hotkeysBound = NO;
 	
-	// create hotkeys-array to hold all the hotkeys
+	// create hotkeys-dictionary to hold all the hotkeys by keycombo
+	// each dict-entry is a NSMutableArray as a keycombo can be assigned to 
+	// multiple hotkeys - ie. one with CAPS-Lock enabled and one without
 	hotkeys = [[NSMutableArray alloc] init];
+	//hotkeys = [[NSMutableDictionary alloc] init];
 	
-	// create array for MIDIPacketTimed to check for feedback loop
-	midiMessages = [[NSMutableArray alloc] init];
-
-	
-	//PYMIDIVirtualSource* 
-	virtualInput = [[PYMIDIVirtualSource alloc] initWithName:@"STC Virtual IN"];
-	[virtualInput addSender:self];
-	//NSLog([virtualInput displayName]);
-	
-	virtualOutput = [[PYMIDIVirtualDestination alloc] initWithName:@"STC Virtual OUT"];
-	[virtualOutput addReceiver:self];
+	midiController = [[MIDIController alloc] init];
 	
     return self;
 }
 
 - (void) hotKeyPressed:(int) hotKeyId
 {
-	
+	/*
 	if (NSAlphaShiftKeyMask & [[NSApp currentEvent] modifierFlags]) {
 		// Hotkeys aus den hotkeysCapsLock auslesen
 		NSLog(@"CAPS LOCK");
 	}
-	
-	//NSLog(@"Hotkey pressed: %d", hotKeyId);
+	NSLog(@"Hotkey pressed: %d", hotKeyId);
 	HotKey *hotkey = (HotKey *)[hotkeys objectAtIndex:hotKeyId];
-	//NSLog(@"Hotkey: %@", hotkey);
+	NSLog(@"Hotkey: %@", hotkey);
 	[hotkey pressed];
+	*/
+	[(HotkeyTrigger *)[hotkeys objectAtIndex:hotKeyId] pressed];
 }
 - (void) hotKeyReleased:(int) hotKeyId
 {
 	//NSLog(@"Hotkey released: %d", hotKeyId);
-	[(HotKey *)[hotkeys objectAtIndex:hotKeyId] released];
+	[(HotkeyTrigger *)[hotkeys objectAtIndex:hotKeyId] released];
 }
 
 
-- (void) sendMIDIMessage: (int) channel: (int) key: (int) value
-{
-	//NSLog(@"sendMIDI via ");
-	//NSLog([virtualInput displayName]);
-	
-	MIDIPacketList packetList;
-	MIDIPacket *packetPtr = MIDIPacketListInit(&packetList);
-	unsigned char midiData[3];
-	midiData[0] = channel;
-	midiData[1] = key;
-	midiData[2] = value;
-	UInt64 timestamp = AudioGetCurrentHostTime();
-	
-	packetPtr = MIDIPacketListAdd(&packetList, sizeof packetList, packetPtr, timestamp, 3, (const Byte *)&midiData);
-	
-	
-	
-	//NSLog(@"%llX", timestamp);
-	// suppress MIDI feedback-loop
-	/*
-	 add midiData to list with AudioGetCurrentHostTime()
-	 if midiData is received, ignore it, if it is the same
-	 the same is:
-	 channel the same
-	 key the same
-	 value the same of if channel == 144: both values > 0 or both values == 0
-	 during lookup, remove messages that are to old (usually older than 250ms)
-	 */
-	//NSArray *timedMIDIPacket;
-	//timedMIDIPacket = [NSArray arrayWithObjects: midiData, nil];
-	MIDIPacketTimed *mpt = [[MIDIPacketTimed alloc] init];
-	[mpt setChannel:channel];
-	[mpt setKey:key];
-	[mpt setValue:value];
-	[mpt setTimestamp:timestamp];
-	
-	
-	NSMutableArray *itemsToKeep = [NSMutableArray arrayWithCapacity:[midiMessages count]];
-	unsigned count = [midiMessages count];
-	while (count--) {
-	//for (MIDIPacketTimed *m in midiMessages) {
-		MIDIPacketTimed *m = [midiMessages objectAtIndex:count];
-		if (![m olderThan : timestamp]) {
-			[itemsToKeep addObject:m];
-		}
-		else {
-			[m autorelease];
-		}
-	}
-	[midiMessages setArray:itemsToKeep];
-	/*
-	unsigned count = [midiMessages count];
-	NSLog(@"send-count: %d", count);
-	while (count--) {
-		MIDIPacketTimed *m = [midiMessages objectAtIndex:count];
-		if ([m olderThan : timestamp]) {
-			[midiMessages removeObjectAtIndex:count];
-			[m release];
-			return;
-		}
-	}
-	*/
-	[midiMessages addObject:mpt];
-	
-	NSLog(@"send: %d, %d, %d", channel, key, value);
-	[virtualInput processMIDIPacketList:&packetList sender:self];
 
-}
-
-- (void)processMIDIPacketList:(MIDIPacketList*)packetList sender:(id)sender
-{
-    // route MIDI in back to out - feedback loop, as Live always sends MIDI in to MIDI out for controllers
-	//NSLog(@"receiveMIDI via ");
-	//NSLog([virtualOutput displayName]);
-	MIDIPacket *packet = &packetList->packet[0];
-	//NSLog(@"packet: %d", packet->data[0]);
-	int channel, key, value;
-	channel = packet->data[0];
-	key = packet->data[1];
-	value = packet->data[2];
-	if (channel == 144 && value > 0)
-	{
-		// values over 0 fix at 127
-		value = 127;
-	}
-	NSLog(@"received: %d, %d, %d", channel, key, value);
-	
-	MIDIPacketTimed *mpt = [[MIDIPacketTimed alloc] init];
-	[mpt setChannel:channel];
-	[mpt setKey:key];
-	[mpt setValue:value];
-	[mpt setTimestamp:AudioGetCurrentHostTime()];
-	
-	bool forwardMIDI = TRUE;
-	NSMutableArray *itemsToKeep = [NSMutableArray arrayWithCapacity:[midiMessages count]];
-	unsigned count = [midiMessages count];
-	while (count--) {
-		//for (MIDIPacketTimed *m in midiMessages) {
-		MIDIPacketTimed *m = [midiMessages objectAtIndex:count];
-		if (![mpt equals: m]) {
-			[itemsToKeep addObject:m];
-		}
-		else {
-			[m autorelease];
-			forwardMIDI = FALSE;
-		}
-	}
-	[midiMessages setArray:itemsToKeep];
-	/*
-	unsigned count = [midiMessages count];
-	NSLog(@"count: %d", count);
-	while (count--) {
-		MIDIPacketTimed *m = [midiMessages objectAtIndex:count];
-		if ([mpt equals:m]) {
-			NSLog(@"break feedback loop");
-			[midiMessages removeObjectAtIndex:count];
-			[m autorelease];
-			return;
-		}
-	}
-	*/
-	if (forwardMIDI) {
-		NSLog(@"forward MIDI");
-		[self sendMIDIMessage: channel : key : value];
-	}
-}
 
 - (void) bindHotkeys {
 	//NSLog(@"bind hotkeys");
-	
 	int i = [hotkeys count];
 	while ( i-- ) {
-		[[hotkeys objectAtIndex:i] activate];
+		HotkeyTrigger *hotkeyTrigger = (HotkeyTrigger *)[hotkeys objectAtIndex:i];
+		if ([hotkeyTrigger hasAlphaLock] == alphaLockEnabled) {
+			[hotkeyTrigger activate];
+		}
+		
 	}
+	/*
+	NSEnumerator *enumerator = [hotkeys keyEnumerator];
+	id key;
 	
+	while ((key = [enumerator nextObject])) {
+		NSMutableArray *hotkeysDict = [hotkeys objectForKey:key];
+		// only bind first hotkey for that keycombo
+		[[hotkeysDict objectAtIndex:0] activate];
+	}
+	*/
 	hotkeysBound = YES;
 }
-- (void) unbindHotkeys {
+- (void) unbindHotkeys: (BOOL) all {
 	//NSLog(@"unbind hotkeys");
 	
 	int i = [hotkeys count];
 	while ( i-- ) {
-		[[hotkeys objectAtIndex:i] deactivate];
+		//[(HotkeyTrigger *)[hotkeys objectAtIndex:i] deactivate];
+		HotkeyTrigger *hotkeyTrigger = (HotkeyTrigger *)[hotkeys objectAtIndex:i];
+		if (all || [hotkeyTrigger hasAlphaLock] != alphaLockEnabled) {
+			[hotkeyTrigger deactivate];
+		}
 	}
-	
 	hotkeysBound = NO;
 }
 
@@ -255,16 +158,36 @@ static OSStatus AppFrontSwitchedHandler(EventHandlerCallRef inHandlerCallRef, Ev
 	//NSLog(@"The active app is %@", activeAppName);
 	
 	// TODO: optional add NSArray for multiple apps other than Live to have hotkeys enabled
-	return true;//[activeAppName isEqualToString: @"Live"];
+	return [activeAppName isEqualToString: @"Live"];
 }
 
 
+
+
+
+
+- (void) setAlphaLock: (BOOL) flag {
+	if (alphaLockEnabled == flag) {
+		// alphaLock is already set to flag, so no action required
+		return;
+	}
+	alphaLockEnabled = flag;
+	//NSLog(@"alphaLock has changed => rebind keyboard-shortcuts");
+	[self unbindHotkeys:FALSE];
+	[self bindHotkeys];
+}
+
+
+
+
 - (void) checkFrontAppForHotkeys {
-	if ([self shouldHaveHotkeys] && !hotkeysBound) {
-		[self bindHotkeys];
+	if ([self shouldHaveHotkeys]) {
+		if (!hotkeysBound) {
+			[self bindHotkeys];
+		}
 	}
 	else if (hotkeysBound) {
-		[self unbindHotkeys];
+		[self unbindHotkeys:TRUE];
 	}
 }
 
@@ -286,8 +209,34 @@ static OSStatus AppFrontSwitchedHandler(EventHandlerCallRef inHandlerCallRef, Ev
 	eventType.eventKind=kEventHotKeyReleased;
 	InstallApplicationEventHandler(&myHotKeyReleasedHandler,1,&eventType,(void *)self,NULL);
 	
+	//EventTypeSpec keyboardHandlerEvents = { kEventClassKeyboard, kEventRawKeyModifiersChanged /*kEventRawKeyDown*/ };
+	//eventType.eventClass=kEventRawKeyUp;
 	//eventType.eventKind=kEventRawKeyDown;
-	//InstallApplicationEventHandler(NewEventHandlerUPP(&myHotKeyRawHandler),1,&eventType,(void *)self,NULL);
+	//InstallApplicationEventHandler(NewEventHandlerUPP(myHotKeyRawHandler),1,&keyboardHandlerEvents,(void *)self,NULL);
+	//InstallEventHandler(GetEventMonitorTarget(), NewEventHandlerUPP(myHotKeyRawHandler),1,&keyboardHandlerEvents,(void *)self,NULL);
+	
+	/*
+	EventHandlerRef      sHandler;
+	EventTypeSpec   kEvents[] =
+	{
+		// use an event that isn't monitored just so we have a valid EventTypeSpec to install
+		{ kEventClassCommand, kEventCommandUpdateStatus }
+	};
+	InstallEventHandler( GetEventMonitorTarget(), myHotKeyRawHandler, GetEventTypeCount( kEvents ),
+						kEvents, (void *)self, NULL);
+	*/
+	//CFMachPortRef keyUpEventTap = CGEventTapCreate(kCGHIDEventTap,kCGHeadInsertEventTap,kCGEventTapOptionListenOnly,kCGEventKeyUp,&keyUpCallback,NULL);
+	CFMachPortRef keyUpEventTap = CGEventTapCreate(kCGHIDEventTap,kCGHeadInsertEventTap,kCGEventTapOptionListenOnly,CGEventMaskBit(kCGEventFlagsChanged),&keyUpCallback,self);
+	CFRunLoopSourceRef keyUpRunLoopSourceRef = CFMachPortCreateRunLoopSource(NULL, keyUpEventTap, 0);
+	CFRelease(keyUpEventTap);
+	CFRunLoopAddSource(CFRunLoopGetCurrent(), keyUpRunLoopSourceRef, kCFRunLoopDefaultMode);
+	CFRelease(keyUpRunLoopSourceRef);
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -311,9 +260,10 @@ static OSStatus AppFrontSwitchedHandler(EventHandlerCallRef inHandlerCallRef, Ev
 	}
 	
 	
-	int hotKeyID = 0;
 	
-	//NSArray *actionKeys = [actions allKeys];
+	// temporary lookup of hotkeyId by keycombo; auto-released at end of function
+	NSMutableDictionary *hotkeyIdsByKeyCombo = [NSMutableDictionary dictionary];
+	
 	NSEnumerator* actionsIterator = [[hotKeyActions allKeys] objectEnumerator];
 	id key;
 	while( key = [actionsIterator nextObject])
@@ -327,77 +277,107 @@ static OSStatus AppFrontSwitchedHandler(EventHandlerCallRef inHandlerCallRef, Ev
 		int keyCombo = 0;
 		if ([[hotkeySettings valueForKey:@"cmdKey"] boolValue]) {
 			keyCombo+= cmdKey;
-			//NSLog(@"cmdKey");
 		}
 		if ([[hotkeySettings valueForKey:@"controlKey"] boolValue]) {
 			keyCombo+= controlKey;
-			//NSLog(@"controlKey");
 		}
 		if ([[hotkeySettings valueForKey:@"optionKey"] boolValue]) {
 			keyCombo+= optionKey;
-			//NSLog(@"optionKey");
 		}
 		if ([[hotkeySettings valueForKey:@"shiftKey"] boolValue]) {
 			keyCombo+= shiftKey;
-			//NSLog(@"shiftKey");
 		}
-		/*
-		 if ([[hotkeySettings valueForKey:@"alphaLock"] boolValue]) {
-		 keyCombo+= alphaLock;
-		 //NSLog(@"alphaLock");
-		 }
-		 */
-		/*
-		 if (keyCombo == 0) {
-		 NSLog(@"key: %@, value: %@", key, [hotKeyActions objectForKey:key]);
-		 }
-		 */
-		//NSLog(@"-- key-combo registered");
+		if ([[hotkeySettings valueForKey:@"alphaLock"] boolValue]) {
+			keyCombo+= alphaLock;
+		}
 		
 		/*
-		 unsigned char midiData[3];
-		 midiData[0] = 0x90 | 0;
-		 midiData[1] = 0;
-		 midiData[2] = 127;
+		//NSLog(@"KeyCombo: 0x%X", keyCombo);
+		if ((keyCombo & alphaLock) == alphaLock) {
+			keyCombo-= alphaLock;
+			NSLog(@"KeyCombo alphaLock removed for subscription: 0x%X", keyCombo);
+		}
 		 */
+		
 		
 		// setup all the Hotkeys based on those actions
-		//HotKey *hotkey = [[HotKeyRepeat alloc] init];
-		HotKey *hotkey = nil;
+		HotkeyAction *hotkeyAction = nil;
 		if ([[actionSettings valueForKey:@"cc"] boolValue]) {
-			hotkey = [[HotKeyRepeat alloc] init];
+			hotkeyAction = [[HotkeyActionRepeat alloc] init];
 			
-			[hotkey setChannel:0xB0 | 0];
-			[hotkey setKey:[[actionSettings valueForKey:@"cc"] intValue]];
+			// binary addition: CC-Status (first byte) = 0xB; Channel (second byte) = 0-15 => send CC on first channel: 0x<status>0 | <channel>
+			[hotkeyAction setChannel:0xB0 | 0];
+			[hotkeyAction setKey:[[actionSettings valueForKey:@"cc"] intValue]];
 			
-			[hotkey setValue:[[actionSettings valueForKey:@"value"] intValue]];
+			[hotkeyAction setValue:[[actionSettings valueForKey:@"value"] intValue]];
 		}
 		else {
-			hotkey = [[HotKeyMomentary alloc] init];
+			hotkeyAction = [[HotkeyActionRetrigger alloc] init];
 			
-			[hotkey setChannel:0x90 | 0];
-			[hotkey setKey:[[actionSettings valueForKey:@"note"] intValue]];
-			[hotkey setValue:127];
+			[hotkeyAction setChannel:0x90 | 0];
+			[hotkeyAction setKey:[[actionSettings valueForKey:@"note"] intValue]];
+			[hotkeyAction setValue:127];
 		}
+		[hotkeyAction setController:midiController];
+		
+		
+		
+		
+		HotkeyTrigger *hotkeyTrigger = nil;
+		NSString *hotkeyIdKeyCombo = [NSString stringWithFormat: @"0x%X", keyCombo*0x100 | keyCode];
+		NSNumber *hotkeyIdNumber = [hotkeyIdsByKeyCombo objectForKey:hotkeyIdKeyCombo];
+		if (hotkeyIdNumber == nil) {
+			// new hotkeyId at the end of hotkeys-array			
+			hotkeyIdNumber = [[NSNumber alloc] initWithInt:[hotkeys count]];
+			[hotkeyIdsByKeyCombo setObject:hotkeyIdNumber forKey:hotkeyIdKeyCombo];
+			
+			hotkeyTrigger = [[HotkeyTrigger alloc] init];
+			[hotkeyTrigger setKeyCombo:keyCombo];
+			[hotkeyTrigger setKeyCode:keyCode];
+			[hotkeyTrigger setHotkeyId:[hotkeyIdNumber intValue]];
+			
+			[hotkeys addObject:hotkeyTrigger];
+		}
+		else {
+			hotkeyTrigger = (HotkeyTrigger *)[hotkeys objectAtIndex:[hotkeyIdNumber intValue]];
+		}
+		[hotkeyTrigger addAction:hotkeyAction];
+		
+		/*
 		[hotkey setKeyCode:keyCode];
+		if ([[hotkeySettings valueForKey:@"alphaLock"] boolValue]) {
+			[hotkey setAlphaLock:true];
+			NSLog(@"alphaLock");
+		}
+		else {
+			[hotkey setAlphaLock:false];
+		}
 		[hotkey setKeyCombo:keyCombo];
-		
-		[hotkey setEventHotKeyID:hotKeyID];
-		
-		[hotkey setController:self];
+		 */
 		
 		//[hotkey setValue:[[actionSettings valueForKey:@"value"] intValue]];
-		[hotkeys addObject:hotkey];
+		
+		//[hotkey setEventHotKeyID:hotKeyID];
+		//[hotkeys addObject:hotkey];
+		
+		//NSLog(@"%d", keyCombo & keyCode);
+		/*
+		NSString *eventHotKeyId = [NSString stringWithFormat: @"%d", keyCombo & keyCode];
+		[hotkey setEventHotKeyID:keyCombo];
+		NSMutableArray *hotkeysDict = [hotkeys objectForKey:eventHotKeyId];
+		if (hotkeysDict == nil) {
+			hotkeysDict = [[NSMutableArray alloc] init];
+			[hotkeys setObject:hotkeysDict forKey:eventHotKeyId];
+		}
+		[hotkeysDict addObject:hotkey];
+		*/
+		
+		//hotkeyId += 1;
+		
 		
 		// do not register hotkey yet
 		//RegisterEventHotKey(keyCode, keyCombo, myHotKeyID, GetApplicationEventTarget(), 0, &myHotKeyRef);
-		hotKeyID += 1;
 	}
-	
-	
-	
-	
-	
 	
 	// check which app is in front and if needed, bind hotkeys
 	[self checkFrontAppForHotkeys];

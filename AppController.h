@@ -5,28 +5,30 @@
 
 #import <Cocoa/Cocoa.h>
 #import <Carbon/Carbon.h>
-#import <PYMIDI/PYMIDI.h>
-#import "HotKey.h"
-#import "HotKeyMomentary.h"
-#import "HotKeyRepeat.h"
-#import "MIDIPacketTimed.h"
+#import "MIDIController.h"
+#import "HotkeyTrigger.h"
+#import "HotkeyAction.h"
+#import "HotkeyActionRepeat.h"
+#import "HotkeyActionRetrigger.h"
 
 OSStatus myHotKeyHandler(EventHandlerCallRef nextHandler, EventRef anEvent, void *userData);
 OSStatus myHotKeyReleasedHandler(EventHandlerCallRef nextHandler, EventRef anEvent, void *userData);
 
 @interface AppController : NSObject {
-	PYMIDIVirtualSource* virtualInput;
-	PYMIDIVirtualDestination* virtualOutput;
 	NSMutableArray *hotkeys;
-	NSMutableArray *midiMessages;
+	MIDIController *midiController;
 	
 	BOOL hotkeysBound;
+	
+	BOOL alphaLockEnabled;
 }
-- (void) sendMIDIMessage: (int) channel: (int) key: (int) value;//(unsigned char*) message;
-- (void) processMIDIPacketList: (MIDIPacketList*)packetList sender:(id)sender;
+//- (void) sendMIDIMessage: (int) channel: (int) key: (int) value;//(unsigned char*) message;
+//- (void) processMIDIPacketList: (MIDIPacketList*)packetList sender:(id)sender;
 
 - (void) hotKeyPressed:(int) hotKeyId;
 - (void) hotKeyReleased:(int) hotKeyId;
+
+- (void) setAlphaLock: (BOOL) flag;
 
 - (void) checkFrontAppForHotkeys;
 - (void) awakeFromNib;
