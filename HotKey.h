@@ -23,8 +23,10 @@
 	int keyCode;
 	int keyCombo;
 	
-	EventHotKeyRef hotKeyRef;
-	EventHotKeyID hotKeyID;
+	bool needsAlphaLock;
+	
+	EventHotKeyRef hotKeyRef; // needed to unregister the hotkey
+	EventHotKeyID hotKeyID; // needed to uniquely address the hotkey pressed
 }
 
 - (void) setController: (id) ac;
@@ -35,6 +37,8 @@
 
 - (void) setKeyCode: (int) code;
 - (void) setKeyCombo: (int) combo;
+- (void) setAlphaLock: (bool) lock;
+- (bool) hasAlphaLock;
 - (void) setEventHotKeyID: (int) i;
 
 - (void) activate;

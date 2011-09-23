@@ -49,6 +49,14 @@
 	hotKeyID.id = i;
 }
 
+- (void) setAlphaLock: (bool) lock
+{
+	needsAlphaLock = lock;
+}
+- (bool) hasAlphaLock
+{
+	return needsAlphaLock;
+}
 
 - (void) activate
 {
@@ -64,7 +72,10 @@
 
 - (void) pressed
 {
-	//NSLog(@"HotKey pressed");
+	NSLog(@"HotKey pressed");
+	if ([self hasAlphaLock]) {
+		NSLog(@"HotKey has alphaLock");
+	}
 	[self execute];
 }
 
