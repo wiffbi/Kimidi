@@ -56,10 +56,10 @@
 	//NSLog(@"3. %d == %d", value, v);
 	if (channel == c && key == k && value == v && ![self olderThan : [m getTimestamp]])
 	{
-		NSLog(@"equal");
+		//NSLog(@"equal");
 		return TRUE;
 	}
-	NSLog(@"NOT equal");
+	//NSLog(@"NOT equal");
 	return FALSE;
 }
 
@@ -67,7 +67,7 @@
 {
 	if (timestamp + 250 * 1000000 < t || t + 250 * 1000000 < timestamp)
 	{
-		NSLog(@"older");
+		//NSLog(@"older");
 		return TRUE;
 	}
 	return FALSE;
