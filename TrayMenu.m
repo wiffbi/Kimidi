@@ -29,6 +29,10 @@
 }
 */
 
+- (void) actionAbout:(id)sender {
+	[NSApp orderFrontStandardAboutPanel:sender];
+}
+
 - (void) actionQuit:(id)sender {
   [NSApp terminate:sender];
 }
@@ -47,6 +51,11 @@
   [menuItem setEnabled:false];
   [menu addItem:menuItem];
 */  
+	// Add To Items
+	menuItem = [menu addItemWithTitle:@"About Kimidi"
+							   action:@selector(actionAbout:)
+						keyEquivalent:@""];
+	[menuItem setTarget:self];
   // Add To Items
   menuItem = [menu addItemWithTitle:@"Visit Website"
                       action:@selector(openWebsite:)
@@ -78,7 +87,7 @@
                   statusItemWithLength:NSSquareStatusItemLength] retain];
   [_statusItem setMenu:menu];
   [_statusItem setHighlightMode:YES];
-  [_statusItem setToolTip:@"Kimidi"];
+  [_statusItem setToolTip:@"Kimidi\nTransforms global hotkeys to MIDI messages\nfor selected track control in Ableton Live"];
   [_statusItem setImage:[NSImage imageNamed:@"menubar.png"]];
   [_statusItem setAlternateImage:[NSImage imageNamed:@"menubar-hover.png"]];
 
