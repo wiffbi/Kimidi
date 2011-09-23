@@ -1,18 +1,13 @@
 //
-//  HotKeyMomentary.m
+//  HotkeyActionRetrigger.m
 //  Kimidi
 //
-//  Created by Richard Schreiber on 29.08.09.
-//  Copyright 2009 __MyCompanyName__. All rights reserved.
-//
-// implements a Momentary toggle button, so you hold it for a certain time and when released, it triggers again
+// implements a momentary toggle button, so you hold it for a certain time and when released, it triggers again
 
 
-#import "AppController.h"
-//#import "HotKey.h"
-#import "HotKeyMomentary.h"
+#import "HotkeyActionRetrigger.h"
 
-@implementation HotKeyMomentary
+@implementation HotkeyActionRetrigger
 
 - (void) pressed
 {
@@ -51,11 +46,7 @@
 	if (isHold)
 	{
 		[self execute];
-		if (channel == 0x90 | 0)
-		{
-			// send note off event
-			[controller sendMIDIMessage:0x80:key:0];
-		}
+		[super released];
 	}
 }
 

@@ -1,39 +1,22 @@
 //
-//  HotKeyRepeat.m
+//  HotkeyActionRepeat.m
 //  Kimidi
 //
-//  Created by Studio on 14.05.10.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
-//
 
-//#import "AppController.h"
-#import "HotKeyRepeat.h"
+#import "HotkeyActionRepeat.h"
 
 
-@implementation HotKeyRepeat
+@implementation HotkeyActionRepeat
 
 - (void) pressed
 {
 	[super pressed];
-	
-	
-	/*
-	[timer invalidate];
-    timer = [NSTimer scheduledTimerWithTimeInterval:0.1
-											target:self
-                                            selector:@selector(execute)
-                                            userInfo:NULL
-                                            repeats:YES];
-	*/
-	//isHold = false;
-	//timer = [[NSTimer alloc] init];
+	// wait 400ms before triggering action repeatedly
     timer = [NSTimer scheduledTimerWithTimeInterval:.4
 											target:self
                                             selector:@selector(startRepeated)
                                             userInfo:NULL
                                             repeats:NO];
-	//[timer invalidate];
-	//timer = nil;
 }
 
 - (void) released
@@ -48,6 +31,7 @@
 }
 - (void) startRepeated
 {
+	// repeat action every 100ms
     timer = [NSTimer scheduledTimerWithTimeInterval:.1
 											target:self
                                             selector:@selector(executeRepeated)
