@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
 	<key>clips_fire_next</key>
@@ -102,22 +102,669 @@
 		<key>note</key>
 		<integer>51</integer>
 	</dict>
-	<!--
-	<key>clips_toggle_mute</key>
+	
+	
+	<key>devices_next</key>
 	<dict>
 		<key>hotkey</key>
 		<dict>
-			<key>controlKey</key>
-			<true/>
 			<key>keyCode</key>
-			<integer>46</integer>
-			<key>optionKey</key>
+			<integer>124</integer>
+			<key>alphaLock</key>
+			<true/>
+		</dict>
+		<key>cc</key>
+		<integer>32</integer>
+		<key>value</key>
+		<integer>1</integer>
+	</dict>
+	<key>devices_prev</key>
+	<dict>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>123</integer>
+			<key>alphaLock</key>
+			<true/>
+		</dict>
+		<key>cc</key>
+		<integer>32</integer>
+		<key>value</key>
+		<integer>127</integer>
+	</dict>
+	<key>devices_instrument</key>
+	<dict>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>37</integer>
+			<key>alphaLock</key>
 			<true/>
 		</dict>
 		<key>note</key>
-		<integer>50</integer>
+		<integer>66</integer>
 	</dict>
-	-->
+	<key>devices_onoff</key>
+	<dict>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>31</integer>
+			<key>alphaLock</key>
+			<true/>
+		</dict>
+		<key>note</key>
+		<integer>69</integer>
+	</dict>
+	
+	<key>devices_param_1_up</key>
+	<dict>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>18</integer>
+			<key>alphaLock</key>
+			<true/>
+		</dict>
+		<key>cc</key>
+		<integer>33</integer>
+		<key>value</key>
+		<integer>5</integer>
+	</dict>
+	<key>devices_param_1_up_precise</key>
+	<dict>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>18</integer>
+			<key>alphaLock</key>
+			<true/>
+			<key>optionKey</key>
+			<true/>
+		</dict>
+		<key>cc</key>
+		<integer>33</integer>
+		<key>value</key>
+		<integer>1</integer>
+	</dict>
+	<key>devices_param_1_down</key>
+	<dict>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>12</integer>
+			<key>alphaLock</key>
+			<true/>
+		</dict>
+		<key>cc</key>
+		<integer>33</integer>
+		<key>value</key>
+		<integer>123</integer>
+	</dict>
+	<key>devices_param_1_down_precise</key>
+	<dict>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>12</integer>
+			<key>alphaLock</key>
+			<true/>
+			<key>optionKey</key>
+			<true/>
+		</dict>
+		<key>cc</key>
+		<integer>33</integer>
+		<key>value</key>
+		<integer>127</integer>
+	</dict>
+	
+	
+	<key>devices_param_2_up</key>
+	<dict>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>19</integer>
+			<key>alphaLock</key>
+			<true/>
+		</dict>
+		<key>cc</key>
+		<integer>34</integer>
+		<key>value</key>
+		<integer>5</integer>
+	</dict>
+	<key>devices_param_2_up_precise</key>
+	<dict>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>19</integer>
+			<key>alphaLock</key>
+			<true/>
+			<key>optionKey</key>
+			<true/>
+		</dict>
+		<key>cc</key>
+		<integer>34</integer>
+		<key>value</key>
+		<integer>1</integer>
+	</dict>
+	<key>devices_param_2_down</key>
+	<dict>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>13</integer>
+			<key>alphaLock</key>
+			<true/>
+		</dict>
+		<key>cc</key>
+		<integer>34</integer>
+		<key>value</key>
+		<integer>123</integer>
+	</dict>
+	<key>devices_param_2_down_precise</key>
+	<dict>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>13</integer>
+			<key>alphaLock</key>
+			<true/>
+			<key>optionKey</key>
+			<true/>
+		</dict>
+		<key>cc</key>
+		<integer>34</integer>
+		<key>value</key>
+		<integer>127</integer>
+	</dict>
+	
+	
+	<key>devices_param_3_up</key>
+	<dict>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>20</integer>
+			<key>alphaLock</key>
+			<true/>
+		</dict>
+		<key>cc</key>
+		<integer>35</integer>
+		<key>value</key>
+		<integer>5</integer>
+	</dict>
+	<key>devices_param_3_up_precise</key>
+	<dict>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>20</integer>
+			<key>alphaLock</key>
+			<true/>
+			<key>optionKey</key>
+			<true/>
+		</dict>
+		<key>cc</key>
+		<integer>35</integer>
+		<key>value</key>
+		<integer>1</integer>
+	</dict>
+	<key>devices_param_3_down</key>
+	<dict>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>14</integer>
+			<key>alphaLock</key>
+			<true/>
+		</dict>
+		<key>cc</key>
+		<integer>35</integer>
+		<key>value</key>
+		<integer>123</integer>
+	</dict>
+	<key>devices_param_3_down_precise</key>
+	<dict>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>14</integer>
+			<key>alphaLock</key>
+			<true/>
+			<key>optionKey</key>
+			<true/>
+		</dict>
+		<key>cc</key>
+		<integer>35</integer>
+		<key>value</key>
+		<integer>127</integer>
+	</dict>
+	
+	
+	
+	
+	<key>devices_param_4_up</key>
+	<dict>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>21</integer>
+			<key>alphaLock</key>
+			<true/>
+		</dict>
+		<key>cc</key>
+		<integer>36</integer>
+		<key>value</key>
+		<integer>5</integer>
+	</dict>
+	<key>devices_param_4_up_precise</key>
+	<dict>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>21</integer>
+			<key>alphaLock</key>
+			<true/>
+			<key>optionKey</key>
+			<true/>
+		</dict>
+		<key>cc</key>
+		<integer>36</integer>
+		<key>value</key>
+		<integer>1</integer>
+	</dict>
+	<key>devices_param_4_down</key>
+	<dict>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>15</integer>
+			<key>alphaLock</key>
+			<true/>
+		</dict>
+		<key>cc</key>
+		<integer>36</integer>
+		<key>value</key>
+		<integer>123</integer>
+	</dict>
+	<key>devices_param_4_down_precise</key>
+	<dict>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>15</integer>
+			<key>alphaLock</key>
+			<true/>
+			<key>optionKey</key>
+			<true/>
+		</dict>
+		<key>cc</key>
+		<integer>36</integer>
+		<key>value</key>
+		<integer>127</integer>
+	</dict>
+	
+	
+	
+	
+	<key>devices_param_5_up</key>
+	<dict>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>23</integer>
+			<key>alphaLock</key>
+			<true/>
+		</dict>
+		<key>cc</key>
+		<integer>37</integer>
+		<key>value</key>
+		<integer>5</integer>
+	</dict>
+	<key>devices_param_5_up_precise</key>
+	<dict>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>23</integer>
+			<key>alphaLock</key>
+			<true/>
+			<key>optionKey</key>
+			<true/>
+		</dict>
+		<key>cc</key>
+		<integer>37</integer>
+		<key>value</key>
+		<integer>1</integer>
+	</dict>
+	<key>devices_param_5_down</key>
+	<dict>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>17</integer>
+			<key>alphaLock</key>
+			<true/>
+		</dict>
+		<key>cc</key>
+		<integer>37</integer>
+		<key>value</key>
+		<integer>123</integer>
+	</dict>
+	<key>devices_param_5_down_precise</key>
+	<dict>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>17</integer>
+			<key>alphaLock</key>
+			<true/>
+			<key>optionKey</key>
+			<true/>
+		</dict>
+		<key>cc</key>
+		<integer>37</integer>
+		<key>value</key>
+		<integer>127</integer>
+	</dict>
+	
+	
+	
+	
+	<key>devices_param_6_up</key>
+	<dict>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>22</integer>
+			<key>alphaLock</key>
+			<true/>
+		</dict>
+		<key>cc</key>
+		<integer>38</integer>
+		<key>value</key>
+		<integer>5</integer>
+	</dict>
+	<key>devices_param_6_up_precise</key>
+	<dict>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>22</integer>
+			<key>alphaLock</key>
+			<true/>
+			<key>optionKey</key>
+			<true/>
+		</dict>
+		<key>cc</key>
+		<integer>38</integer>
+		<key>value</key>
+		<integer>1</integer>
+	</dict>
+	<key>devices_param_6_down</key>
+	<dict>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>16</integer>
+			<key>alphaLock</key>
+			<true/>
+		</dict>
+		<key>cc</key>
+		<integer>38</integer>
+		<key>value</key>
+		<integer>123</integer>
+	</dict>
+	<key>devices_param_6_down_precise</key>
+	<dict>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>16</integer>
+			<key>alphaLock</key>
+			<true/>
+			<key>optionKey</key>
+			<true/>
+		</dict>
+		<key>cc</key>
+		<integer>38</integer>
+		<key>value</key>
+		<integer>127</integer>
+	</dict>
+	
+	
+	
+	
+	<key>devices_param_7_up</key>
+	<dict>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>26</integer>
+			<key>alphaLock</key>
+			<true/>
+		</dict>
+		<key>cc</key>
+		<integer>39</integer>
+		<key>value</key>
+		<integer>5</integer>
+	</dict>
+	<key>devices_param_7_up_precise</key>
+	<dict>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>26</integer>
+			<key>alphaLock</key>
+			<true/>
+			<key>optionKey</key>
+			<true/>
+		</dict>
+		<key>cc</key>
+		<integer>39</integer>
+		<key>value</key>
+		<integer>1</integer>
+	</dict>
+	<key>devices_param_7_down</key>
+	<dict>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>32</integer>
+			<key>alphaLock</key>
+			<true/>
+		</dict>
+		<key>cc</key>
+		<integer>39</integer>
+		<key>value</key>
+		<integer>123</integer>
+	</dict>
+	<key>devices_param_7_down_precise</key>
+	<dict>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>32</integer>
+			<key>alphaLock</key>
+			<true/>
+			<key>optionKey</key>
+			<true/>
+		</dict>
+		<key>cc</key>
+		<integer>39</integer>
+		<key>value</key>
+		<integer>127</integer>
+	</dict>
+	
+	
+	
+	
+	<key>devices_param_8_up</key>
+	<dict>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>28</integer>
+			<key>alphaLock</key>
+			<true/>
+		</dict>
+		<key>cc</key>
+		<integer>40</integer>
+		<key>value</key>
+		<integer>5</integer>
+	</dict>
+	<key>devices_param_8_up_precise</key>
+	<dict>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>28</integer>
+			<key>alphaLock</key>
+			<true/>
+			<key>optionKey</key>
+			<true/>
+		</dict>
+		<key>cc</key>
+		<integer>40</integer>
+		<key>value</key>
+		<integer>1</integer>
+	</dict>
+	<key>devices_param_8_down</key>
+	<dict>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>34</integer>
+			<key>alphaLock</key>
+			<true/>
+		</dict>
+		<key>cc</key>
+		<integer>40</integer>
+		<key>value</key>
+		<integer>123</integer>
+	</dict>
+	<key>devices_param_8_down_precise</key>
+	<dict>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>34</integer>
+			<key>alphaLock</key>
+			<true/>
+			<key>optionKey</key>
+			<true/>
+		</dict>
+		<key>cc</key>
+		<integer>40</integer>
+		<key>value</key>
+		<integer>127</integer>
+	</dict>
+	
+	
+	
+	<key>devices_param_1_reset</key>
+	<dict>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>0</integer>
+			<key>alphaLock</key>
+			<true/>
+		</dict>
+		<key>note</key>
+		<integer>52</integer>
+	</dict>
+	<key>devices_param_2_reset</key>
+	<dict>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>1</integer>
+			<key>alphaLock</key>
+			<true/>
+		</dict>
+		<key>note</key>
+		<integer>53</integer>
+	</dict>
+	<key>devices_param_3_reset</key>
+	<dict>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>2</integer>
+			<key>alphaLock</key>
+			<true/>
+		</dict>
+		<key>note</key>
+		<integer>54</integer>
+	</dict>
+	<key>devices_param_4_reset</key>
+	<dict>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>3</integer>
+			<key>alphaLock</key>
+			<true/>
+		</dict>
+		<key>note</key>
+		<integer>55</integer>
+	</dict>
+	<key>devices_param_5_reset</key>
+	<dict>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>5</integer>
+			<key>alphaLock</key>
+			<true/>
+		</dict>
+		<key>note</key>
+		<integer>56</integer>
+	</dict>
+	<key>devices_param_6_reset</key>
+	<dict>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>4</integer>
+			<key>alphaLock</key>
+			<true/>
+		</dict>
+		<key>note</key>
+		<integer>57</integer>
+	</dict>
+	<key>devices_param_7_reset</key>
+	<dict>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>38</integer>
+			<key>alphaLock</key>
+			<true/>
+		</dict>
+		<key>note</key>
+		<integer>58</integer>
+	</dict>
+	<key>devices_param_8_reset</key>
+	<dict>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>40</integer>
+			<key>alphaLock</key>
+			<true/>
+		</dict>
+		<key>note</key>
+		<integer>59</integer>
+	</dict>
+	
+	
+	
+	
+	
 	<key>global_toggle_metronome</key>
 	<dict>
 		<key>hotkey</key>
@@ -222,7 +869,6 @@
 		<key>note</key>
 		<integer>11</integer>
 	</dict>
-	
 	<key>global_tap_tempo</key>
 	<dict>
 		<key>hotkey</key>
@@ -299,9 +945,6 @@
 		<key>value</key>
 		<integer>123</integer>
 	</dict>
-	
-	
-	
 	<key>global_move_loop_left</key>
 	<dict>
 		<key>cc</key>
@@ -330,7 +973,6 @@
 		<key>value</key>
 		<integer>1</integer>
 	</dict>
-	
 	<key>global_move_lb_left</key>
 	<dict>
 		<key>cc</key>
@@ -363,7 +1005,6 @@
 		<key>value</key>
 		<integer>1</integer>
 	</dict>
-	
 	<key>global_move_rb_left</key>
 	<dict>
 		<key>cc</key>
@@ -424,7 +1065,6 @@
 		<key>value</key>
 		<integer>124</integer>
 	</dict>
-	
 	<key>scenes_fire_next</key>
 	<dict>
 		<key>hotkey</key>
@@ -697,6 +1337,10 @@
 		<key>value</key>
 		<integer>1</integer>
 	</dict>
+	
+	
+	
+	
 	<key>track_sends_1_down</key>
 	<dict>
 		<key>cc</key>
@@ -789,6 +1433,10 @@
 		<key>value</key>
 		<integer>1</integer>
 	</dict>
+	
+	
+	
+	
 	<key>track_sends_2_down</key>
 	<dict>
 		<key>cc</key>
@@ -1012,22 +1660,6 @@
 			<key>controlKey</key>
 			<true/>
 			<key>keyCode</key>
-			<integer>21</integer>
-			<key>shiftKey</key>
-			<true/>
-		</dict>
-		<key>value</key>
-		<integer>127</integer>
-	</dict>
-	<key>track_sends_4_reset</key>
-	<dict>
-		<key>cc</key>
-		<integer>15</integer>
-		<key>hotkey</key>
-		<dict>
-			<key>controlKey</key>
-			<true/>
-			<key>keyCode</key>
 			<integer>15</integer>
 			<key>shiftKey</key>
 			<true/>
@@ -1065,6 +1697,412 @@
 		<key>value</key>
 		<integer>1</integer>
 	</dict>
+	
+	
+	
+	
+	
+	<key>track_sends_5_down</key>
+	<dict>
+		<key>cc</key>
+		<integer>28</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>controlKey</key>
+			<true/>
+			<key>keyCode</key>
+			<integer>17</integer>
+		</dict>
+		<key>value</key>
+		<integer>123</integer>
+	</dict>
+	<key>track_sends_5_down_precise</key>
+	<dict>
+		<key>cc</key>
+		<integer>28</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>controlKey</key>
+			<true/>
+			<key>keyCode</key>
+			<integer>17</integer>
+			<key>optionKey</key>
+			<true/>
+		</dict>
+		<key>value</key>
+		<integer>127</integer>
+	</dict>
+	<key>track_sends_5_open</key>
+	<dict>
+		<key>cc</key>
+		<integer>16</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>controlKey</key>
+			<true/>
+			<key>keyCode</key>
+			<integer>23</integer>
+			<key>shiftKey</key>
+			<true/>
+		</dict>
+		<key>value</key>
+		<integer>127</integer>
+	</dict>
+	<key>track_sends_5_reset</key>
+	<dict>
+		<key>cc</key>
+		<integer>16</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>controlKey</key>
+			<true/>
+			<key>keyCode</key>
+			<integer>17</integer>
+			<key>shiftKey</key>
+			<true/>
+		</dict>
+		<key>value</key>
+		<integer>0</integer>
+	</dict>
+	<key>track_sends_5_up</key>
+	<dict>
+		<key>cc</key>
+		<integer>28</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>controlKey</key>
+			<true/>
+			<key>keyCode</key>
+			<integer>23</integer>
+		</dict>
+		<key>value</key>
+		<integer>5</integer>
+	</dict>
+	<key>track_sends_5_up_precise</key>
+	<dict>
+		<key>cc</key>
+		<integer>28</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>controlKey</key>
+			<true/>
+			<key>keyCode</key>
+			<integer>23</integer>
+			<key>optionKey</key>
+			<true/>
+		</dict>
+		<key>value</key>
+		<integer>1</integer>
+	</dict>
+	
+	
+	
+	
+	
+	
+	
+	<key>track_sends_6_down</key>
+	<dict>
+		<key>cc</key>
+		<integer>29</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>controlKey</key>
+			<true/>
+			<key>keyCode</key>
+			<integer>16</integer>
+		</dict>
+		<key>value</key>
+		<integer>123</integer>
+	</dict>
+	<key>track_sends_6_down_precise</key>
+	<dict>
+		<key>cc</key>
+		<integer>29</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>controlKey</key>
+			<true/>
+			<key>keyCode</key>
+			<integer>16</integer>
+			<key>optionKey</key>
+			<true/>
+		</dict>
+		<key>value</key>
+		<integer>127</integer>
+	</dict>
+	<key>track_sends_6_reset</key>
+	<dict>
+		<key>cc</key>
+		<integer>17</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>controlKey</key>
+			<true/>
+			<key>keyCode</key>
+			<integer>16</integer>
+			<key>shiftKey</key>
+			<true/>
+		</dict>
+		<key>value</key>
+		<integer>0</integer>
+	</dict>
+	<key>track_sends_6_open</key>
+	<dict>
+		<key>cc</key>
+		<integer>17</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>controlKey</key>
+			<true/>
+			<key>keyCode</key>
+			<integer>22</integer>
+			<key>shiftKey</key>
+			<true/>
+		</dict>
+		<key>value</key>
+		<integer>127</integer>
+	</dict>
+	<key>track_sends_6_up</key>
+	<dict>
+		<key>cc</key>
+		<integer>29</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>controlKey</key>
+			<true/>
+			<key>keyCode</key>
+			<integer>22</integer>
+		</dict>
+		<key>value</key>
+		<integer>5</integer>
+	</dict>
+	<key>track_sends_6_up_precise</key>
+	<dict>
+		<key>cc</key>
+		<integer>29</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>controlKey</key>
+			<true/>
+			<key>keyCode</key>
+			<integer>22</integer>
+			<key>optionKey</key>
+			<true/>
+		</dict>
+		<key>value</key>
+		<integer>1</integer>
+	</dict>
+	
+	
+	
+	
+	
+	
+	
+	
+	<key>track_sends_7_down</key>
+	<dict>
+		<key>cc</key>
+		<integer>30</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>controlKey</key>
+			<true/>
+			<key>keyCode</key>
+			<integer>32</integer>
+		</dict>
+		<key>value</key>
+		<integer>123</integer>
+	</dict>
+	<key>track_sends_7_down_precise</key>
+	<dict>
+		<key>cc</key>
+		<integer>30</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>controlKey</key>
+			<true/>
+			<key>keyCode</key>
+			<integer>32</integer>
+			<key>optionKey</key>
+			<true/>
+		</dict>
+		<key>value</key>
+		<integer>127</integer>
+	</dict>
+	<key>track_sends_7_reset</key>
+	<dict>
+		<key>cc</key>
+		<integer>18</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>controlKey</key>
+			<true/>
+			<key>keyCode</key>
+			<integer>32</integer>
+			<key>shiftKey</key>
+			<true/>
+		</dict>
+		<key>value</key>
+		<integer>0</integer>
+	</dict>
+	<key>track_sends_7_open</key>
+	<dict>
+		<key>cc</key>
+		<integer>18</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>controlKey</key>
+			<true/>
+			<key>keyCode</key>
+			<integer>26</integer>
+			<key>shiftKey</key>
+			<true/>
+		</dict>
+		<key>value</key>
+		<integer>127</integer>
+	</dict>
+	<key>track_sends_7_up</key>
+	<dict>
+		<key>cc</key>
+		<integer>30</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>controlKey</key>
+			<true/>
+			<key>keyCode</key>
+			<integer>26</integer>
+		</dict>
+		<key>value</key>
+		<integer>5</integer>
+	</dict>
+	<key>track_sends_7_up_precise</key>
+	<dict>
+		<key>cc</key>
+		<integer>30</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>controlKey</key>
+			<true/>
+			<key>keyCode</key>
+			<integer>26</integer>
+			<key>optionKey</key>
+			<true/>
+		</dict>
+		<key>value</key>
+		<integer>1</integer>
+	</dict>
+	
+	
+	
+	
+	
+	
+	
+	
+	<key>track_sends_8_down</key>
+	<dict>
+		<key>cc</key>
+		<integer>31</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>controlKey</key>
+			<true/>
+			<key>keyCode</key>
+			<integer>34</integer>
+		</dict>
+		<key>value</key>
+		<integer>123</integer>
+	</dict>
+	<key>track_sends_8_down_precise</key>
+	<dict>
+		<key>cc</key>
+		<integer>31</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>controlKey</key>
+			<true/>
+			<key>keyCode</key>
+			<integer>34</integer>
+			<key>optionKey</key>
+			<true/>
+		</dict>
+		<key>value</key>
+		<integer>127</integer>
+	</dict>
+	<key>track_sends_8_reset</key>
+	<dict>
+		<key>cc</key>
+		<integer>19</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>controlKey</key>
+			<true/>
+			<key>keyCode</key>
+			<integer>34</integer>
+			<key>shiftKey</key>
+			<true/>
+		</dict>
+		<key>value</key>
+		<integer>0</integer>
+	</dict>
+	<key>track_sends_8_open</key>
+	<dict>
+		<key>cc</key>
+		<integer>19</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>controlKey</key>
+			<true/>
+			<key>keyCode</key>
+			<integer>28</integer>
+			<key>shiftKey</key>
+			<true/>
+		</dict>
+		<key>value</key>
+		<integer>127</integer>
+	</dict>
+	<key>track_sends_8_up</key>
+	<dict>
+		<key>cc</key>
+		<integer>31</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>controlKey</key>
+			<true/>
+			<key>keyCode</key>
+			<integer>28</integer>
+		</dict>
+		<key>value</key>
+		<integer>5</integer>
+	</dict>
+	<key>track_sends_8_up_precise</key>
+	<dict>
+		<key>cc</key>
+		<integer>31</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>controlKey</key>
+			<true/>
+			<key>keyCode</key>
+			<integer>28</integer>
+			<key>optionKey</key>
+			<true/>
+		</dict>
+		<key>value</key>
+		<integer>1</integer>
+	</dict>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<key>track_solo</key>
 	<dict>
 		<key>hotkey</key>
@@ -1105,7 +2143,6 @@
 		<key>note</key>
 		<integer>7</integer>
 	</dict>
-	
 	<key>track_stop_selected</key>
 	<dict>
 		<key>hotkey</key>
@@ -1166,7 +2203,6 @@
 		<key>note</key>
 		<integer>49</integer>
 	</dict>
-	
 	<key>track_switch_monitoring</key>
 	<dict>
 		<key>hotkey</key>
