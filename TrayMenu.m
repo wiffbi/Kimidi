@@ -19,7 +19,7 @@
 */
 
 - (void) openWebsite:(id)sender {
-  NSURL *url = [NSURL URLWithString:@"http://kimidi.wiffbi.com/"];
+  NSURL *url = [NSURL URLWithString:@"http://stc.wiffbi.com/"];
   [[NSWorkspace sharedWorkspace] openURL:url];
   //[url release];
 }
