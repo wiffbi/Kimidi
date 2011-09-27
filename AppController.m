@@ -119,9 +119,15 @@ static OSStatus AppFrontSwitchedHandler(EventHandlerCallRef inHandlerCallRef, Ev
 	int i = [hotkeys count];
 	while ( i-- ) {
 		HotkeyTrigger *hotkeyTrigger = (HotkeyTrigger *)[hotkeys objectAtIndex:i];
+		/*
 		if ([hotkeyTrigger hasAlphaLock] == alphaLockEnabled) {
 			[hotkeyTrigger activate];
 		}
+		*/
+		if (!alphaLockEnabled && [hotkeyTrigger hasAlphaLock]) {
+			continue;
+		}
+		[hotkeyTrigger activate];
 		
 	}
 	/*
@@ -143,7 +149,8 @@ static OSStatus AppFrontSwitchedHandler(EventHandlerCallRef inHandlerCallRef, Ev
 	while ( i-- ) {
 		//[(HotkeyTrigger *)[hotkeys objectAtIndex:i] deactivate];
 		HotkeyTrigger *hotkeyTrigger = (HotkeyTrigger *)[hotkeys objectAtIndex:i];
-		if (all || [hotkeyTrigger hasAlphaLock] != alphaLockEnabled) {
+		//if (all || [hotkeyTrigger hasAlphaLock] != alphaLockEnabled) {
+		if (all || ([hotkeyTrigger hasAlphaLock] && !alphaLockEnabled)) {
 			[hotkeyTrigger deactivate];
 		}
 	}
