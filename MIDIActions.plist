@@ -2339,5 +2339,66 @@
 		<key>value</key>
 		<integer>127</integer>
 	</dict>
+	
+	<key>quantization_clip_trigger_next</key>
+	<dict>
+		<key>cc</key>
+		<integer>49</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>controlKey</key>
+			<true/>
+			<key>keyCode</key>
+			<integer>24</integer>
+		</dict>
+		<key>value</key>
+		<integer>1</integer>
+	</dict>
+	<key>quantization_clip_trigger_prev</key>
+	<dict>
+		<key>cc</key>
+		<integer>49</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>controlKey</key>
+			<true/>
+			<key>keyCode</key>
+			<integer>27</integer>
+		</dict>
+		<key>value</key>
+		<integer>127</integer>
+	</dict>
+	<key>quantization_midi_recording_next</key>
+	<dict>
+		<key>cc</key>
+		<integer>50</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>controlKey</key>
+			<true/>
+			<key>optionKey</key>
+			<true/>
+			<key>keyCode</key>
+			<integer>24</integer>
+		</dict>
+		<key>value</key>
+		<integer>1</integer>
+	</dict>
+	<key>quantization_midi_recording_prev</key>
+	<dict>
+		<key>cc</key>
+		<integer>50</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>controlKey</key>
+			<true/>
+			<key>optionKey</key>
+			<true/>
+			<key>keyCode</key>
+			<integer>27</integer>
+		</dict>
+		<key>value</key>
+		<integer>127</integer>
+	</dict>
 </dict>
 </plist>
