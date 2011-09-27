@@ -21,6 +21,8 @@
 	int keyCode;
 	int keyCombo;
 	
+	bool active;
+	
 	EventHotKeyRef hotKeyRef; // needed to unregister the hotkey
 	EventHotKeyID hotkeyId; // needed to uniquely address the hotkey pressed
 }

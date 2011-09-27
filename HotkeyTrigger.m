@@ -48,6 +48,9 @@
 
 - (void) activate
 {
+	if (active) return;
+	active = TRUE;
+	
 	int keyComboWithoutAlphaLock = keyCombo;
 	if ([self hasAlphaLock]) {
 		keyComboWithoutAlphaLock-= alphaLock;
@@ -56,7 +59,10 @@
 }
 - (void) deactivate
 {
-	UnregisterEventHotKey(hotKeyRef);
+	if (active) {
+		active = FALSE;
+		UnregisterEventHotKey(hotKeyRef);
+	}
 }
 
 
