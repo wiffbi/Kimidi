@@ -2339,6 +2339,39 @@
 		<key>value</key>
 		<integer>127</integer>
 	</dict>
+	<key>tracks_fold</key>
+	<dict>
+		<key>cc</key>
+		<integer>73</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>controlKey</key>
+			<true/>
+			<key>shiftKey</key>
+			<true/>
+			<key>keyCode</key>
+			<integer>126</integer>
+		</dict>
+		<key>value</key>
+		<integer>127</integer>
+	</dict>
+	<key>tracks_unfold</key>
+	<dict>
+		<key>cc</key>
+		<integer>73</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>controlKey</key>
+			<true/>
+			<key>shiftKey</key>
+			<true/>
+			<key>keyCode</key>
+			<integer>125</integer>
+		</dict>
+		<key>value</key>
+		<integer>1</integer>
+	</dict>
+	
 	
 	<key>quantization_clip_trigger_next</key>
 	<dict>
