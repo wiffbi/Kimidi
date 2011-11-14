@@ -31,7 +31,7 @@
 
 - (void) pressed
 {
-	NSLog(@"HotKey pressed");
+	//NSLog(@"HotKey pressed");
 	[self execute];
 }
 
