@@ -2471,6 +2471,23 @@
 		</dict>
 	</dict>
 	
+	<key>global_toggle_track_collapsed</key>
+	<dict>
+		<key>note</key>
+		<integer>94</integer>
+		<key>hotkey</key>
+		<dict>
+			<key>controlKey</key>
+			<true/>
+			<key>cmdKey</key>
+			<true/>
+			<key>shiftKey</key>
+			<true/>
+			<key>keyCode</key>
+			<integer>0</integer>
+		</dict>
+	</dict>
+	
 	<key>quantization_clip_trigger_next</key>
 	<dict>
 		<key>cc</key>
