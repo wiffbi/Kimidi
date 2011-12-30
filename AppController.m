@@ -312,6 +312,10 @@ static OSStatus AppFrontSwitchedHandler(EventHandlerCallRef inHandlerCallRef, Ev
 		int channel = 0; // default channel is 0 (with channels ranging from 0 to 15)
 		if ([[actionSettings objectForKey:@"channel"] boolValue]) {
 			channel = [[actionSettings objectForKey:@"channel"] intValue];
+			if (channel < 0 || channel > 15) {
+				channel = 0;
+				NSLog(@"channel not in range 0-15, set to default 0");
+			}
 		}
 		if ([[actionSettings valueForKey:@"cc"] boolValue]) {
 			hotkeyAction = [[HotkeyActionRepeat alloc] init];
