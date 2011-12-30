@@ -19,7 +19,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.2.5</string>
+	<string>1.2.6</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>© 2010-2011, Richard Schreiber</string>
 	<key>NSMainNibFile</key>
