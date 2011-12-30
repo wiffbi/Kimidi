@@ -309,11 +309,15 @@ static OSStatus AppFrontSwitchedHandler(EventHandlerCallRef inHandlerCallRef, Ev
 		
 		// setup all the Hotkeys based on those actions
 		HotkeyAction *hotkeyAction = nil;
+		int channel = 0; // default channel is 0 (with channels ranging from 0 to 15)
+		if ([[actionSettings objectForKey:@"channel"] boolValue]) {
+			channel = [[actionSettings objectForKey:@"channel"] intValue];
+		}
 		if ([[actionSettings valueForKey:@"cc"] boolValue]) {
 			hotkeyAction = [[HotkeyActionRepeat alloc] init];
 			
 			// binary addition: CC-Status (first byte) = 0xB; Channel (second byte) = 0-15 => send CC on first channel: 0x<status>0 | <channel>
-			[hotkeyAction setChannel:0xB0 | 0];
+			[hotkeyAction setChannel:0xB0 | channel];
 			[hotkeyAction setKey:[[actionSettings valueForKey:@"cc"] intValue]];
 			
 			[hotkeyAction setValue:[[actionSettings valueForKey:@"value"] intValue]];
@@ -321,7 +325,7 @@ static OSStatus AppFrontSwitchedHandler(EventHandlerCallRef inHandlerCallRef, Ev
 		else {
 			hotkeyAction = [[HotkeyActionRetrigger alloc] init];
 			
-			[hotkeyAction setChannel:0x90 | 0];
+			[hotkeyAction setChannel:0x90 | channel];
 			[hotkeyAction setKey:[[actionSettings valueForKey:@"note"] intValue]];
 			[hotkeyAction setValue:127];
 		}

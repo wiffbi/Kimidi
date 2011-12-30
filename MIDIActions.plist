@@ -13,6 +13,10 @@
 		</dict>
 		<key>note</key>
 		<integer>45</integer>
+		<!-- channel key is optional, defaults to 0
+		<key>channel</key>
+		<integer>0</integer>
+		-->
 	</dict>
 	<key>clips_fire_next_available</key>
 	<dict>
