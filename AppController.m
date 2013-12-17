@@ -180,8 +180,11 @@ static OSStatus AppFrontSwitchedHandler(EventHandlerCallRef inHandlerCallRef, Ev
 	}
 	alphaLockEnabled = flag;
 	//NSLog(@"alphaLock has changed => rebind keyboard-shortcuts");
-	[self unbindHotkeys:FALSE];
-	[self bindHotkeys];
+	
+	if ([self shouldHaveHotkeys]) {
+		[self unbindHotkeys:FALSE];
+		[self bindHotkeys];
+	}
 }
 
 
