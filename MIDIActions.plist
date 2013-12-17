@@ -768,7 +768,18 @@
 	
 	
 	
-	
+	<key>global_back_to_arranger</key>
+	<dict>
+		<key>hotkey</key>
+		<dict>
+			<key>keyCode</key>
+			<integer>11</integer>
+			<key>controlKey</key>
+			<true/>
+		</dict>
+		<key>note</key>
+		<integer>13</integer>
+	</dict>
 	<key>global_toggle_metronome</key>
 	<dict>
 		<key>hotkey</key>
