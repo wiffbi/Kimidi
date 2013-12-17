@@ -19,9 +19,9 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.2.6</string>
+	<string>1.2.7</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>© 2010-2011, Richard Schreiber</string>
+	<string>© 2010-2012, Richard Schreiber</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
