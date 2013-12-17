@@ -1,9 +1,0 @@
-#import <PYMIDI/PYMIDIUtils.h>
-#import <PYMIDI/PYMIDIManager.h>
-#import <PYMIDI/PYMIDIEndpointDescriptor.h>
-#import <PYMIDI/PYMIDIEndpoint.h>
-#import <PYMIDI/PYMIDIEndpointSet.h>
-#import <PYMIDI/PYMIDIRealSource.h>
-#import <PYMIDI/PYMIDIRealDestination.h>
-#import <PYMIDI/PYMIDIVirtualSource.h>
-#import <PYMIDI/PYMIDIVirtualDestination.h>
