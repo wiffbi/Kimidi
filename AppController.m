@@ -69,6 +69,8 @@
 
 - (void) bindHotkeys {
     
+    [self testAccessibilityWithPrompt:YES];
+    
     [self activateTriggers];
     
     NSLog(@"bind hotkeys");
@@ -145,14 +147,14 @@
 	}
 }
 
-- (void) foremostAppActivated: (NSNotification*) noti{
+- (void) frontAppSwitched: (NSNotification*) notification {
     [self checkFrontAppForHotkeys];
 }
 
 - (void) awakeFromNib
 {
 	// event-handler for front app switched
-    [[[NSWorkspace sharedWorkspace] notificationCenter] addObserver:self selector:@selector(foremostAppActivated:) name:NSWorkspaceDidActivateApplicationNotification object:nil];
+    [[[NSWorkspace sharedWorkspace] notificationCenter] addObserver:self selector:@selector(frontAppSwitched:) name:NSWorkspaceDidActivateApplicationNotification object:nil];
 
 	// read default Key-Commands and Actions from MIDIActions.plist
 	NSString *errorDesc = nil;
@@ -276,6 +278,24 @@
     }
     
     return [NSString stringWithFormat: @"0x%X", keyCombo*0x100 | keyCode];
+}
+
+
+
+- (BOOL) testAccessibilityWithPrompt:(BOOL) prompt {
+    
+    NSDictionary* opts = @{(__bridge id)kAXTrustedCheckOptionPrompt: (prompt ? @YES:@NO)};
+    
+    BOOL enabled = AXIsProcessTrustedWithOptions((__bridge CFDictionaryRef)opts);
+    
+    if (enabled) {
+        NSLog(@"Accessibility Enabled");
+    }
+    else {
+        NSLog(@"Accessibility Disabled");
+    }
+    
+    return enabled;
 }
 
 

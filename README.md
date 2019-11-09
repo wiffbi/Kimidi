@@ -1,10 +1,11 @@
 Kimidi – keyboard shortcuts to MIDI
 ===================================
 
-This is a fork of the accompanying [Kimidi app](https://github.com/wiffbi/Kimidi) for Selected_Track_Control for Ableton Live. On OS X, this app transforms global keyboard shortcuts into MIDI messages, which are sent to Ableton Live on a virtual MIDI-port (created by the app automatically itself). **This allows instant keyboard-control of lots of features in Ableton Live** that either would require prior, manual configuration of each Live-set or aren't possible at all (such as using the same keyboard shortcut for e.g. the mute button – but always on the selected track).
+This is [Matatata's](https://github.com/matatatata) fork of the accompanying [Kimidi app](https://github.com/wiffbi/Kimidi) for Selected_Track_Control for Ableton Live. On OS X, this app transforms global keyboard shortcuts into MIDI messages, which are sent to Ableton Live on a virtual MIDI-port (created by the app automatically itself). **This allows instant keyboard-control of lots of features in Ableton Live** that either would require prior, manual configuration of each Live-set or aren't possible at all (such as using the same keyboard shortcut for e.g. the mute button – but always on the selected track).
 
 More information and the app itself can be found on the [project’s homepage.](http://stc.wiffbi.com/)
 
+# About the fork
 The original version will most likely NOT work under macOS 10.15 Catalina because Apple deprecated the Carbon API. In this fork I tried to remove that dependency and as a consequence had to make several changes to make it work without the Carbon API.
 
 Current version is 1.3.0 and it seems to work fine on Mojave.
