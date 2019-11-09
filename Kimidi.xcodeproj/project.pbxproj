@@ -56,7 +56,6 @@
 		9551622F23762DEC00D667D4 /* PYMIDIVirtualSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 9551622423762DEB00D667D4 /* PYMIDIVirtualSource.m */; };
 		9551623023762DEC00D667D4 /* PYMIDIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9551622523762DEC00D667D4 /* PYMIDIManager.m */; };
 		9551623123762DEC00D667D4 /* PYMIDIUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9551622623762DEC00D667D4 /* PYMIDIUtils.m */; };
-		955162382376365C00D667D4 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 955162362376348200D667D4 /* Carbon.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -127,7 +126,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7939A447101FA02D00FEB7DA /* Cocoa.framework in Frameworks */,
-				955162382376365C00D667D4 /* Carbon.framework in Frameworks */,
 				7939A448101FA02D00FEB7DA /* CoreAudio.framework in Frameworks */,
 				7939A449101FA02D00FEB7DA /* CoreMIDI.framework in Frameworks */,
 			);

@@ -13,6 +13,7 @@
 - (id) init
 {
 	hotkeyActions = [[NSMutableArray alloc] init];
+    pressed = false;
     return self;
 }
 
@@ -38,7 +39,7 @@
 }
 - (void) setHotkeyId: (int) i
 {
-	hotkeyId.id = i;
+	hotkeyId = i;
 }
 
 - (bool) hasAlphaLock
@@ -50,18 +51,12 @@
 {
 	if (active) return;
 	active = TRUE;
-	
-	int keyComboWithoutAlphaLock = keyCombo;
-	if ([self hasAlphaLock]) {
-		keyComboWithoutAlphaLock-= alphaLock;
-	}
-	RegisterEventHotKey(keyCode, keyComboWithoutAlphaLock, hotkeyId, GetApplicationEventTarget(), 0, &hotKeyRef);
 }
+
 - (void) deactivate
 {
 	if (active) {
 		active = FALSE;
-		UnregisterEventHotKey(hotKeyRef);
 	}
 }
 
@@ -70,6 +65,11 @@
 
 - (void) pressed
 {
+    if(pressed)
+        return;
+    
+    pressed=true;
+    
 	int i = [hotkeyActions count];
 	while ( i-- ) {
 		[(HotkeyAction *)[hotkeyActions objectAtIndex:i] pressed];
@@ -78,6 +78,12 @@
 
 - (void) released
 {
+    
+    if(!pressed)
+        return;
+    
+    pressed=false;
+    
 	int i = [hotkeyActions count];
 	while ( i-- ) {
 		[(HotkeyAction *)[hotkeyActions objectAtIndex:i] released];
