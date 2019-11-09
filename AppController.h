@@ -13,9 +13,16 @@
 
 
 @interface AppController : NSObject {
+    
 	NSMutableArray *hotkeys;
+    // indexes to the hotkeys array by keyCombo (keyCode combined with modifier bit flags)
+    NSMutableDictionary *hotkeyIdexesByKeyCombo;
+    
+    // keep track of all currently pressed triggers
+    NSMutableSet<HotkeyTrigger*> *pressedTriggers;
+    
 	MIDIController *midiController;
-    NSMutableDictionary *hotkeyIdsByKeyCombo;
+
     
     // event handler ref
     id globalMonitor;

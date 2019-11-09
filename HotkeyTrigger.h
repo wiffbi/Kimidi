@@ -60,6 +60,7 @@ enum {
 }
 
 - (void) setKeyCode: (int) code;
+- (int) keyCode;
 - (void) setKeyCombo: (int) combo;
 - (bool) hasAlphaLock;
 - (void) setHotkeyId: (int) i;

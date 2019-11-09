@@ -13,35 +13,36 @@
 {
 	hotkeysBound = NO;
 	
-	// create hotkeys-dictionary to hold all the hotkeys by keycombo
-	// each dict-entry is a NSMutableArray as a keycombo can be assigned to 
-	// multiple hotkeys - ie. one with CAPS-Lock enabled and one without
 	hotkeys = [[NSMutableArray alloc] init];
-	//hotkeys = [[NSMutableDictionary alloc] init];
-	
+    hotkeyIdexesByKeyCombo = [[NSMutableDictionary alloc] init];
+	pressedTriggers = [[NSMutableSet alloc] init];
 	midiController = [[MIDIController alloc] init];
 	
     return self;
 }
 
+
+- (void) dealloc
+{
+    [hotkeys release];
+    [hotkeyIdexesByKeyCombo release];
+    [pressedTriggers release];
+    [midiController release];
+    [super dealloc];
+}
+
 - (void) hotKeyPressed:(int) hotKeyId
 {
-	/*
-	if (NSAlphaShiftKeyMask & [[NSApp currentEvent] modifierFlags]) {
-		// Hotkeys aus den hotkeysCapsLock auslesen
-		NSLog(@"CAPS LOCK");
-	}
-	NSLog(@"Hotkey pressed: %d", hotKeyId);
-	HotKey *hotkey = (HotKey *)[hotkeys objectAtIndex:hotKeyId];
-	NSLog(@"Hotkey: %@", hotkey);
-	[hotkey pressed];
-	*/
-	[(HotkeyTrigger *)[hotkeys objectAtIndex:hotKeyId] pressed];
+    HotkeyTrigger* trigger = (HotkeyTrigger *) [hotkeys objectAtIndex:hotKeyId];
+	[trigger pressed];
+    
+    [pressedTriggers addObject:trigger];
 }
 - (void) hotKeyReleased:(int) hotKeyId
 {
-	//NSLog(@"Hotkey released: %d", hotKeyId);
-	[(HotkeyTrigger *)[hotkeys objectAtIndex:hotKeyId] released];
+    HotkeyTrigger* trigger = (HotkeyTrigger *) [hotkeys objectAtIndex:hotKeyId];
+	[trigger released];
+    [pressedTriggers removeObject:trigger];
 }
 
 
@@ -54,6 +55,11 @@
 }
 
 - (void) deactivateTriggers {
+    
+    [pressedTriggers makeObjectsPerformSelector:@selector(released)];
+    [pressedTriggers removeAllObjects];
+    
+    
     int i = [hotkeys count];
     while ( i-- ) {
         HotkeyTrigger *hotkeyTrigger = (HotkeyTrigger *)[hotkeys objectAtIndex:i];
@@ -67,27 +73,41 @@
     
     NSLog(@"bind hotkeys");
 	void (^block)(NSEvent*) = ^(NSEvent *event) {
-        NSString *key = [self hotKeyComboId:event.keyCode flags:event.modifierFlags];
-        NSNumber *num = [self->hotkeyIdsByKeyCombo valueForKey:key];
-     
-        if(num != nil) {
-            if(event.type == NSEventTypeKeyDown && ! event.ARepeat) {
+        NSString *comboId = [self hotKeyComboId:event.keyCode flags:event.modifierFlags];
+        NSNumber *num = [hotkeyIdexesByKeyCombo valueForKey:comboId];
+        
+        if(event.type == NSEventTypeKeyUp) {
+            NSLog(@"keyup: %i", event.keyCode);
+            if(num!=nil)
+                [self hotKeyReleased: [num intValue]];
+            [self releaseAllPressedTriggersWithKeyCode: event.keyCode];
+        }
+        else if(event.type == NSEventTypeKeyDown && ! event.ARepeat) {
+            if(num != nil) {
                 NSLog(@"keydown: %i", event.keyCode);
                 [self hotKeyPressed: [num intValue]];
             }
-            if(event.type == NSEventTypeKeyUp) {
-                NSLog(@"keyup: %i", event.keyCode);
-                [self hotKeyReleased: [num intValue]];
-            }
         }
-        [key release];
-        [num release];
     };
     
     globalMonitor = [NSEvent addGlobalMonitorForEventsMatchingMask:(NSKeyUpMask|NSKeyDownMask)
                                            handler:block];
     
 	hotkeysBound = YES;
+}
+
+-(void) releaseAllPressedTriggersWithKeyCode:(int) keyCode {
+      id tmp = pressedTriggers;
+      pressedTriggers = [[pressedTriggers objectsPassingTest:
+                          ^BOOL (HotkeyTrigger* t,BOOL* stop){
+          if([t keyCode] == keyCode){
+              NSLog(@"also released %@",t);
+              [t released];
+              return YES; // remove trigger
+          }
+          return YES; // keep others
+      }] mutableCopy];
+      [tmp release];
 }
 
 - (void) unbindHotkeys: (BOOL) all {
@@ -151,10 +171,6 @@
 	}
 	
 	
-	
-	// lookup of hotkeyId by keycombo;
-    hotkeyIdsByKeyCombo = [[NSMutableDictionary dictionary] retain]; // do I need to retain this?
-	
 	NSEnumerator* actionsIterator = [[hotKeyActions allKeys] objectEnumerator];
 	id key;
 	while( key = [actionsIterator nextObject])
@@ -211,16 +227,13 @@
 		}
 		[hotkeyAction setController:midiController];
 		
-		
-		
-		
-		HotkeyTrigger *hotkeyTrigger = nil;
+        HotkeyTrigger *hotkeyTrigger = nil;
 		NSString *hotkeyIdKeyCombo = [NSString stringWithFormat: @"0x%X", keyCombo*0x100 | keyCode];
-		NSNumber *hotkeyIdNumber = [hotkeyIdsByKeyCombo objectForKey:hotkeyIdKeyCombo];
+		NSNumber *hotkeyIdNumber = [hotkeyIdexesByKeyCombo objectForKey:hotkeyIdKeyCombo];
 		if (hotkeyIdNumber == nil) {
 			// new hotkeyId at the end of hotkeys-array			
 			hotkeyIdNumber = [[NSNumber alloc] initWithInt:[hotkeys count]];
-			[hotkeyIdsByKeyCombo setObject:hotkeyIdNumber forKey:hotkeyIdKeyCombo];
+			[hotkeyIdexesByKeyCombo setObject:hotkeyIdNumber forKey:hotkeyIdKeyCombo];
 			
 			hotkeyTrigger = [[HotkeyTrigger alloc] init];
 			[hotkeyTrigger setKeyCombo:keyCombo];
@@ -243,7 +256,6 @@
     else {
         // TODO alert
         NSLog(@"Accessibility Disabled");
-        //[NSApp terminate:nil];
     }
     
 	// check which app is in front and if needed, bind hotkeys
