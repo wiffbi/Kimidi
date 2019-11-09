@@ -10,7 +10,7 @@ The original version will most likely NOT work under macOS 10.15 Catalina becaus
 
 Current version is 1.3.0 and it seems to work fine on Mojave.
 
-To build the app, clone this repository, and its submodule PYMIDI
+To build the app, clone this repository, and the [PYMIDI.framework](https://github.com/matatata/pymidi.git) submodule.
 
 	git clone https://github.com/matatata/Kimidi.git Kimidi
 
