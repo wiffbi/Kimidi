@@ -24,7 +24,7 @@ Then build the submodule and Kimidi
 	cd ../..
 	xcodebuild
 	
-	open . build/Release
+	open build/Release
 	
 Upon first start you'll be asked to allow the app to use accessibility features. This is indeed necessary in order to allow the app to receive key strokes from Ableton Live. If the app has not permission - it will not work and not receive keystrokes, so please check that the app is listed in `System Preferences/Security & Privacy` Tab `Privacy` section `Accessibility`.
 
