@@ -201,11 +201,12 @@ static OSStatus AppFrontSwitchedHandler(EventHandlerCallRef inHandlerCallRef, Ev
 	}
 }
 
+
 - (void) awakeFromNib
 {
 	// event-handler for front app switched
 	EventTypeSpec spec = { kEventClassApplication,  kEventAppFrontSwitched };
-    InstallApplicationEventHandler(NewEventHandlerUPP(AppFrontSwitchedHandler), 1, &spec, (void*)self, NULL);
+ //   InstallApplicationEventHandler(NewEventHandlerUPP(AppFrontSwitchedHandler), 1, &spec, (void*)self, NULL);
 	
 	
 	// event-handlers for KeyPressed and KeyReleased
@@ -214,10 +215,10 @@ static OSStatus AppFrontSwitchedHandler(EventHandlerCallRef inHandlerCallRef, Ev
 	
 	// eventType for KeyPressed
 	eventType.eventKind=kEventHotKeyPressed;
-	InstallApplicationEventHandler(&myHotKeyHandler,1,&eventType,(void *)self,NULL);
+//	InstallApplicationEventHandler(&myHotKeyHandler,1,&eventType,(void *)self,NULL);
 	// eventType for KeyReleased
 	eventType.eventKind=kEventHotKeyReleased;
-	InstallApplicationEventHandler(&myHotKeyReleasedHandler,1,&eventType,(void *)self,NULL);
+//	InstallApplicationEventHandler(&myHotKeyReleasedHandler,1,&eventType,(void *)self,NULL);
 	
 	//EventTypeSpec keyboardHandlerEvents = { kEventClassKeyboard, kEventRawKeyModifiersChanged /*kEventRawKeyDown*/ };
 	//eventType.eventClass=kEventRawKeyUp;
@@ -272,7 +273,8 @@ static OSStatus AppFrontSwitchedHandler(EventHandlerCallRef inHandlerCallRef, Ev
 	
 	
 	// temporary lookup of hotkeyId by keycombo; auto-released at end of function
-	NSMutableDictionary *hotkeyIdsByKeyCombo = [NSMutableDictionary dictionary];
+	//NSMutableDictionary *hotkeyIdsByKeyCombo = [NSMutableDictionary dictionary];
+    self->hotkeyIdsByKeyCombo = [[NSMutableDictionary dictionary] retain];
 	
 	NSEnumerator* actionsIterator = [[hotKeyActions allKeys] objectEnumerator];
 	id key;
@@ -399,9 +401,90 @@ static OSStatus AppFrontSwitchedHandler(EventHandlerCallRef inHandlerCallRef, Ev
 	
 	// check which app is in front and if needed, bind hotkeys
 	[self checkFrontAppForHotkeys];
+    
+    
+    [self didLaunch:nil];
 }
 
 
 
+// 10.9+ only, see this url for compatibility:
+// http://stackoverflow.com/questions/17693408/enable-access-for-assistive-devices-programmatically-on-10-9
+BOOL checkAccessibility()
+{
+    NSDictionary* opts = @{(__bridge id)kAXTrustedCheckOptionPrompt: @YES};
+    return AXIsProcessTrustedWithOptions((__bridge CFDictionaryRef)opts);
+}
+
+- (void)didLaunch:(NSNotification *)aNotification
+{
+    if (checkAccessibility()) {
+        NSLog(@"Accessibility Enabled");
+    }
+    else {
+        NSLog(@"Accessibility Disabled");
+    }
+
+    NSLog(@"registering keydown mask");
+    [NSEvent addGlobalMonitorForEventsMatchingMask:NSKeyDownMask
+                                           handler:^(NSEvent *event){
+        
+        if(![self shouldHaveHotkeys])
+            return;
+        
+        NSLog(@"keydown: %i", event.keyCode);
+        
+        NSString * key = [self hotKeyComboId:event.keyCode flags:event.modifierFlags];
+        
+        NSNumber * num = [self->hotkeyIdsByKeyCombo valueForKey:key];
+        
+        [self hotKeyPressed: [num intValue]];
+        [key release];
+        [num release];
+                                                    
+                                    }];
+    
+    [NSEvent addGlobalMonitorForEventsMatchingMask:NSKeyUpMask
+                                              handler:^(NSEvent *event){
+        
+        if(![self shouldHaveHotkeys])
+            return;
+        
+        NSLog(@"keyup: %i", event.keyCode);
+           NSString * key = [self hotKeyComboId:event.keyCode flags:event.modifierFlags];
+           
+           NSNumber * num = [self->hotkeyIdsByKeyCombo valueForKey:key];
+           
+           [self hotKeyReleased: [num intValue]];
+        
+        [key release];
+        [num release];
+                                                       
+                                              }];
+    
+}
+
+
+- (NSString*) hotKeyComboId:(int)keyCode flags:(NSEventModifierFlags)flags {
+    
+    int keyCombo = 0;
+    if ((flags & NSEventModifierFlagCommand)==NSEventModifierFlagCommand) {
+        keyCombo+= cmdKey;
+    }
+    if ((flags & NSEventModifierFlagControl)==NSEventModifierFlagControl) {
+        keyCombo+= controlKey;
+    }
+    if ((flags & NSEventModifierFlagOption)==NSEventModifierFlagOption) {
+        keyCombo+= optionKey;
+    }
+    if ((flags & NSEventModifierFlagShift)==NSEventModifierFlagShift) {
+        keyCombo+= shiftKey;
+    }
+    if ((flags & NSEventModifierFlagCapsLock)==NSEventModifierFlagCapsLock) {
+        keyCombo+= alphaLock;
+    }
+    
+    return [NSString stringWithFormat: @"0x%X", keyCombo*0x100 | keyCode];
+}
 
 @end

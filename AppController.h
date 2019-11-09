@@ -17,6 +17,7 @@ OSStatus myHotKeyReleasedHandler(EventHandlerCallRef nextHandler, EventRef anEve
 @interface AppController : NSObject {
 	NSMutableArray *hotkeys;
 	MIDIController *midiController;
+    NSMutableDictionary *hotkeyIdsByKeyCombo;
 	
 	BOOL hotkeysBound;
 	
