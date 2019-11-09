@@ -92,8 +92,30 @@
   [_statusItem setAlternateImage:[NSImage imageNamed:@"menubar-hover.png"]];
 
   [menu release];
+    
+  [self testAccessibility];
   
   [[[AppController alloc] init] awakeFromNib];
+}
+
+
+- (void) testAccessibility {
+    
+    NSDictionary* opts = @{(__bridge id)kAXTrustedCheckOptionPrompt: @YES};
+    BOOL enabled = AXIsProcessTrustedWithOptions((__bridge CFDictionaryRef)opts);
+    
+    if (enabled) {
+        NSLog(@"Accessibility Enabled");
+    }
+    else {
+        NSLog(@"Accessibility Disabled");
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert setMessageText:@"Message text."];
+        [alert setInformativeText:@"Informative text."];
+        [alert addButtonWithTitle:@"Cancel"];
+        [alert addButtonWithTitle:@"Ok"];
+        [alert runModal];
+    }
 }
 
 

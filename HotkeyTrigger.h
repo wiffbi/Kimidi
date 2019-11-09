@@ -4,6 +4,7 @@
 //
 //  Created by Richard Schreiber on 18.09.11.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  
 //
 /*
  * HotkeyTrigger registers the keycombo and triggers the HotkeyActions subscribed to it

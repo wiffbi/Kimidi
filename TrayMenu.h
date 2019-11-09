@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface TrayMenu : NSObject {
+@interface TrayMenu : NSObject <NSApplicationDelegate> {
     @private
         NSStatusItem *_statusItem;
 }

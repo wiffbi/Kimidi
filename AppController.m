@@ -74,18 +74,18 @@
     NSLog(@"bind hotkeys");
 	void (^block)(NSEvent*) = ^(NSEvent *event) {
         NSString *comboId = [self hotKeyComboId:event.keyCode flags:event.modifierFlags];
-        NSNumber *num = [hotkeyIdexesByKeyCombo valueForKey:comboId];
+        NSNumber *hotkeyindex = [hotkeyIdexesByKeyCombo valueForKey:comboId];
         
         if(event.type == NSEventTypeKeyUp) {
             NSLog(@"keyup: %i", event.keyCode);
-            if(num!=nil)
-                [self hotKeyReleased: [num intValue]];
+            if(hotkeyindex!=nil)
+                [self hotKeyReleased: [hotkeyindex intValue]];
             [self releaseAllPressedTriggersWithKeyCode: event.keyCode];
         }
         else if(event.type == NSEventTypeKeyDown && ! event.ARepeat) {
-            if(num != nil) {
+            if(hotkeyindex != nil) {
                 NSLog(@"keydown: %i", event.keyCode);
-                [self hotKeyPressed: [num intValue]];
+                [self hotKeyPressed: [hotkeyindex intValue]];
             }
         }
     };
@@ -248,15 +248,6 @@
 		[hotkeyTrigger addAction:hotkeyAction];
 		
 	}
-	
-    
-    if (checkAccessibility()) {
-        NSLog(@"Accessibility Enabled");
-    }
-    else {
-        // TODO alert
-        NSLog(@"Accessibility Disabled");
-    }
     
 	// check which app is in front and if needed, bind hotkeys
 	[self checkFrontAppForHotkeys];
@@ -264,14 +255,6 @@
 }
 
 
-
-// 10.9+ only, see this url for compatibility:
-// http://stackoverflow.com/questions/17693408/enable-access-for-assistive-devices-programmatically-on-10-9
-BOOL checkAccessibility()
-{
-    NSDictionary* opts = @{(__bridge id)kAXTrustedCheckOptionPrompt: @YES};
-    return AXIsProcessTrustedWithOptions((__bridge CFDictionaryRef)opts);
-}
 
 - (NSString*) hotKeyComboId:(int)keyCode flags:(NSEventModifierFlags)flags {
     
@@ -294,5 +277,6 @@ BOOL checkAccessibility()
     
     return [NSString stringWithFormat: @"0x%X", keyCombo*0x100 | keyCode];
 }
+
 
 @end
