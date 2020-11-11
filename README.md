@@ -8,18 +8,18 @@ More information and the app itself can be found on the [project’s homepage.](
 # About the fork
 The original version will most likely NOT work under macOS 10.15 Catalina because Apple deprecated the Carbon API. In this fork I tried to remove that dependency and as a consequence had to make several changes to make it work without the Carbon API.
 
-Current version is 1.3.0 and it seems to work fine on Mojave.
+Current version is 1.3.0 and it seems to work fine on Mojave and Catalina.
 
-To build the app, clone this repository, and the [PYMIDI.framework](https://github.com/matatata/pymidi.git) submodule.
+To build the app, we'll clone this repository and the [PYMIDI.framework](https://github.com/matatata/pymidi.git) submodule by executing these commands:
 
 	git clone https://github.com/matatata/Kimidi.git Kimidi
-
+	cd Kimidi
 	git submodule init
 	git submodule update
 	
-Then build the submodule and Kimidi
+Then we'll build the submodule and finally Kimidi
 
-	cd Kimidi/externals/pymidi
+	cd externals/pymidi
 	xcodebuild
 	cd ../..
 	xcodebuild
