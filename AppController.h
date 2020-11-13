@@ -4,31 +4,35 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import <Carbon/Carbon.h>
+
 #import "MIDIController.h"
 #import "HotkeyTrigger.h"
 #import "HotkeyAction.h"
 #import "HotkeyActionRepeat.h"
 #import "HotkeyActionRetrigger.h"
 
-OSStatus myHotKeyHandler(EventHandlerCallRef nextHandler, EventRef anEvent, void *userData);
-OSStatus myHotKeyReleasedHandler(EventHandlerCallRef nextHandler, EventRef anEvent, void *userData);
 
 @interface AppController : NSObject {
+    
 	NSMutableArray *hotkeys;
+    // indexes to the hotkeys array by keyCombo (keyCode combined with modifier bit flags)
+    NSMutableDictionary *hotkeyIdexesByKeyCombo;
+    
+    // keep track of all currently pressed triggers
+    NSMutableSet<HotkeyTrigger*> *pressedTriggers;
+    
 	MIDIController *midiController;
+
+    
+    // event handler ref
+    id globalMonitor;
 	
 	BOOL hotkeysBound;
-	
-	BOOL alphaLockEnabled;
+
 }
-//- (void) sendMIDIMessage: (int) channel: (int) key: (int) value;//(unsigned char*) message;
-//- (void) processMIDIPacketList: (MIDIPacketList*)packetList sender:(id)sender;
 
 - (void) hotKeyPressed:(int) hotKeyId;
 - (void) hotKeyReleased:(int) hotKeyId;
-
-- (void) setAlphaLock: (BOOL) flag;
 
 - (void) checkFrontAppForHotkeys;
 - (void) awakeFromNib;

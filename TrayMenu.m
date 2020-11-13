@@ -11,27 +11,12 @@
 
 
 @implementation TrayMenu
-/* not possible with a Menubar item only
-- (void) init
-{
-	NSLog(@"init");
-}
-*/
 
 - (void) openWebsite:(id)sender {
-  NSURL *url = [NSURL URLWithString:@"http://stc.wiffbi.com/"];
+  NSURL *url = [NSURL URLWithString:@"https://github.com/matatata/Kimidi/blob/master/README.md"];
   [[NSWorkspace sharedWorkspace] openURL:url];
-  //[url release];
 }
-/*
-- (void) openFinder:(id)sender {
-  [[NSWorkspace sharedWorkspace] launchApplication:@"Finder"];
-}
-*/
 
-- (void) actionAbout:(id)sender {
-	[NSApp orderFrontStandardAboutPanel:sender];
-}
 
 - (void) actionQuit:(id)sender {
   [NSApp terminate:sender];
@@ -43,30 +28,11 @@
   NSMenu *menu = [[NSMenu allocWithZone:menuZone] init];
   NSMenuItem *menuItem;
 
-/*
-  // Add To Items
-  menuItem = [[NSMenuItem alloc] initWithTitle:@"transforms global hotkeys to MIDI \nmessages for Ableton Live track control"
-                      action:NULL
-                      keyEquivalent:@""];
-  [menuItem setEnabled:false];
-  [menu addItem:menuItem];
-*/  
-	// Add To Items
-	menuItem = [menu addItemWithTitle:@"About Kimidi"
-							   action:@selector(actionAbout:)
-						keyEquivalent:@""];
-	[menuItem setTarget:self];
-  // Add To Items
   menuItem = [menu addItemWithTitle:@"Visit Website"
                       action:@selector(openWebsite:)
                       keyEquivalent:@""];
   [menuItem setTarget:self];
-  /*
-  menuItem = [menu addItemWithTitle:@"Open Finder"
-                      action:@selector(openFinder:)
-                      keyEquivalent:@""];
-  [menuItem setTarget:self];
-  */
+
   // Add Separator
   [menu addItem:[NSMenuItem separatorItem]];
   
@@ -74,7 +40,7 @@
   menuItem = [menu addItemWithTitle:@"Quit Kimidi"
                       action:@selector(actionQuit:)
                       keyEquivalent:@""];
-  //[menuItem setToolTip:@"Quit"];
+    
   [menuItem setTarget:self];
 
   return menu;
@@ -93,8 +59,12 @@
 
   [menu release];
   
+    
   [[[AppController alloc] init] awakeFromNib];
+  
+  
 }
+
 
 
 @end

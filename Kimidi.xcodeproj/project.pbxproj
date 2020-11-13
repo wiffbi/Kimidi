@@ -3,95 +3,59 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 42;
+	objectVersion = 45;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		790414E41021916200F9761A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
-		790414E51021916200F9761A /* appicon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 7939A40B101F9F4400FEB7DA /* appicon.icns */; };
-		790414E61021916200F9761A /* menubar.png in Resources */ = {isa = PBXBuildFile; fileRef = 79694EE7102029A500EF3D24 /* menubar.png */; };
-		790414E71021916200F9761A /* menubar-hover.png in Resources */ = {isa = PBXBuildFile; fileRef = 79694F2210202DB100EF3D24 /* menubar-hover.png */; };
-		790414E81021917500F9761A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
-		790414E91021917500F9761A /* TrayMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BD94DD101F107F0057A858 /* TrayMenu.m */; };
-		790414F51021917500F9761A /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7939A475101FA0CF00FEB7DA /* AppController.m */; };
-		790415991021918500F9761A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7939A444101FA02D00FEB7DA /* Cocoa.framework */; };
-		7904159A1021918500F9761A /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7939A445101FA02D00FEB7DA /* CoreAudio.framework */; };
-		7904159B1021918500F9761A /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7939A446101FA02D00FEB7DA /* CoreMIDI.framework */; };
 		790416B910219AC500F9761A /* Credits.html in Resources */ = {isa = PBXBuildFile; fileRef = 790416B810219AC500F9761A /* Credits.html */; };
-		790416BA10219AC500F9761A /* Credits.html in Resources */ = {isa = PBXBuildFile; fileRef = 790416B810219AC500F9761A /* Credits.html */; };
-		791C2C56102ADD69009F650C /* MIDIActions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 791C2C55102ADD69009F650C /* MIDIActions.plist */; };
 		791C2C57102ADD69009F650C /* MIDIActions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 791C2C55102ADD69009F650C /* MIDIActions.plist */; };
-		792470E513A246D300A3F1CF /* MIDIPacketTimed.m in Sources */ = {isa = PBXBuildFile; fileRef = 792470E413A246D300A3F1CF /* MIDIPacketTimed.m */; };
 		792470E613A246D300A3F1CF /* MIDIPacketTimed.m in Sources */ = {isa = PBXBuildFile; fileRef = 792470E413A246D300A3F1CF /* MIDIPacketTimed.m */; };
 		7939A40C101F9F4400FEB7DA /* appicon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 7939A40B101F9F4400FEB7DA /* appicon.icns */; };
-		7939A447101FA02D00FEB7DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7939A444101FA02D00FEB7DA /* Cocoa.framework */; };
-		7939A448101FA02D00FEB7DA /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7939A445101FA02D00FEB7DA /* CoreAudio.framework */; };
-		7939A449101FA02D00FEB7DA /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7939A446101FA02D00FEB7DA /* CoreMIDI.framework */; };
 		7939A476101FA0CF00FEB7DA /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7939A475101FA0CF00FEB7DA /* AppController.m */; };
 		794F69E7104956130000CCA9 /* HotkeyActionRetrigger.m in Sources */ = {isa = PBXBuildFile; fileRef = 794F69E6104956130000CCA9 /* HotkeyActionRetrigger.m */; };
-		794F69E8104956130000CCA9 /* HotkeyActionRetrigger.m in Sources */ = {isa = PBXBuildFile; fileRef = 794F69E6104956130000CCA9 /* HotkeyActionRetrigger.m */; };
-		795E91F01311425C00C13113 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 795E91EF1311425C00C13113 /* Carbon.framework */; };
 		79694EE8102029A500EF3D24 /* menubar.png in Resources */ = {isa = PBXBuildFile; fileRef = 79694EE7102029A500EF3D24 /* menubar.png */; };
 		79694F2310202DB100EF3D24 /* menubar-hover.png in Resources */ = {isa = PBXBuildFile; fileRef = 79694F2210202DB100EF3D24 /* menubar-hover.png */; };
-		798B7BBD1429DD8800AD6694 /* MIDIController.m in Sources */ = {isa = PBXBuildFile; fileRef = 798B7BBC1429DD8800AD6694 /* MIDIController.m */; };
 		798B7BBE1429DD8800AD6694 /* MIDIController.m in Sources */ = {isa = PBXBuildFile; fileRef = 798B7BBC1429DD8800AD6694 /* MIDIController.m */; };
 		7996F44B132D7F960066FDBC /* HotkeyActionRepeat.m in Sources */ = {isa = PBXBuildFile; fileRef = 7996F44A132D7F960066FDBC /* HotkeyActionRepeat.m */; };
-		7996F44C132D7F960066FDBC /* HotkeyActionRepeat.m in Sources */ = {isa = PBXBuildFile; fileRef = 7996F44A132D7F960066FDBC /* HotkeyActionRepeat.m */; };
-		79AB7C101425FB1C00D6E4B2 /* HotkeyTrigger.m in Sources */ = {isa = PBXBuildFile; fileRef = 79AB7C0F1425FB1C00D6E4B2 /* HotkeyTrigger.m */; };
 		79AB7C111425FB1C00D6E4B2 /* HotkeyTrigger.m in Sources */ = {isa = PBXBuildFile; fileRef = 79AB7C0F1425FB1C00D6E4B2 /* HotkeyTrigger.m */; };
 		79BD94DE101F107F0057A858 /* TrayMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 79BD94DD101F107F0057A858 /* TrayMenu.m */; };
-		79C6364C14271DA60001F144 /* HotkeyAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 79C6364B14271DA60001F144 /* HotkeyAction.m */; };
 		79C6364D14271DA60001F144 /* HotkeyAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 79C6364B14271DA60001F144 /* HotkeyAction.m */; };
-		79C6D9D71423F8CC0096A5FA /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 795E91EF1311425C00C13113 /* Carbon.framework */; };
-		79CB634B1860F2F600ED8345 /* PYMIDIEndpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CB63361860F2F600ED8345 /* PYMIDIEndpoint.m */; };
-		79CB634C1860F2F600ED8345 /* PYMIDIEndpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CB63361860F2F600ED8345 /* PYMIDIEndpoint.m */; };
-		79CB634D1860F2F600ED8345 /* PYMIDIEndpointDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CB63381860F2F600ED8345 /* PYMIDIEndpointDescriptor.m */; };
-		79CB634E1860F2F600ED8345 /* PYMIDIEndpointDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CB63381860F2F600ED8345 /* PYMIDIEndpointDescriptor.m */; };
-		79CB634F1860F2F600ED8345 /* PYMIDIEndpointSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CB633A1860F2F600ED8345 /* PYMIDIEndpointSet.m */; };
-		79CB63501860F2F600ED8345 /* PYMIDIEndpointSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CB633A1860F2F600ED8345 /* PYMIDIEndpointSet.m */; };
-		79CB63511860F2F600ED8345 /* PYMIDIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CB633C1860F2F600ED8345 /* PYMIDIManager.m */; };
-		79CB63521860F2F600ED8345 /* PYMIDIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CB633C1860F2F600ED8345 /* PYMIDIManager.m */; };
-		79CB63531860F2F600ED8345 /* PYMIDIRealDestination.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CB633E1860F2F600ED8345 /* PYMIDIRealDestination.m */; };
-		79CB63541860F2F600ED8345 /* PYMIDIRealDestination.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CB633E1860F2F600ED8345 /* PYMIDIRealDestination.m */; };
-		79CB63551860F2F600ED8345 /* PYMIDIRealEndpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CB63401860F2F600ED8345 /* PYMIDIRealEndpoint.m */; };
-		79CB63561860F2F600ED8345 /* PYMIDIRealEndpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CB63401860F2F600ED8345 /* PYMIDIRealEndpoint.m */; };
-		79CB63571860F2F600ED8345 /* PYMIDIRealSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CB63421860F2F600ED8345 /* PYMIDIRealSource.m */; };
-		79CB63581860F2F600ED8345 /* PYMIDIRealSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CB63421860F2F600ED8345 /* PYMIDIRealSource.m */; };
-		79CB63591860F2F600ED8345 /* PYMIDIUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CB63441860F2F600ED8345 /* PYMIDIUtils.m */; };
-		79CB635A1860F2F600ED8345 /* PYMIDIUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CB63441860F2F600ED8345 /* PYMIDIUtils.m */; };
-		79CB635B1860F2F600ED8345 /* PYMIDIVirtualDestination.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CB63461860F2F600ED8345 /* PYMIDIVirtualDestination.m */; };
-		79CB635C1860F2F600ED8345 /* PYMIDIVirtualDestination.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CB63461860F2F600ED8345 /* PYMIDIVirtualDestination.m */; };
-		79CB635D1860F2F600ED8345 /* PYMIDIVirtualEndpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CB63481860F2F600ED8345 /* PYMIDIVirtualEndpoint.m */; };
-		79CB635E1860F2F600ED8345 /* PYMIDIVirtualEndpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CB63481860F2F600ED8345 /* PYMIDIVirtualEndpoint.m */; };
-		79CB635F1860F2F600ED8345 /* PYMIDIVirtualSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CB634A1860F2F600ED8345 /* PYMIDIVirtualSource.m */; };
-		79CB63601860F2F600ED8345 /* PYMIDIVirtualSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 79CB634A1860F2F600ED8345 /* PYMIDIVirtualSource.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
+		955162412377524F00D667D4 /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 955162402377524F00D667D4 /* CoreMIDI.framework */; };
+		955162452377528900D667D4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 955162442377528900D667D4 /* Cocoa.framework */; };
+		955162472377539000D667D4 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 955162462377539000D667D4 /* CoreAudio.framework */; };
+		956B895323776D8A00223989 /* PYMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 956B895223776D8A00223989 /* PYMIDI.framework */; };
+		956B895423776D8A00223989 /* PYMIDI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 956B895223776D8A00223989 /* PYMIDI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		956B894D237768B300223989 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				956B895423776D8A00223989 /* PYMIDI.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
-		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
-		32CA4F630368D1EE00C91783 /* Kimidi_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Kimidi_Prefix.pch; sourceTree = "<group>"; };
-		790414981021906D00F9761A /* Selected Track Control.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Selected Track Control.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		7904149A1021906D00F9761A /* SelectedTrackControl-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SelectedTrackControl-Info.plist"; sourceTree = "<group>"; };
 		790416B810219AC500F9761A /* Credits.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Credits.html; sourceTree = "<group>"; };
 		791C2C55102ADD69009F650C /* MIDIActions.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.xml; path = MIDIActions.plist; sourceTree = "<group>"; };
 		792470E313A246D300A3F1CF /* MIDIPacketTimed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIDIPacketTimed.h; sourceTree = "<group>"; };
 		792470E413A246D300A3F1CF /* MIDIPacketTimed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIDIPacketTimed.m; sourceTree = "<group>"; };
 		7939A40B101F9F4400FEB7DA /* appicon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = appicon.icns; sourceTree = "<group>"; };
-		7939A444101FA02D00FEB7DA /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = SDKs/MacOSX10.4u.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = SYSTEM_DEVELOPER_DIR; };
-		7939A445101FA02D00FEB7DA /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = SDKs/MacOSX10.4u.sdk/System/Library/Frameworks/CoreAudio.framework; sourceTree = SYSTEM_DEVELOPER_DIR; };
-		7939A446101FA02D00FEB7DA /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = SDKs/MacOSX10.4u.sdk/System/Library/Frameworks/CoreMIDI.framework; sourceTree = SYSTEM_DEVELOPER_DIR; };
 		7939A474101FA0CF00FEB7DA /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
 		7939A475101FA0CF00FEB7DA /* AppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppController.m; sourceTree = "<group>"; };
 		794F69E5104956130000CCA9 /* HotkeyActionRetrigger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotkeyActionRetrigger.h; sourceTree = "<group>"; };
 		794F69E6104956130000CCA9 /* HotkeyActionRetrigger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotkeyActionRetrigger.m; sourceTree = "<group>"; };
 		795E91C91311400D00C13113 /* Kimidi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kimidi.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		795E91EF1311425C00C13113 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		79694EE7102029A500EF3D24 /* menubar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menubar.png; sourceTree = "<group>"; };
 		79694F2210202DB100EF3D24 /* menubar-hover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menubar-hover.png"; sourceTree = "<group>"; };
 		798B7BBB1429DD8800AD6694 /* MIDIController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIDIController.h; sourceTree = "<group>"; };
@@ -104,52 +68,25 @@
 		79BD94DD101F107F0057A858 /* TrayMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrayMenu.m; sourceTree = "<group>"; };
 		79C6364A14271DA60001F144 /* HotkeyAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotkeyAction.h; sourceTree = "<group>"; };
 		79C6364B14271DA60001F144 /* HotkeyAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotkeyAction.m; sourceTree = "<group>"; };
-		79CB63341860F2F600ED8345 /* PYMIDI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PYMIDI.h; path = externals/pymidi/Source/PYMIDI.h; sourceTree = "<group>"; };
-		79CB63351860F2F600ED8345 /* PYMIDIEndpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PYMIDIEndpoint.h; path = externals/pymidi/Source/PYMIDIEndpoint.h; sourceTree = "<group>"; };
-		79CB63361860F2F600ED8345 /* PYMIDIEndpoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PYMIDIEndpoint.m; path = externals/pymidi/Source/PYMIDIEndpoint.m; sourceTree = "<group>"; };
-		79CB63371860F2F600ED8345 /* PYMIDIEndpointDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PYMIDIEndpointDescriptor.h; path = externals/pymidi/Source/PYMIDIEndpointDescriptor.h; sourceTree = "<group>"; };
-		79CB63381860F2F600ED8345 /* PYMIDIEndpointDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PYMIDIEndpointDescriptor.m; path = externals/pymidi/Source/PYMIDIEndpointDescriptor.m; sourceTree = "<group>"; };
-		79CB63391860F2F600ED8345 /* PYMIDIEndpointSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PYMIDIEndpointSet.h; path = externals/pymidi/Source/PYMIDIEndpointSet.h; sourceTree = "<group>"; };
-		79CB633A1860F2F600ED8345 /* PYMIDIEndpointSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PYMIDIEndpointSet.m; path = externals/pymidi/Source/PYMIDIEndpointSet.m; sourceTree = "<group>"; };
-		79CB633B1860F2F600ED8345 /* PYMIDIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PYMIDIManager.h; path = externals/pymidi/Source/PYMIDIManager.h; sourceTree = "<group>"; };
-		79CB633C1860F2F600ED8345 /* PYMIDIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PYMIDIManager.m; path = externals/pymidi/Source/PYMIDIManager.m; sourceTree = "<group>"; };
-		79CB633D1860F2F600ED8345 /* PYMIDIRealDestination.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PYMIDIRealDestination.h; path = externals/pymidi/Source/PYMIDIRealDestination.h; sourceTree = "<group>"; };
-		79CB633E1860F2F600ED8345 /* PYMIDIRealDestination.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PYMIDIRealDestination.m; path = externals/pymidi/Source/PYMIDIRealDestination.m; sourceTree = "<group>"; };
-		79CB633F1860F2F600ED8345 /* PYMIDIRealEndpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PYMIDIRealEndpoint.h; path = externals/pymidi/Source/PYMIDIRealEndpoint.h; sourceTree = "<group>"; };
-		79CB63401860F2F600ED8345 /* PYMIDIRealEndpoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PYMIDIRealEndpoint.m; path = externals/pymidi/Source/PYMIDIRealEndpoint.m; sourceTree = "<group>"; };
-		79CB63411860F2F600ED8345 /* PYMIDIRealSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PYMIDIRealSource.h; path = externals/pymidi/Source/PYMIDIRealSource.h; sourceTree = "<group>"; };
-		79CB63421860F2F600ED8345 /* PYMIDIRealSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PYMIDIRealSource.m; path = externals/pymidi/Source/PYMIDIRealSource.m; sourceTree = "<group>"; };
-		79CB63431860F2F600ED8345 /* PYMIDIUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PYMIDIUtils.h; path = externals/pymidi/Source/PYMIDIUtils.h; sourceTree = "<group>"; };
-		79CB63441860F2F600ED8345 /* PYMIDIUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PYMIDIUtils.m; path = externals/pymidi/Source/PYMIDIUtils.m; sourceTree = "<group>"; };
-		79CB63451860F2F600ED8345 /* PYMIDIVirtualDestination.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PYMIDIVirtualDestination.h; path = externals/pymidi/Source/PYMIDIVirtualDestination.h; sourceTree = "<group>"; };
-		79CB63461860F2F600ED8345 /* PYMIDIVirtualDestination.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PYMIDIVirtualDestination.m; path = externals/pymidi/Source/PYMIDIVirtualDestination.m; sourceTree = "<group>"; };
-		79CB63471860F2F600ED8345 /* PYMIDIVirtualEndpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PYMIDIVirtualEndpoint.h; path = externals/pymidi/Source/PYMIDIVirtualEndpoint.h; sourceTree = "<group>"; };
-		79CB63481860F2F600ED8345 /* PYMIDIVirtualEndpoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PYMIDIVirtualEndpoint.m; path = externals/pymidi/Source/PYMIDIVirtualEndpoint.m; sourceTree = "<group>"; };
-		79CB63491860F2F600ED8345 /* PYMIDIVirtualSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PYMIDIVirtualSource.h; path = externals/pymidi/Source/PYMIDIVirtualSource.h; sourceTree = "<group>"; };
-		79CB634A1860F2F600ED8345 /* PYMIDIVirtualSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PYMIDIVirtualSource.m; path = externals/pymidi/Source/PYMIDIVirtualSource.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		9551623923773D9100D667D4 /* Kimidi_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Kimidi_Prefix.pch; sourceTree = "<group>"; };
+		955162402377524F00D667D4 /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/CoreMIDI.framework; sourceTree = DEVELOPER_DIR; };
+		955162422377527000D667D4 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = ../../../../../System/Library/Frameworks/AppKit.framework; sourceTree = "<group>"; };
+		955162432377527000D667D4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = ../../../../../System/Library/Frameworks/Foundation.framework; sourceTree = "<group>"; };
+		955162442377528900D667D4 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
+		955162462377539000D667D4 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		956B895223776D8A00223989 /* PYMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PYMIDI.framework; path = externals/pymidi/build/Release/PYMIDI.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		790414961021906D00F9761A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				790415991021918500F9761A /* Cocoa.framework in Frameworks */,
-				7904159A1021918500F9761A /* CoreAudio.framework in Frameworks */,
-				7904159B1021918500F9761A /* CoreMIDI.framework in Frameworks */,
-				795E91F01311425C00C13113 /* Carbon.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		8D11072E0486CEB800E47090 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				79C6D9D71423F8CC0096A5FA /* Carbon.framework in Frameworks */,
-				7939A447101FA02D00FEB7DA /* Cocoa.framework in Frameworks */,
-				7939A448101FA02D00FEB7DA /* CoreAudio.framework in Frameworks */,
-				7939A449101FA02D00FEB7DA /* CoreMIDI.framework in Frameworks */,
+				956B895323776D8A00223989 /* PYMIDI.framework in Frameworks */,
+				955162472377539000D667D4 /* CoreAudio.framework in Frameworks */,
+				955162452377528900D667D4 /* Cocoa.framework in Frameworks */,
+				955162412377524F00D667D4 /* CoreMIDI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,31 +116,9 @@
 			name = Classes;
 			sourceTree = "<group>";
 		};
-		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				7939A444101FA02D00FEB7DA /* Cocoa.framework */,
-				7939A445101FA02D00FEB7DA /* CoreAudio.framework */,
-				7939A446101FA02D00FEB7DA /* CoreMIDI.framework */,
-				795E91EF1311425C00C13113 /* Carbon.framework */,
-			);
-			name = "Linked Frameworks";
-			sourceTree = "<group>";
-		};
-		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
-				13E42FB307B3F0F600E4EEF1 /* CoreData.framework */,
-				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
-			);
-			name = "Other Frameworks";
-			sourceTree = "<group>";
-		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				790414981021906D00F9761A /* Selected Track Control.app */,
 				795E91C91311400D00C13113 /* Kimidi.app */,
 			);
 			name = Products;
@@ -212,13 +127,11 @@
 		29B97314FDCFA39411CA2CEA /* Kimidi */ = {
 			isa = PBXGroup;
 			children = (
-				79CB63331860F2D900ED8345 /* PYMIDI */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
-				7904149A1021906D00F9761A /* SelectedTrackControl-Info.plist */,
 			);
 			name = Kimidi;
 			sourceTree = "<group>";
@@ -226,8 +139,8 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
-				32CA4F630368D1EE00C91783 /* Kimidi_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
+				9551623923773D9100D667D4 /* Kimidi_Prefix.pch */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -249,62 +162,19 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
-				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
+				956B895223776D8A00223989 /* PYMIDI.framework */,
+				955162462377539000D667D4 /* CoreAudio.framework */,
+				955162442377528900D667D4 /* Cocoa.framework */,
+				955162422377527000D667D4 /* AppKit.framework */,
+				955162432377527000D667D4 /* Foundation.framework */,
+				955162402377524F00D667D4 /* CoreMIDI.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		79CB63331860F2D900ED8345 /* PYMIDI */ = {
-			isa = PBXGroup;
-			children = (
-				79CB63341860F2F600ED8345 /* PYMIDI.h */,
-				79CB63351860F2F600ED8345 /* PYMIDIEndpoint.h */,
-				79CB63361860F2F600ED8345 /* PYMIDIEndpoint.m */,
-				79CB63371860F2F600ED8345 /* PYMIDIEndpointDescriptor.h */,
-				79CB63381860F2F600ED8345 /* PYMIDIEndpointDescriptor.m */,
-				79CB63391860F2F600ED8345 /* PYMIDIEndpointSet.h */,
-				79CB633A1860F2F600ED8345 /* PYMIDIEndpointSet.m */,
-				79CB633B1860F2F600ED8345 /* PYMIDIManager.h */,
-				79CB633C1860F2F600ED8345 /* PYMIDIManager.m */,
-				79CB633D1860F2F600ED8345 /* PYMIDIRealDestination.h */,
-				79CB633E1860F2F600ED8345 /* PYMIDIRealDestination.m */,
-				79CB633F1860F2F600ED8345 /* PYMIDIRealEndpoint.h */,
-				79CB63401860F2F600ED8345 /* PYMIDIRealEndpoint.m */,
-				79CB63411860F2F600ED8345 /* PYMIDIRealSource.h */,
-				79CB63421860F2F600ED8345 /* PYMIDIRealSource.m */,
-				79CB63431860F2F600ED8345 /* PYMIDIUtils.h */,
-				79CB63441860F2F600ED8345 /* PYMIDIUtils.m */,
-				79CB63451860F2F600ED8345 /* PYMIDIVirtualDestination.h */,
-				79CB63461860F2F600ED8345 /* PYMIDIVirtualDestination.m */,
-				79CB63471860F2F600ED8345 /* PYMIDIVirtualEndpoint.h */,
-				79CB63481860F2F600ED8345 /* PYMIDIVirtualEndpoint.m */,
-				79CB63491860F2F600ED8345 /* PYMIDIVirtualSource.h */,
-				79CB634A1860F2F600ED8345 /* PYMIDIVirtualSource.m */,
-			);
-			name = PYMIDI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		790414971021906D00F9761A /* Selected Track Control */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 7904149B1021906E00F9761A /* Build configuration list for PBXNativeTarget "Selected Track Control" */;
-			buildPhases = (
-				790414941021906D00F9761A /* Resources */,
-				790414951021906D00F9761A /* Sources */,
-				790414961021906D00F9761A /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Selected Track Control";
-			productName = SelectedTrackControl;
-			productReference = 790414981021906D00F9761A /* Selected Track Control.app */;
-			productType = "com.apple.product-type.application";
-		};
 		8D1107260486CEB800E47090 /* Kimidi */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "Kimidi" */;
@@ -312,6 +182,7 @@
 				8D1107290486CEB800E47090 /* Resources */,
 				8D11072C0486CEB800E47090 /* Sources */,
 				8D11072E0486CEB800E47090 /* Frameworks */,
+				956B894D237768B300223989 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -329,6 +200,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 1110;
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Kimidi" */;
 			compatibilityVersion = "Xcode 2.4";
@@ -345,25 +217,11 @@
 			projectRoot = "";
 			targets = (
 				8D1107260486CEB800E47090 /* Kimidi */,
-				790414971021906D00F9761A /* Selected Track Control */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		790414941021906D00F9761A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				790414E41021916200F9761A /* InfoPlist.strings in Resources */,
-				790414E51021916200F9761A /* appicon.icns in Resources */,
-				790414E61021916200F9761A /* menubar.png in Resources */,
-				790414E71021916200F9761A /* menubar-hover.png in Resources */,
-				790416BA10219AC500F9761A /* Credits.html in Resources */,
-				791C2C56102ADD69009F650C /* MIDIActions.plist in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		8D1107290486CEB800E47090 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -380,57 +238,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		790414951021906D00F9761A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				79CB63601860F2F600ED8345 /* PYMIDIVirtualSource.m in Sources */,
-				79CB63521860F2F600ED8345 /* PYMIDIManager.m in Sources */,
-				790414E81021917500F9761A /* main.m in Sources */,
-				79CB63541860F2F600ED8345 /* PYMIDIRealDestination.m in Sources */,
-				79CB63561860F2F600ED8345 /* PYMIDIRealEndpoint.m in Sources */,
-				790414E91021917500F9761A /* TrayMenu.m in Sources */,
-				790414F51021917500F9761A /* AppController.m in Sources */,
-				79CB635E1860F2F600ED8345 /* PYMIDIVirtualEndpoint.m in Sources */,
-				79CB634E1860F2F600ED8345 /* PYMIDIEndpointDescriptor.m in Sources */,
-				794F69E8104956130000CCA9 /* HotkeyActionRetrigger.m in Sources */,
-				7996F44C132D7F960066FDBC /* HotkeyActionRepeat.m in Sources */,
-				792470E513A246D300A3F1CF /* MIDIPacketTimed.m in Sources */,
-				79CB635C1860F2F600ED8345 /* PYMIDIVirtualDestination.m in Sources */,
-				79AB7C101425FB1C00D6E4B2 /* HotkeyTrigger.m in Sources */,
-				79C6364C14271DA60001F144 /* HotkeyAction.m in Sources */,
-				79CB634C1860F2F600ED8345 /* PYMIDIEndpoint.m in Sources */,
-				79CB635A1860F2F600ED8345 /* PYMIDIUtils.m in Sources */,
-				798B7BBD1429DD8800AD6694 /* MIDIController.m in Sources */,
-				79CB63581860F2F600ED8345 /* PYMIDIRealSource.m in Sources */,
-				79CB63501860F2F600ED8345 /* PYMIDIEndpointSet.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		8D11072C0486CEB800E47090 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				79CB635F1860F2F600ED8345 /* PYMIDIVirtualSource.m in Sources */,
-				79CB63511860F2F600ED8345 /* PYMIDIManager.m in Sources */,
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
-				79CB63531860F2F600ED8345 /* PYMIDIRealDestination.m in Sources */,
-				79CB63551860F2F600ED8345 /* PYMIDIRealEndpoint.m in Sources */,
 				79BD94DE101F107F0057A858 /* TrayMenu.m in Sources */,
 				7939A476101FA0CF00FEB7DA /* AppController.m in Sources */,
-				79CB635D1860F2F600ED8345 /* PYMIDIVirtualEndpoint.m in Sources */,
-				79CB634D1860F2F600ED8345 /* PYMIDIEndpointDescriptor.m in Sources */,
 				794F69E7104956130000CCA9 /* HotkeyActionRetrigger.m in Sources */,
 				7996F44B132D7F960066FDBC /* HotkeyActionRepeat.m in Sources */,
 				792470E613A246D300A3F1CF /* MIDIPacketTimed.m in Sources */,
-				79CB635B1860F2F600ED8345 /* PYMIDIVirtualDestination.m in Sources */,
 				79AB7C111425FB1C00D6E4B2 /* HotkeyTrigger.m in Sources */,
 				79C6364D14271DA60001F144 /* HotkeyAction.m in Sources */,
-				79CB634B1860F2F600ED8345 /* PYMIDIEndpoint.m in Sources */,
-				79CB63591860F2F600ED8345 /* PYMIDIUtils.m in Sources */,
 				798B7BBE1429DD8800AD6694 /* MIDIController.m in Sources */,
-				79CB63571860F2F600ED8345 /* PYMIDIRealSource.m in Sources */,
-				79CB634F1860F2F600ED8345 /* PYMIDIEndpointSet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,117 +268,55 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		7904149C1021906E00F9761A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
-					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_2)",
-				);
-				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(DEVELOPER_DIR)/SDKs/MacOSX10.4u.sdk/System/Library/Frameworks\"";
-				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(DEVELOPER_DIR)/SDKs/MacOSX10.4u.sdk/System/Library/Frameworks\"";
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_MODEL_TUNING = G5;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
-				GCC_VERSION = 4.0;
-				INFOPLIST_FILE = "SelectedTrackControl-Info.plist";
-				INSTALL_PATH = "$(HOME)/Applications";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
-				PREBINDING = NO;
-				PRODUCT_NAME = "Selected Track Control";
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
-				WRAPPER_EXTENSION = app;
-				ZERO_LINK = YES;
-			};
-			name = Debug;
-		};
-		7904149D1021906E00F9761A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				COPY_PHASE_STRIP = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
-					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_2)",
-				);
-				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(DEVELOPER_DIR)/SDKs/MacOSX10.4u.sdk/System/Library/Frameworks\"";
-				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(DEVELOPER_DIR)/SDKs/MacOSX10.4u.sdk/System/Library/Frameworks\"";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_MODEL_TUNING = G5;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
-				GCC_VERSION = 4.0;
-				INFOPLIST_FILE = "SelectedTrackControl-Info.plist";
-				INSTALL_PATH = "$(HOME)/Applications";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
-				PREBINDING = NO;
-				PRODUCT_NAME = "Selected Track Control";
-				WRAPPER_EXTENSION = app;
-				ZERO_LINK = NO;
-			};
-			name = Release;
-		};
 		C01FCF4B08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
-					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_2)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/externals/pymidi/build/Release",
 				);
-				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(DEVELOPER_DIR)/SDKs/MacOSX10.4u.sdk/System/Library/Frameworks\"";
-				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(DEVELOPER_DIR)/SDKs/MacOSX10.4u.sdk/System/Library/Frameworks\"";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_VERSION = "";
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = "";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MARKETING_VERSION = 1.3;
+				OTHER_LDFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.wiffbi.Kimidi;
 				PRODUCT_NAME = Kimidi;
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
-				ZERO_LINK = YES;
 			};
 			name = Debug;
 		};
 		C01FCF4C08A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
+				CODE_SIGN_IDENTITY = "";
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
-					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_2)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/externals/pymidi/build/Release",
 				);
-				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(DEVELOPER_DIR)/SDKs/MacOSX10.4u.sdk/System/Library/Frameworks\"";
-				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(DEVELOPER_DIR)/SDKs/MacOSX10.4u.sdk/System/Library/Frameworks\"";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_MODEL_TUNING = G5;
-				GCC_VERSION = 4.0;
+				GCC_VERSION = "";
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = "";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MARKETING_VERSION = 1.3;
+				OTHER_LDFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.wiffbi.Kimidi;
 				PRODUCT_NAME = Kimidi;
+				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -566,38 +324,40 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_VERSION = 4.0;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CODE_SIGN_STYLE = Automatic;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Kimidi_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
+				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				PREBINDING = NO;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
-				USER_HEADER_SEARCH_PATHS = .;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wiffbi.Kimidi;
+				SDKROOT = macosx;
+				VALID_ARCHS = x86_64;
 			};
 			name = Debug;
 		};
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CODE_SIGN_STYLE = Automatic;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Kimidi_Prefix.pch;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				PREBINDING = NO;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
-				USER_HEADER_SEARCH_PATHS = .;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wiffbi.Kimidi;
+				SDKROOT = macosx;
+				VALID_ARCHS = x86_64;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7904149B1021906E00F9761A /* Build configuration list for PBXNativeTarget "Selected Track Control" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				7904149C1021906E00F9761A /* Debug */,
-				7904149D1021906E00F9761A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "Kimidi" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

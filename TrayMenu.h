@@ -7,9 +7,9 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import <Carbon/Carbon.h>
 
-@interface TrayMenu : NSObject {
+
+@interface TrayMenu : NSObject <NSApplicationDelegate> {
     @private
         NSStatusItem *_statusItem;
 }

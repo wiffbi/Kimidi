@@ -4,75 +4,8 @@
 //
 
 #import "AppController.h"
-//#import <Carbon/Carbon.h>
-//#import <CoreServices/CoreServices.h>
-
-//#import <CoreAudio/HostTime.h>
-//#import <PYMIDI/PYMIDI.h>
 
 
-// How to monitor modifier key-state globally
-// http://stackoverflow.com/questions/1603030/how-to-monitor-global-modifier-key-state-in-any-application
-CGEventRef keyUpCallback (CGEventTapProxy proxy, CGEventType type, CGEventRef event, void* refcon)
-{
-	AppController *app = (AppController *)refcon;
-	if (type == kCGEventFlagsChanged)
-	{
-		CGEventFlags newFlags = CGEventGetFlags(event);
-		//NSLog(@"%d", newFlags);
-		//NSLog(@"flags: 0x%llX",newFlags & kCGEventFlagMaskAlphaShift);
-		// setAlphLock on app
-		[app setAlphaLock: ((newFlags & kCGEventFlagMaskAlphaShift) == kCGEventFlagMaskAlphaShift)];
-	}
-	// just monitor the keystroke, always return the event
-    return event;
-}
-
-
-OSStatus myHotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent, void *userData)
-{
-	
-	//NSLog(@"modifier flags: 0x%x", [[NSApp currentEvent] modifierFlags]);
-	
-	
-	OSStatus theError;
-	EventHotKeyID hkCom;
-	
-	//UInt32 modifierFlags = GetCurrentKeyModifiers();
-	//NSUInteger modifierFlags = [theEvent modifierFlags];
-	//NSLog(@"%d", modifierFlags);
-	
-	//NSLog(@"%d", [[NSApp currentEvent] modifierFlags]);
-	/*
-	if (NSAlphaShiftKeyMask & [[NSApp currentEvent] modifierFlags]) {
-		NSLog(@"CAPS LOCK");
-	}
-	*/
-	
-	
-	theError = GetEventParameter(theEvent,kEventParamDirectObject,typeEventHotKeyID,NULL,sizeof(hkCom),NULL,&hkCom);
-	
-	if( theError == noErr && GetEventClass(theEvent) == kEventClassKeyboard)
-	{
-		[(id)userData hotKeyPressed:hkCom.id];
-	}
-	
-	return theError;
-}
-
-OSStatus myHotKeyReleasedHandler(EventHandlerCallRef nextHandler, EventRef theEvent, void *userData)
-{
-	EventHotKeyID hkCom;
-	GetEventParameter(theEvent,kEventParamDirectObject,typeEventHotKeyID,NULL,sizeof(hkCom),NULL,&hkCom);
-	[(id)userData hotKeyReleased:hkCom.id];
-	return noErr;
-}
-
-static OSStatus AppFrontSwitchedHandler(EventHandlerCallRef inHandlerCallRef, EventRef inEvent, void *inUserData)
-{
-    [(id)inUserData checkFrontAppForHotkeys];
-    return 0;
-}
 
 
 @implementation AppController
@@ -80,80 +13,111 @@ static OSStatus AppFrontSwitchedHandler(EventHandlerCallRef inHandlerCallRef, Ev
 {
 	hotkeysBound = NO;
 	
-	// create hotkeys-dictionary to hold all the hotkeys by keycombo
-	// each dict-entry is a NSMutableArray as a keycombo can be assigned to 
-	// multiple hotkeys - ie. one with CAPS-Lock enabled and one without
 	hotkeys = [[NSMutableArray alloc] init];
-	//hotkeys = [[NSMutableDictionary alloc] init];
-	
+    hotkeyIdexesByKeyCombo = [[NSMutableDictionary alloc] init];
+	pressedTriggers = [[NSMutableSet alloc] init];
 	midiController = [[MIDIController alloc] init];
 	
     return self;
 }
 
+
+- (void) dealloc
+{
+    [hotkeys release];
+    [hotkeyIdexesByKeyCombo release];
+    [pressedTriggers release];
+    [midiController release];
+    [super dealloc];
+}
+
 - (void) hotKeyPressed:(int) hotKeyId
 {
-	/*
-	if (NSAlphaShiftKeyMask & [[NSApp currentEvent] modifierFlags]) {
-		// Hotkeys aus den hotkeysCapsLock auslesen
-		NSLog(@"CAPS LOCK");
-	}
-	NSLog(@"Hotkey pressed: %d", hotKeyId);
-	HotKey *hotkey = (HotKey *)[hotkeys objectAtIndex:hotKeyId];
-	NSLog(@"Hotkey: %@", hotkey);
-	[hotkey pressed];
-	*/
-	[(HotkeyTrigger *)[hotkeys objectAtIndex:hotKeyId] pressed];
+    HotkeyTrigger* trigger = (HotkeyTrigger *) [hotkeys objectAtIndex:hotKeyId];
+	[trigger pressed];
+    
+    [pressedTriggers addObject:trigger];
 }
 - (void) hotKeyReleased:(int) hotKeyId
 {
-	//NSLog(@"Hotkey released: %d", hotKeyId);
-	[(HotkeyTrigger *)[hotkeys objectAtIndex:hotKeyId] released];
+    HotkeyTrigger* trigger = (HotkeyTrigger *) [hotkeys objectAtIndex:hotKeyId];
+	[trigger released];
+    [pressedTriggers removeObject:trigger];
 }
 
 
+- (void) activateTriggers {
+    int i = [hotkeys count];
+    while ( i-- ) {
+        HotkeyTrigger *hotkeyTrigger = (HotkeyTrigger *)[hotkeys objectAtIndex:i];
+        [hotkeyTrigger activate];
+    }
+}
 
+- (void) deactivateTriggers {
+    
+    [pressedTriggers makeObjectsPerformSelector:@selector(released)];
+    [pressedTriggers removeAllObjects];
+    
+    
+    int i = [hotkeys count];
+    while ( i-- ) {
+        HotkeyTrigger *hotkeyTrigger = (HotkeyTrigger *)[hotkeys objectAtIndex:i];
+        [hotkeyTrigger deactivate];
+    }
+}
 
 - (void) bindHotkeys {
-	//NSLog(@"bind hotkeys");
-	int i = [hotkeys count];
-	while ( i-- ) {
-		HotkeyTrigger *hotkeyTrigger = (HotkeyTrigger *)[hotkeys objectAtIndex:i];
-		/*
-		if ([hotkeyTrigger hasAlphaLock] == alphaLockEnabled) {
-			[hotkeyTrigger activate];
-		}
-		*/
-		if (!alphaLockEnabled && [hotkeyTrigger hasAlphaLock]) {
-			continue;
-		}
-		[hotkeyTrigger activate];
-		
-	}
-	/*
-	NSEnumerator *enumerator = [hotkeys keyEnumerator];
-	id key;
-	
-	while ((key = [enumerator nextObject])) {
-		NSMutableArray *hotkeysDict = [hotkeys objectForKey:key];
-		// only bind first hotkey for that keycombo
-		[[hotkeysDict objectAtIndex:0] activate];
-	}
-	*/
+    
+    [self testAccessibilityWithPrompt:YES];
+    
+    [self activateTriggers];
+    
+    NSLog(@"bind hotkeys");
+	void (^block)(NSEvent*) = ^(NSEvent *event) {
+        NSString *comboId = [self hotKeyComboId:event.keyCode flags:event.modifierFlags];
+        NSNumber *hotkeyindex = [hotkeyIdexesByKeyCombo valueForKey:comboId];
+        
+        if(event.type == NSEventTypeKeyUp) {
+            NSLog(@"keyup: %i", event.keyCode);
+            if(hotkeyindex!=nil)
+                [self hotKeyReleased: [hotkeyindex intValue]];
+            [self releaseAllPressedTriggersWithKeyCode: event.keyCode];
+        }
+        else if(event.type == NSEventTypeKeyDown && ! event.ARepeat) {
+            if(hotkeyindex != nil) {
+                NSLog(@"keydown: %i", event.keyCode);
+                [self hotKeyPressed: [hotkeyindex intValue]];
+            }
+        }
+    };
+    
+    globalMonitor = [NSEvent addGlobalMonitorForEventsMatchingMask:(NSKeyUpMask|NSKeyDownMask)
+                                           handler:block];
+    
 	hotkeysBound = YES;
 }
+
+-(void) releaseAllPressedTriggersWithKeyCode:(int) keyCode {
+      id tmp = pressedTriggers;
+      pressedTriggers = [[pressedTriggers objectsPassingTest:
+                          ^BOOL (HotkeyTrigger* t,BOOL* stop){
+          if([t keyCode] == keyCode){
+              NSLog(@"also released %@",t);
+              [t released];
+              return YES; // remove trigger
+          }
+          return YES; // keep others
+      }] mutableCopy];
+      [tmp release];
+}
+
 - (void) unbindHotkeys: (BOOL) all {
-	//NSLog(@"unbind hotkeys");
+    NSLog(@"unbind hotkeys");
+     
+    [self deactivateTriggers];
 	
-	int i = [hotkeys count];
-	while ( i-- ) {
-		//[(HotkeyTrigger *)[hotkeys objectAtIndex:i] deactivate];
-		HotkeyTrigger *hotkeyTrigger = (HotkeyTrigger *)[hotkeys objectAtIndex:i];
-		//if (all || [hotkeyTrigger hasAlphaLock] != alphaLockEnabled) {
-		if (all || ([hotkeyTrigger hasAlphaLock] && !alphaLockEnabled)) {
-			[hotkeyTrigger deactivate];
-		}
-	}
+    [NSEvent removeMonitor:globalMonitor];
 	hotkeysBound = NO;
 }
 
@@ -162,30 +126,12 @@ static OSStatus AppFrontSwitchedHandler(EventHandlerCallRef inHandlerCallRef, Ev
 	
 	NSDictionary *activeApp = [[NSWorkspace sharedWorkspace] activeApplication];
 	NSString *activeAppName = (NSString *)[activeApp objectForKey:@"NSApplicationName"];
-	//NSLog(@"The active app is %@", activeAppName);
+	NSLog(@"The active app is %@", activeAppName);
 	
 	// TODO: optional add NSArray for multiple apps other than Live to have hotkeys enabled
 	return [activeAppName isEqualToString: @"Live"];
 }
 
-
-
-
-
-
-- (void) setAlphaLock: (BOOL) flag {
-	if (alphaLockEnabled == flag) {
-		// alphaLock is already set to flag, so no action required
-		return;
-	}
-	alphaLockEnabled = flag;
-	//NSLog(@"alphaLock has changed => rebind keyboard-shortcuts");
-	
-	if ([self shouldHaveHotkeys]) {
-		[self unbindHotkeys:FALSE];
-		[self bindHotkeys];
-	}
-}
 
 
 
@@ -201,58 +147,15 @@ static OSStatus AppFrontSwitchedHandler(EventHandlerCallRef inHandlerCallRef, Ev
 	}
 }
 
+- (void) frontAppSwitched: (NSNotification*) notification {
+    [self checkFrontAppForHotkeys];
+}
+
 - (void) awakeFromNib
 {
 	// event-handler for front app switched
-	EventTypeSpec spec = { kEventClassApplication,  kEventAppFrontSwitched };
-    InstallApplicationEventHandler(NewEventHandlerUPP(AppFrontSwitchedHandler), 1, &spec, (void*)self, NULL);
-	
-	
-	// event-handlers for KeyPressed and KeyReleased
-	EventTypeSpec eventType;
-	eventType.eventClass=kEventClassKeyboard;
-	
-	// eventType for KeyPressed
-	eventType.eventKind=kEventHotKeyPressed;
-	InstallApplicationEventHandler(&myHotKeyHandler,1,&eventType,(void *)self,NULL);
-	// eventType for KeyReleased
-	eventType.eventKind=kEventHotKeyReleased;
-	InstallApplicationEventHandler(&myHotKeyReleasedHandler,1,&eventType,(void *)self,NULL);
-	
-	//EventTypeSpec keyboardHandlerEvents = { kEventClassKeyboard, kEventRawKeyModifiersChanged /*kEventRawKeyDown*/ };
-	//eventType.eventClass=kEventRawKeyUp;
-	//eventType.eventKind=kEventRawKeyDown;
-	//InstallApplicationEventHandler(NewEventHandlerUPP(myHotKeyRawHandler),1,&keyboardHandlerEvents,(void *)self,NULL);
-	//InstallEventHandler(GetEventMonitorTarget(), NewEventHandlerUPP(myHotKeyRawHandler),1,&keyboardHandlerEvents,(void *)self,NULL);
-	
-	/*
-	EventHandlerRef      sHandler;
-	EventTypeSpec   kEvents[] =
-	{
-		// use an event that isn't monitored just so we have a valid EventTypeSpec to install
-		{ kEventClassCommand, kEventCommandUpdateStatus }
-	};
-	InstallEventHandler( GetEventMonitorTarget(), myHotKeyRawHandler, GetEventTypeCount( kEvents ),
-						kEvents, (void *)self, NULL);
-	*/
-	//CFMachPortRef keyUpEventTap = CGEventTapCreate(kCGHIDEventTap,kCGHeadInsertEventTap,kCGEventTapOptionListenOnly,kCGEventKeyUp,&keyUpCallback,NULL);
-	CFMachPortRef keyUpEventTap = CGEventTapCreate(kCGHIDEventTap,kCGHeadInsertEventTap,kCGEventTapOptionListenOnly,CGEventMaskBit(kCGEventFlagsChanged),&keyUpCallback,self);
-	CFRunLoopSourceRef keyUpRunLoopSourceRef = CFMachPortCreateRunLoopSource(NULL, keyUpEventTap, 0);
-	CFRelease(keyUpEventTap);
-	CFRunLoopAddSource(CFRunLoopGetCurrent(), keyUpRunLoopSourceRef, kCFRunLoopDefaultMode);
-	CFRelease(keyUpRunLoopSourceRef);
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+    [[[NSWorkspace sharedWorkspace] notificationCenter] addObserver:self selector:@selector(frontAppSwitched:) name:NSWorkspaceDidActivateApplicationNotification object:nil];
+
 	// read default Key-Commands and Actions from MIDIActions.plist
 	NSString *errorDesc = nil;
 	NSPropertyListFormat format;
@@ -265,14 +168,10 @@ static OSStatus AppFrontSwitchedHandler(EventHandlerCallRef inHandlerCallRef, Ev
 		errorDescription:&errorDesc];
 	
 	if (!hotKeyActions) {
-		NSLog(errorDesc);
+        NSLog(@"%@", errorDesc);
 		[errorDesc release];
 	}
 	
-	
-	
-	// temporary lookup of hotkeyId by keycombo; auto-released at end of function
-	NSMutableDictionary *hotkeyIdsByKeyCombo = [NSMutableDictionary dictionary];
 	
 	NSEnumerator* actionsIterator = [[hotKeyActions allKeys] objectEnumerator];
 	id key;
@@ -300,14 +199,6 @@ static OSStatus AppFrontSwitchedHandler(EventHandlerCallRef inHandlerCallRef, Ev
 		if ([[hotkeySettings valueForKey:@"alphaLock"] boolValue]) {
 			keyCombo+= alphaLock;
 		}
-		
-		/*
-		//NSLog(@"KeyCombo: 0x%X", keyCombo);
-		if ((keyCombo & alphaLock) == alphaLock) {
-			keyCombo-= alphaLock;
-			NSLog(@"KeyCombo alphaLock removed for subscription: 0x%X", keyCombo);
-		}
-		 */
 		
 		
 		// setup all the Hotkeys based on those actions
@@ -338,16 +229,13 @@ static OSStatus AppFrontSwitchedHandler(EventHandlerCallRef inHandlerCallRef, Ev
 		}
 		[hotkeyAction setController:midiController];
 		
-		
-		
-		
-		HotkeyTrigger *hotkeyTrigger = nil;
+        HotkeyTrigger *hotkeyTrigger = nil;
 		NSString *hotkeyIdKeyCombo = [NSString stringWithFormat: @"0x%X", keyCombo*0x100 | keyCode];
-		NSNumber *hotkeyIdNumber = [hotkeyIdsByKeyCombo objectForKey:hotkeyIdKeyCombo];
+		NSNumber *hotkeyIdNumber = [hotkeyIdexesByKeyCombo objectForKey:hotkeyIdKeyCombo];
 		if (hotkeyIdNumber == nil) {
 			// new hotkeyId at the end of hotkeys-array			
 			hotkeyIdNumber = [[NSNumber alloc] initWithInt:[hotkeys count]];
-			[hotkeyIdsByKeyCombo setObject:hotkeyIdNumber forKey:hotkeyIdKeyCombo];
+			[hotkeyIdexesByKeyCombo setObject:hotkeyIdNumber forKey:hotkeyIdKeyCombo];
 			
 			hotkeyTrigger = [[HotkeyTrigger alloc] init];
 			[hotkeyTrigger setKeyCombo:keyCombo];
@@ -361,47 +249,54 @@ static OSStatus AppFrontSwitchedHandler(EventHandlerCallRef inHandlerCallRef, Ev
 		}
 		[hotkeyTrigger addAction:hotkeyAction];
 		
-		/*
-		[hotkey setKeyCode:keyCode];
-		if ([[hotkeySettings valueForKey:@"alphaLock"] boolValue]) {
-			[hotkey setAlphaLock:true];
-			NSLog(@"alphaLock");
-		}
-		else {
-			[hotkey setAlphaLock:false];
-		}
-		[hotkey setKeyCombo:keyCombo];
-		 */
-		
-		//[hotkey setValue:[[actionSettings valueForKey:@"value"] intValue]];
-		
-		//[hotkey setEventHotKeyID:hotKeyID];
-		//[hotkeys addObject:hotkey];
-		
-		//NSLog(@"%d", keyCombo & keyCode);
-		/*
-		NSString *eventHotKeyId = [NSString stringWithFormat: @"%d", keyCombo & keyCode];
-		[hotkey setEventHotKeyID:keyCombo];
-		NSMutableArray *hotkeysDict = [hotkeys objectForKey:eventHotKeyId];
-		if (hotkeysDict == nil) {
-			hotkeysDict = [[NSMutableArray alloc] init];
-			[hotkeys setObject:hotkeysDict forKey:eventHotKeyId];
-		}
-		[hotkeysDict addObject:hotkey];
-		*/
-		
-		//hotkeyId += 1;
-		
-		
-		// do not register hotkey yet
-		//RegisterEventHotKey(keyCode, keyCombo, myHotKeyID, GetApplicationEventTarget(), 0, &myHotKeyRef);
 	}
-	
+    
 	// check which app is in front and if needed, bind hotkeys
 	[self checkFrontAppForHotkeys];
+    
 }
 
 
+
+- (NSString*) hotKeyComboId:(int)keyCode flags:(NSEventModifierFlags)flags {
+    
+    int keyCombo = 0;
+    if ((flags & NSEventModifierFlagCommand)==NSEventModifierFlagCommand) {
+        keyCombo+= cmdKey;
+    }
+    if ((flags & NSEventModifierFlagControl)==NSEventModifierFlagControl) {
+        keyCombo+= controlKey;
+    }
+    if ((flags & NSEventModifierFlagOption)==NSEventModifierFlagOption) {
+        keyCombo+= optionKey;
+    }
+    if ((flags & NSEventModifierFlagShift)==NSEventModifierFlagShift) {
+        keyCombo+= shiftKey;
+    }
+    if ((flags & NSEventModifierFlagCapsLock)==NSEventModifierFlagCapsLock) {
+        keyCombo+= alphaLock;
+    }
+    
+    return [NSString stringWithFormat: @"0x%X", keyCombo*0x100 | keyCode];
+}
+
+
+
+- (BOOL) testAccessibilityWithPrompt:(BOOL) prompt {
+    
+    NSDictionary* opts = @{(__bridge id)kAXTrustedCheckOptionPrompt: (prompt ? @YES:@NO)};
+    
+    BOOL enabled = AXIsProcessTrustedWithOptions((__bridge CFDictionaryRef)opts);
+    
+    if (enabled) {
+        NSLog(@"Accessibility Enabled");
+    }
+    else {
+        NSLog(@"Accessibility Disabled");
+    }
+    
+    return enabled;
+}
 
 
 @end

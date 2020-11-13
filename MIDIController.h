@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <CoreAudio/HostTime.h>
 #import <PYMIDI/PYMIDI.h>
 #import "MIDIPacketTimed.h"
 
