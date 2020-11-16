@@ -15,7 +15,7 @@ To build the app, we'll clone this repository and the [PYMIDI.framework](https:/
 	git clone https://github.com/matatata/Kimidi.git Kimidi
 	cd Kimidi
 	git submodule init
-	git submodule update
+	git submodule update --remote
 	
 Then we'll build the submodule and finally Kimidi
 
